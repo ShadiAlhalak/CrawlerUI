@@ -14,6 +14,7 @@ using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using MaterialSkin2DotNet.Controls;
+using Microsoft.VisualBasic;
 
 namespace CrawlerUI
 {
@@ -26,7 +27,8 @@ namespace CrawlerUI
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
         public bool IsSideBarOpen { get; set; } = false;
-
+        public bool DarkMode { get; set; } = false;
+        public MaterialSkinManager materialSkinManager { get; set; } 
         #endregion
 
         #region Constractor
@@ -38,6 +40,11 @@ namespace CrawlerUI
             //materialSkinManager.AddFormToManage(this);
             //materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             //materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+
+            materialSkinManager = materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
         }
 
         #endregion
@@ -239,6 +246,41 @@ namespace CrawlerUI
             }
         }
 
+        private void picSettings_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DarkMode = !DarkMode;
+                if (DarkMode)
+                {
+                    PicDarkMode.BackgroundImage = Properties.Resources.moon_39_512;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+                    this.Refresh();
+                }
+                else
+                {
+                    PicDarkMode.BackgroundImage = Properties.Resources.sun_53_512;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+                    this.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void picExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         #region Core
 
         private void WView_CoreWebView2InitializationCompleted_1(object sender, CoreWebView2InitializationCompletedEventArgs e)
@@ -328,50 +370,6 @@ namespace CrawlerUI
             }
         }
 
-        private void btnDataApp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnHomeApp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExitApp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExitApp_MouseEnter(object sender, EventArgs e)
-        {
-            if (!IsSideBarOpen)
-            {
-                tblMain.ColumnStyles[0].Width = 165;
-                DarkModeSwitch.Visible = true;
-                btnHomeApp.Visible = true;
-                btnDataApp.Visible = true;
-                btnSettingsApp.Visible = true;
-                btnExitApp.Visible = true;
-                IsSideBarOpen = true;
-            }
-        }
-
-        private void Icon_MouseLeave(object sender, EventArgs e)
-        {
-            if (IsSideBarOpen)
-            {
-                tblMain.ColumnStyles[0].Width = 50;
-                DarkModeSwitch.Visible = false;
-                btnHomeApp.Visible = false;
-                btnDataApp.Visible = false;
-                btnSettingsApp.Visible = false;
-                btnExitApp.Visible = false;
-                IsSideBarOpen = false;
-            }
-        }
-
-
         #endregion
 
         #endregion
@@ -380,24 +378,11 @@ namespace CrawlerUI
 
         #endregion
 
-        //private void Drawer_DrawerEndOpen(object sender)
-        //{
-        //    tblMain.ColumnStyles[0].Width = 165;
-        //    this.Drawer.Controls.Add(Them);
-        //    this.Drawer.Controls.Add(btnHome);
-        //    this.Drawer.Controls.Add(BtnData);
-        //    this.Drawer.Controls.Add(btnSettings);
-        //    this.Drawer.Controls.Add(btnClose);
-        //}
+        private void picHome_Click(object sender, EventArgs e)
+        {
 
-        //private void Drawer_DrawerEndClose(object sender)
-        //{
-        //    tblMain.ColumnStyles[0].Width = 50;
-        //    this.Drawer.Controls.Remove(Them);
-        //    this.Drawer.Controls.Remove(btnHome);
-        //    this.Drawer.Controls.Remove(BtnData);
-        //    this.Drawer.Controls.Remove(btnSettings);
-        //    this.Drawer.Controls.Remove(btnClose);
-        //}
+        }
+
+
     }
 }

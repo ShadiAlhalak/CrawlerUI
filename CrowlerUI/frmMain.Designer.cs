@@ -31,10 +31,6 @@
             MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem1 = new MaterialSkin2DotNet.MaterialListBoxItem();
             MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem2 = new MaterialSkin2DotNet.MaterialListBoxItem();
             MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem3 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            this.btnHome = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.BtnData = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.btnSettings = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.btnClose = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.MainSp = new System.Windows.Forms.SplitContainer();
             this.ToolsSP = new System.Windows.Forms.SplitContainer();
@@ -67,12 +63,12 @@
             this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox();
             this.btnReload = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tblSideBar = new System.Windows.Forms.TableLayoutPanel();
-            this.Icon = new System.Windows.Forms.PictureBox();
-            this.btnHomeApp = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.DarkModeSwitch = new MaterialSkin2DotNet.Controls.MaterialSwitch();
-            this.btnDataApp = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.btnSettingsApp = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.btnExitApp = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.pivAbout = new System.Windows.Forms.PictureBox();
+            this.picHelp = new System.Windows.Forms.PictureBox();
+            this.picExit = new System.Windows.Forms.PictureBox();
+            this.picHome = new System.Windows.Forms.PictureBox();
+            this.PicDarkMode = new System.Windows.Forms.PictureBox();
+            this.picSettings = new System.Windows.Forms.PictureBox();
             this.SaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.tblMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSp)).BeginInit();
@@ -99,93 +95,18 @@
             this.TPLLog.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tblSideBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Icon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pivAbout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHome)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicDarkMode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettings)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnHome
-            // 
-            this.btnHome.AutoSize = false;
-            this.btnHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHome.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHome.Depth = 0;
-            this.btnHome.HighEmphasis = true;
-            this.btnHome.Icon = global::CrawlerUI.Properties.Resources.nuget_icon;
-            this.btnHome.Location = new System.Drawing.Point(7, 71);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHome.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnHome.Name = "btnHome";
-            this.btnHome.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHome.Size = new System.Drawing.Size(146, 36);
-            this.btnHome.TabIndex = 1;
-            this.btnHome.Text = "Home";
-            this.btnHome.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Text;
-            this.btnHome.UseAccentColor = false;
-            this.btnHome.UseVisualStyleBackColor = true;
-            // 
-            // BtnData
-            // 
-            this.BtnData.AutoSize = false;
-            this.BtnData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BtnData.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.BtnData.Depth = 0;
-            this.BtnData.HighEmphasis = true;
-            this.BtnData.Icon = global::CrawlerUI.Properties.Resources.nuget_icon;
-            this.BtnData.Location = new System.Drawing.Point(7, 110);
-            this.BtnData.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BtnData.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.BtnData.Name = "BtnData";
-            this.BtnData.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.BtnData.Size = new System.Drawing.Size(146, 36);
-            this.BtnData.TabIndex = 2;
-            this.BtnData.Text = "Data";
-            this.BtnData.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Text;
-            this.BtnData.UseAccentColor = false;
-            this.BtnData.UseVisualStyleBackColor = true;
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.AutoSize = false;
-            this.btnSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSettings.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnSettings.Depth = 0;
-            this.btnSettings.HighEmphasis = true;
-            this.btnSettings.Icon = global::CrawlerUI.Properties.Resources.nuget_icon;
-            this.btnSettings.Location = new System.Drawing.Point(7, 148);
-            this.btnSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnSettings.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSettings.Size = new System.Drawing.Size(146, 36);
-            this.btnSettings.TabIndex = 3;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Text;
-            this.btnSettings.UseAccentColor = false;
-            this.btnSettings.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.AutoSize = false;
-            this.btnClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClose.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClose.Depth = 0;
-            this.btnClose.HighEmphasis = true;
-            this.btnClose.Icon = global::CrawlerUI.Properties.Resources.nuget_icon;
-            this.btnClose.Location = new System.Drawing.Point(7, 186);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClose.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnClose.Name = "btnClose";
-            this.btnClose.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClose.Size = new System.Drawing.Size(146, 36);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "Close";
-            this.btnClose.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Text;
-            this.btnClose.UseAccentColor = false;
-            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // tblMain
             // 
             this.tblMain.ColumnCount = 2;
-            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblMain.Controls.Add(this.MainSp, 1, 1);
             this.tblMain.Controls.Add(this.tableLayoutPanel1, 1, 0);
@@ -202,7 +123,7 @@
             // MainSp
             // 
             this.MainSp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainSp.Location = new System.Drawing.Point(53, 54);
+            this.MainSp.Location = new System.Drawing.Point(58, 54);
             this.MainSp.Name = "MainSp";
             this.MainSp.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -213,7 +134,7 @@
             // MainSp.Panel2
             // 
             this.MainSp.Panel2.Controls.Add(this.grpLog);
-            this.MainSp.Size = new System.Drawing.Size(894, 507);
+            this.MainSp.Size = new System.Drawing.Size(889, 507);
             this.MainSp.SplitterDistance = 379;
             this.MainSp.TabIndex = 1;
             // 
@@ -231,7 +152,7 @@
             // ToolsSP.Panel2
             // 
             this.ToolsSP.Panel2.Controls.Add(this.ExtendSP);
-            this.ToolsSP.Size = new System.Drawing.Size(894, 379);
+            this.ToolsSP.Size = new System.Drawing.Size(889, 379);
             this.ToolsSP.SplitterDistance = 206;
             this.ToolsSP.TabIndex = 0;
             // 
@@ -372,8 +293,8 @@
             // ExtendSP.Panel2
             // 
             this.ExtendSP.Panel2.Controls.Add(this.tableLayoutPanel3);
-            this.ExtendSP.Size = new System.Drawing.Size(684, 379);
-            this.ExtendSP.SplitterDistance = 554;
+            this.ExtendSP.Size = new System.Drawing.Size(679, 379);
+            this.ExtendSP.SplitterDistance = 546;
             this.ExtendSP.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -389,7 +310,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(554, 379);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(546, 379);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // WView
@@ -401,7 +322,7 @@
             this.WView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WView.Location = new System.Drawing.Point(3, 3);
             this.WView.Name = "WView";
-            this.WView.Size = new System.Drawing.Size(548, 331);
+            this.WView.Size = new System.Drawing.Size(540, 331);
             this.WView.Source = new System.Uri("https://www.amazon.com/", System.UriKind.Absolute);
             this.WView.TabIndex = 0;
             this.WView.ZoomFactor = 1D;
@@ -423,7 +344,7 @@
             this.btnLaunch.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLaunch.Size = new System.Drawing.Size(546, 30);
+            this.btnLaunch.Size = new System.Drawing.Size(538, 30);
             this.btnLaunch.TabIndex = 0;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -443,7 +364,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(126, 379);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(129, 379);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // grbValues
@@ -452,7 +373,7 @@
             this.grbValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grbValues.Location = new System.Drawing.Point(3, 3);
             this.grbValues.Name = "grbValues";
-            this.grbValues.Size = new System.Drawing.Size(120, 373);
+            this.grbValues.Size = new System.Drawing.Size(123, 373);
             this.grbValues.TabIndex = 2;
             this.grbValues.TabStop = false;
             this.grbValues.Text = "Values";
@@ -469,7 +390,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(114, 347);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(117, 347);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // LstValues
@@ -484,7 +405,7 @@
             this.LstValues.Name = "LstValues";
             this.LstValues.SelectedIndex = -1;
             this.LstValues.SelectedItem = null;
-            this.LstValues.Size = new System.Drawing.Size(108, 301);
+            this.LstValues.Size = new System.Drawing.Size(111, 301);
             this.LstValues.TabIndex = 1;
             // 
             // btnClearValues
@@ -500,7 +421,7 @@
             this.btnClearValues.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnClearValues.Name = "btnClearValues";
             this.btnClearValues.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearValues.Size = new System.Drawing.Size(106, 28);
+            this.btnClearValues.Size = new System.Drawing.Size(109, 28);
             this.btnClearValues.TabIndex = 0;
             this.btnClearValues.Text = "Clear";
             this.btnClearValues.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -514,7 +435,7 @@
             this.grpLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpLog.Location = new System.Drawing.Point(0, 0);
             this.grpLog.Name = "grpLog";
-            this.grpLog.Size = new System.Drawing.Size(894, 124);
+            this.grpLog.Size = new System.Drawing.Size(889, 124);
             this.grpLog.TabIndex = 0;
             this.grpLog.TabStop = false;
             this.grpLog.Text = "Log";
@@ -534,7 +455,7 @@
             this.TPLLog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.TPLLog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.TPLLog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TPLLog.Size = new System.Drawing.Size(888, 98);
+            this.TPLLog.Size = new System.Drawing.Size(883, 98);
             this.TPLLog.TabIndex = 0;
             // 
             // btnExpotLog
@@ -546,7 +467,7 @@
             this.btnExpotLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExpotLog.HighEmphasis = true;
             this.btnExpotLog.Icon = null;
-            this.btnExpotLog.Location = new System.Drawing.Point(752, 6);
+            this.btnExpotLog.Location = new System.Drawing.Point(747, 6);
             this.btnExpotLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnExpotLog.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnExpotLog.Name = "btnExpotLog";
@@ -568,7 +489,7 @@
             this.btnClearLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearLog.HighEmphasis = true;
             this.btnClearLog.Icon = null;
-            this.btnClearLog.Location = new System.Drawing.Point(752, 48);
+            this.btnClearLog.Location = new System.Drawing.Point(747, 48);
             this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearLog.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnClearLog.Name = "btnClearLog";
@@ -587,7 +508,7 @@
             this.rchLog.Location = new System.Drawing.Point(3, 3);
             this.rchLog.Name = "rchLog";
             this.TPLLog.SetRowSpan(this.rchLog, 3);
-            this.rchLog.Size = new System.Drawing.Size(742, 92);
+            this.rchLog.Size = new System.Drawing.Size(737, 92);
             this.rchLog.TabIndex = 3;
             this.rchLog.Text = "";
             // 
@@ -608,11 +529,11 @@
             this.tableLayoutPanel1.Controls.Add(this.txtURL, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnReload, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(53, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(58, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 45);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(889, 45);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // btnForward
@@ -687,7 +608,7 @@
             this.btnGo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGo.HighEmphasis = true;
             this.btnGo.Icon = null;
-            this.btnGo.Location = new System.Drawing.Point(838, 6);
+            this.btnGo.Location = new System.Drawing.Point(833, 6);
             this.btnGo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGo.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnGo.Name = "btnGo";
@@ -713,7 +634,7 @@
             this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
             this.txtURL.Multiline = false;
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(568, 36);
+            this.txtURL.Size = new System.Drawing.Size(563, 36);
             this.txtURL.TabIndex = 4;
             this.txtURL.Text = "";
             this.txtURL.TrailingIcon = null;
@@ -743,21 +664,22 @@
             // 
             // tblSideBar
             // 
-            this.tblSideBar.BackColor = System.Drawing.Color.Gray;
+            this.tblSideBar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tblSideBar.ColumnCount = 1;
-            this.tblSideBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblSideBar.Controls.Add(this.Icon, 0, 0);
-            this.tblSideBar.Controls.Add(this.btnHomeApp, 0, 2);
-            this.tblSideBar.Controls.Add(this.DarkModeSwitch, 0, 1);
-            this.tblSideBar.Controls.Add(this.btnDataApp, 0, 3);
-            this.tblSideBar.Controls.Add(this.btnSettingsApp, 0, 4);
-            this.tblSideBar.Controls.Add(this.btnExitApp, 0, 5);
+            this.tblSideBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tblSideBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblSideBar.Controls.Add(this.pivAbout, 0, 3);
+            this.tblSideBar.Controls.Add(this.picHelp, 0, 4);
+            this.tblSideBar.Controls.Add(this.picExit, 0, 5);
+            this.tblSideBar.Controls.Add(this.picHome, 0, 0);
+            this.tblSideBar.Controls.Add(this.PicDarkMode, 0, 1);
+            this.tblSideBar.Controls.Add(this.picSettings, 0, 2);
             this.tblSideBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblSideBar.Location = new System.Drawing.Point(3, 3);
             this.tblSideBar.Name = "tblSideBar";
             this.tblSideBar.RowCount = 8;
             this.tblMain.SetRowSpan(this.tblSideBar, 2);
-            this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
@@ -765,139 +687,81 @@
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblSideBar.Size = new System.Drawing.Size(44, 558);
+            this.tblSideBar.Size = new System.Drawing.Size(49, 558);
             this.tblSideBar.TabIndex = 3;
-            this.tblSideBar.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.tblSideBar.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
             // 
-            // Icon
+            // pivAbout
             // 
-            this.Icon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Icon.Location = new System.Drawing.Point(3, 3);
-            this.Icon.Name = "Icon";
-            this.Icon.Size = new System.Drawing.Size(38, 74);
-            this.Icon.TabIndex = 0;
-            this.Icon.TabStop = false;
-            this.Icon.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.Icon.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
+            this.pivAbout.BackgroundImage = global::CrawlerUI.Properties.Resources.about_30_512;
+            this.pivAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pivAbout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pivAbout.Location = new System.Drawing.Point(0, 138);
+            this.pivAbout.Margin = new System.Windows.Forms.Padding(0);
+            this.pivAbout.Name = "pivAbout";
+            this.pivAbout.Size = new System.Drawing.Size(50, 46);
+            this.pivAbout.TabIndex = 18;
+            this.pivAbout.TabStop = false;
             // 
-            // btnHomeApp
+            // picHelp
             // 
-            this.btnHomeApp.AutoSize = false;
-            this.btnHomeApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHomeApp.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHomeApp.Depth = 0;
-            this.btnHomeApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnHomeApp.HighEmphasis = true;
-            this.btnHomeApp.Icon = null;
-            this.btnHomeApp.Location = new System.Drawing.Point(4, 132);
-            this.btnHomeApp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHomeApp.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnHomeApp.Name = "btnHomeApp";
-            this.btnHomeApp.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHomeApp.Size = new System.Drawing.Size(36, 34);
-            this.btnHomeApp.TabIndex = 2;
-            this.btnHomeApp.Text = "Home";
-            this.btnHomeApp.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnHomeApp.UseAccentColor = false;
-            this.btnHomeApp.UseVisualStyleBackColor = true;
-            this.btnHomeApp.Visible = false;
-            this.btnHomeApp.Click += new System.EventHandler(this.btnHomeApp_Click);
-            this.btnHomeApp.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.btnHomeApp.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
+            this.picHelp.BackgroundImage = global::CrawlerUI.Properties.Resources.help_248_512;
+            this.picHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picHelp.Location = new System.Drawing.Point(0, 184);
+            this.picHelp.Margin = new System.Windows.Forms.Padding(0);
+            this.picHelp.Name = "picHelp";
+            this.picHelp.Size = new System.Drawing.Size(50, 46);
+            this.picHelp.TabIndex = 19;
+            this.picHelp.TabStop = false;
             // 
-            // DarkModeSwitch
+            // picExit
             // 
-            this.DarkModeSwitch.AutoSize = true;
-            this.DarkModeSwitch.Depth = 0;
-            this.DarkModeSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DarkModeSwitch.Location = new System.Drawing.Point(0, 80);
-            this.DarkModeSwitch.Margin = new System.Windows.Forms.Padding(0);
-            this.DarkModeSwitch.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.DarkModeSwitch.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.DarkModeSwitch.Name = "DarkModeSwitch";
-            this.DarkModeSwitch.Ripple = true;
-            this.DarkModeSwitch.Size = new System.Drawing.Size(44, 46);
-            this.DarkModeSwitch.TabIndex = 6;
-            this.DarkModeSwitch.Text = "Dark Mode";
-            this.DarkModeSwitch.UseVisualStyleBackColor = true;
-            this.DarkModeSwitch.Visible = false;
-            this.DarkModeSwitch.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.DarkModeSwitch.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
+            this.picExit.BackgroundImage = global::CrawlerUI.Properties.Resources.exit_11_512;
+            this.picExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picExit.Location = new System.Drawing.Point(0, 230);
+            this.picExit.Margin = new System.Windows.Forms.Padding(0);
+            this.picExit.Name = "picExit";
+            this.picExit.Size = new System.Drawing.Size(50, 46);
+            this.picExit.TabIndex = 20;
+            this.picExit.TabStop = false;
+            this.picExit.Click += new System.EventHandler(this.picExit_Click);
             // 
-            // btnDataApp
+            // picHome
             // 
-            this.btnDataApp.AutoSize = false;
-            this.btnDataApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDataApp.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnDataApp.Depth = 0;
-            this.btnDataApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDataApp.HighEmphasis = true;
-            this.btnDataApp.Icon = null;
-            this.btnDataApp.Location = new System.Drawing.Point(4, 178);
-            this.btnDataApp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnDataApp.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnDataApp.Name = "btnDataApp";
-            this.btnDataApp.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnDataApp.Size = new System.Drawing.Size(36, 34);
-            this.btnDataApp.TabIndex = 4;
-            this.btnDataApp.Text = "Data";
-            this.btnDataApp.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnDataApp.UseAccentColor = false;
-            this.btnDataApp.UseVisualStyleBackColor = true;
-            this.btnDataApp.Visible = false;
-            this.btnDataApp.Click += new System.EventHandler(this.btnDataApp_Click);
-            this.btnDataApp.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.btnDataApp.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
+            this.picHome.BackgroundImage = global::CrawlerUI.Properties.Resources.sidebar_list_more_2_512;
+            this.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picHome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picHome.Location = new System.Drawing.Point(3, 3);
+            this.picHome.Name = "picHome";
+            this.picHome.Size = new System.Drawing.Size(44, 40);
+            this.picHome.TabIndex = 17;
+            this.picHome.TabStop = false;
+            this.picHome.Click += new System.EventHandler(this.picHome_Click);
             // 
-            // btnSettingsApp
+            // PicDarkMode
             // 
-            this.btnSettingsApp.AutoSize = false;
-            this.btnSettingsApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSettingsApp.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnSettingsApp.Depth = 0;
-            this.btnSettingsApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSettingsApp.HighEmphasis = true;
-            this.btnSettingsApp.Icon = null;
-            this.btnSettingsApp.Location = new System.Drawing.Point(4, 224);
-            this.btnSettingsApp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnSettingsApp.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnSettingsApp.Name = "btnSettingsApp";
-            this.btnSettingsApp.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSettingsApp.Size = new System.Drawing.Size(36, 34);
-            this.btnSettingsApp.TabIndex = 3;
-            this.btnSettingsApp.Text = "Settings";
-            this.btnSettingsApp.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnSettingsApp.UseAccentColor = false;
-            this.btnSettingsApp.UseVisualStyleBackColor = true;
-            this.btnSettingsApp.Visible = false;
-            this.btnSettingsApp.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.btnSettingsApp.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
+            this.PicDarkMode.BackgroundImage = global::CrawlerUI.Properties.Resources.sun_53_512;
+            this.PicDarkMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PicDarkMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PicDarkMode.Location = new System.Drawing.Point(4, 50);
+            this.PicDarkMode.Margin = new System.Windows.Forms.Padding(4);
+            this.PicDarkMode.Name = "PicDarkMode";
+            this.PicDarkMode.Size = new System.Drawing.Size(42, 38);
+            this.PicDarkMode.TabIndex = 22;
+            this.PicDarkMode.TabStop = false;
+            this.PicDarkMode.Click += new System.EventHandler(this.picSettings_Click);
             // 
-            // btnExitApp
+            // picSettings
             // 
-            this.btnExitApp.AutoSize = false;
-            this.btnExitApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnExitApp.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnExitApp.Depth = 0;
-            this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExitApp.HighEmphasis = true;
-            this.btnExitApp.Icon = null;
-            this.btnExitApp.Location = new System.Drawing.Point(4, 270);
-            this.btnExitApp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnExitApp.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnExitApp.Name = "btnExitApp";
-            this.btnExitApp.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnExitApp.Size = new System.Drawing.Size(36, 34);
-            this.btnExitApp.TabIndex = 7;
-            this.btnExitApp.Text = "exit";
-            this.btnExitApp.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnExitApp.UseAccentColor = false;
-            this.btnExitApp.UseVisualStyleBackColor = true;
-            this.btnExitApp.Visible = false;
-            this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
-            this.btnExitApp.MouseEnter += new System.EventHandler(this.btnExitApp_MouseEnter);
-            this.btnExitApp.MouseLeave += new System.EventHandler(this.Icon_MouseLeave);
+            this.picSettings.BackgroundImage = global::CrawlerUI.Properties.Resources.settings_119_512;
+            this.picSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picSettings.Location = new System.Drawing.Point(3, 95);
+            this.picSettings.Name = "picSettings";
+            this.picSettings.Size = new System.Drawing.Size(44, 40);
+            this.picSettings.TabIndex = 23;
+            this.picSettings.TabStop = false;
             // 
             // SaveDialog
             // 
@@ -907,12 +771,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(956, 631);
             this.Controls.Add(this.tblMain);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.BtnData);
-            this.Controls.Add(this.btnHome);
             this.Name = "frmMain";
             this.Text = "Smart Crawler";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -946,17 +807,17 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tblSideBar.ResumeLayout(false);
-            this.tblSideBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Icon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pivAbout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHome)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicDarkMode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettings)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private MaterialSkin2DotNet.Controls.MaterialButton btnHome;
-        private MaterialSkin2DotNet.Controls.MaterialButton BtnData;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnSettings;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnClose;
         private TableLayoutPanel tblMain;
         private SplitContainer MainSp;
         private SplitContainer ToolsSP;
@@ -990,11 +851,11 @@
         private MaterialSkin2DotNet.Controls.MaterialButton btnReload;
         private SaveFileDialog SaveDialog;
         private TableLayoutPanel tblSideBar;
-        private PictureBox Icon;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnHomeApp;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnSettingsApp;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnDataApp;
-        private MaterialSkin2DotNet.Controls.MaterialSwitch DarkModeSwitch;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnExitApp;
+        private PictureBox picHome;
+        private PictureBox pivAbout;
+        private PictureBox picHelp;
+        private PictureBox picExit;
+        private PictureBox PicDarkMode;
+        private PictureBox picSettings;
     }
 }
