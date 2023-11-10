@@ -22,7 +22,7 @@ namespace CrawlerUI
 
         #region Variables
 
-        public List<clsHtmlElem> Values { get; set; }
+        public List<clsHtmlElem> Values { get; set; } = new List<clsHtmlElem>();
         public MaterialMessage Message { get; set; } = new MaterialMessage();
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
@@ -80,6 +80,20 @@ namespace CrawlerUI
             }
         }
 
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                WView.Reload();
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
         private void btnGo_Click(object sender, EventArgs e)
         {
             try
@@ -134,16 +148,7 @@ namespace CrawlerUI
         {
             try
             {
-                switch (selectedItem.Text)
-                {
-                    case ModConstant.AddValue:
 
-                    case ModConstant.PreventLinks:
-
-                        break;
-                    default:
-                        break;
-                }
             }
             catch (Exception ex)
             {
@@ -215,6 +220,7 @@ namespace CrawlerUI
             try
             {
                 LstValues.Items.Clear();
+                Values.Clear();
             }
             catch (Exception ex)
             {
@@ -248,15 +254,15 @@ namespace CrawlerUI
                 txtURL.Text = WView.Source.ToString();
                 if (PreventLinks)
                 {
-                    string LinksDisableScr = File.ReadAllText("LinksDisable.js");
+                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
+                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
                     WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
                 }
                 if (AddZone)
                 {
-                    string script = File.ReadAllText("Mouse.js");
+                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
+                    string script = File.ReadAllText(MouseScriptPath);
                     WView.CoreWebView2.ExecuteScriptAsync(script);
-                    //old way 
-                    //WView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
                 }
             }
             catch (Exception ex)
@@ -272,31 +278,14 @@ namespace CrawlerUI
             try
             {
                 clsHtmlElem jsonObject = JsonConvert.DeserializeObject<clsHtmlElem>(e.WebMessageAsJson);
-                var elem = await WView.CoreWebView2.ExecuteScriptAsync("document.querySelector(." + jsonObject.ClassName + ");");
-                var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
-                //var fullhtml2 =await  WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.innerHTML;");
-                //var fullhtml3 =await  WView.CoreWebView2.ExecuteScriptAsync("document.getElementsByTagName(\"html\")[0]\r\n.innerHTML;");
-                string SiteName = ModValidation.GetSiteName(txtURL.Text);
-                if (string.IsNullOrEmpty(SiteName))
-                {
-                    SiteName += ".html";
-                    File.WriteAllText(SiteName, fullhtml);
-                }
-
-                //WView.CoreWebView2.ExecuteScriptAsync("window.onload = function() {\r\n    var anchors = document.getElementsByTagName(\"a\");\r\n    for (var i = 0; i < anchors.length; i++) {\r\n        anchors[i].onclick = function() {return false;};\r\n    }\r\n};");
-
-                //Diable all link script
-                // WView.CoreWebView2.ExecuteScriptAsync("var anchors = document.getElementsByTagName(\"a\");\r\n    for (var i = 0; i < anchors.length; i++) {\r\n        anchors[i].onclick = function() {return false;};\r\n    }");
-                //string script = File.ReadAllText("LinksDisable.js");
-                //await WView.CoreWebView2.ExecuteScriptAsync(script);
-
+                //var elem = await WView.CoreWebView2.ExecuteScriptAsync("document.querySelector(." + jsonObject.ClassName + ");");
                 rchLog.AppendText(jsonObject.ObjectToString());
                 rchLog.ScrollToCaret();
-                //rchLog.AppendText(ModResoucres.cnst_FullHtmlSavedDone + "," +ModResoucres.cnst_YouCanFindFullHtmlInRoot+". \n \n");
                 switch (jsonObject.Key)
                 {
                     case "click":
-                        //treeView1.Nodes.Add(jsonObject.Value);
+                        LstValues.AddItem(jsonObject.Value);
+                        Values.Add(jsonObject);
                         break;
                 }
             }
@@ -308,6 +297,29 @@ namespace CrawlerUI
             }
         }
 
+        private async void btnLaunch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
+                //var fullhtml2 =await  WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.innerHTML;");
+                //var fullhtml3 =await  WView.CoreWebView2.ExecuteScriptAsync("document.getElementsByTagName(\"html\")[0]\r\n.innerHTML;");
+                string SiteName = ModValidation.GetSiteName(txtURL.Text);
+                if (!string.IsNullOrEmpty(SiteName))
+                {
+                    SiteName += ".html";
+                    File.WriteAllText(SiteName, fullhtml);
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+
         #endregion
 
         #endregion
@@ -315,7 +327,6 @@ namespace CrawlerUI
         #region Methods
 
         #endregion
-
 
     }
 }

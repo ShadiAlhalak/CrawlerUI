@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem1 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem2 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem3 = new MaterialSkin2DotNet.MaterialListBoxItem();
+            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem4 = new MaterialSkin2DotNet.MaterialListBoxItem();
+            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem5 = new MaterialSkin2DotNet.MaterialListBoxItem();
+            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem6 = new MaterialSkin2DotNet.MaterialListBoxItem();
             this.btnHome = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.BtnData = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnSettings = new MaterialSkin2DotNet.Controls.MaterialButton();
@@ -46,7 +46,9 @@
             this.btnSwPrevLinks = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwScrolling = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.ExtendSP = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.WView = new Microsoft.Web.WebView2.WinForms.WebView2();
+            this.btnLaunch = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.grbValues = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -63,6 +65,7 @@
             this.btnBrawserHome = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnGo = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox();
+            this.btnReload = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tblMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSp)).BeginInit();
             this.MainSp.Panel1.SuspendLayout();
@@ -79,6 +82,7 @@
             this.ExtendSP.Panel1.SuspendLayout();
             this.ExtendSP.Panel2.SuspendLayout();
             this.ExtendSP.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WView)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.grbValues.SuspendLayout();
@@ -173,6 +177,7 @@
             this.tblMain.ColumnCount = 2;
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblMain.Controls.Add(this.MainSp, 1, 1);
             this.tblMain.Controls.Add(this.tableLayoutPanel1, 1, 0);
             this.tblMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -272,18 +277,18 @@
             this.LstToolbox.Depth = 0;
             this.LstToolbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LstToolbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            materialListBoxItem1.SecondaryText = "";
-            materialListBoxItem1.Tag = null;
-            materialListBoxItem1.Text = "Add Value";
-            materialListBoxItem2.SecondaryText = "";
-            materialListBoxItem2.Tag = null;
-            materialListBoxItem2.Text = "Prevent Links";
-            materialListBoxItem3.SecondaryText = "";
-            materialListBoxItem3.Tag = null;
-            materialListBoxItem3.Text = "Scrolling tool";
-            this.LstToolbox.Items.Add(materialListBoxItem1);
-            this.LstToolbox.Items.Add(materialListBoxItem2);
-            this.LstToolbox.Items.Add(materialListBoxItem3);
+            materialListBoxItem4.SecondaryText = "";
+            materialListBoxItem4.Tag = null;
+            materialListBoxItem4.Text = "Add Value";
+            materialListBoxItem5.SecondaryText = "";
+            materialListBoxItem5.Tag = null;
+            materialListBoxItem5.Text = "Prevent Links";
+            materialListBoxItem6.SecondaryText = "";
+            materialListBoxItem6.Tag = null;
+            materialListBoxItem6.Text = "Scrolling tool";
+            this.LstToolbox.Items.Add(materialListBoxItem4);
+            this.LstToolbox.Items.Add(materialListBoxItem5);
+            this.LstToolbox.Items.Add(materialListBoxItem6);
             this.LstToolbox.Location = new System.Drawing.Point(3, 123);
             this.LstToolbox.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.LstToolbox.Name = "LstToolbox";
@@ -352,7 +357,7 @@
             // 
             // ExtendSP.Panel1
             // 
-            this.ExtendSP.Panel1.Controls.Add(this.WView);
+            this.ExtendSP.Panel1.Controls.Add(this.tableLayoutPanel2);
             // 
             // ExtendSP.Panel2
             // 
@@ -361,21 +366,60 @@
             this.ExtendSP.SplitterDistance = 597;
             this.ExtendSP.TabIndex = 0;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Controls.Add(this.WView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnLaunch, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(597, 379);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
             // WView
             // 
             this.WView.AllowExternalDrop = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.WView, 2);
             this.WView.CreationProperties = null;
             this.WView.DefaultBackgroundColor = System.Drawing.Color.White;
             this.WView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WView.Location = new System.Drawing.Point(0, 0);
+            this.WView.Location = new System.Drawing.Point(3, 3);
             this.WView.Name = "WView";
-            this.WView.Size = new System.Drawing.Size(597, 379);
+            this.WView.Size = new System.Drawing.Size(591, 331);
             this.WView.Source = new System.Uri("https://www.amazon.com/", System.UriKind.Absolute);
             this.WView.TabIndex = 0;
             this.WView.ZoomFactor = 1D;
             this.WView.CoreWebView2InitializationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs>(this.WView_CoreWebView2InitializationCompleted_1);
             this.WView.NavigationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs>(this.WView_NavigationCompleted_1);
             this.WView.WebMessageReceived += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs>(this.WView_WebMessageReceived_1);
+            // 
+            // btnLaunch
+            // 
+            this.btnLaunch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel2.SetColumnSpan(this.btnLaunch, 2);
+            this.btnLaunch.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnLaunch.Depth = 0;
+            this.btnLaunch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLaunch.HighEmphasis = true;
+            this.btnLaunch.Icon = null;
+            this.btnLaunch.Location = new System.Drawing.Point(4, 343);
+            this.btnLaunch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLaunch.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnLaunch.Size = new System.Drawing.Size(589, 30);
+            this.btnLaunch.TabIndex = 0;
+            this.btnLaunch.Text = "Launch";
+            this.btnLaunch.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnLaunch.UseAccentColor = false;
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -539,17 +583,20 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnCount = 7;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.Controls.Add(this.btnForward, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnBack, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnForward, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnBack, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnBrawserHome, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnGo, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtURL, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnGo, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtURL, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnReload, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -563,9 +610,10 @@
             this.btnForward.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnForward.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnForward.Depth = 0;
+            this.btnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnForward.HighEmphasis = true;
             this.btnForward.Icon = null;
-            this.btnForward.Location = new System.Drawing.Point(114, 6);
+            this.btnForward.Location = new System.Drawing.Point(214, 6);
             this.btnForward.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnForward.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnForward.Name = "btnForward";
@@ -583,9 +631,10 @@
             this.btnBack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnBack.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnBack.Depth = 0;
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBack.HighEmphasis = true;
             this.btnBack.Icon = null;
-            this.btnBack.Location = new System.Drawing.Point(64, 6);
+            this.btnBack.Location = new System.Drawing.Point(164, 6);
             this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBack.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnBack.Name = "btnBack";
@@ -603,6 +652,7 @@
             this.btnBrawserHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnBrawserHome.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnBrawserHome.Depth = 0;
+            this.btnBrawserHome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBrawserHome.HighEmphasis = true;
             this.btnBrawserHome.Icon = null;
             this.btnBrawserHome.Location = new System.Drawing.Point(4, 6);
@@ -610,7 +660,7 @@
             this.btnBrawserHome.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnBrawserHome.Name = "btnBrawserHome";
             this.btnBrawserHome.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBrawserHome.Size = new System.Drawing.Size(52, 33);
+            this.btnBrawserHome.Size = new System.Drawing.Size(72, 33);
             this.btnBrawserHome.TabIndex = 2;
             this.btnBrawserHome.Text = "Home";
             this.btnBrawserHome.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -648,17 +698,38 @@
             this.txtURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtURL.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtURL.LeadingIcon = null;
-            this.txtURL.Location = new System.Drawing.Point(163, 3);
+            this.txtURL.Location = new System.Drawing.Point(283, 3);
             this.txtURL.MaxLength = 50;
             this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
             this.txtURL.Multiline = false;
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(718, 36);
+            this.txtURL.Size = new System.Drawing.Size(598, 36);
             this.txtURL.TabIndex = 4;
             this.txtURL.Text = "";
             this.txtURL.TrailingIcon = null;
             this.txtURL.UseTallSize = false;
             this.txtURL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtURL_KeyDown);
+            // 
+            // btnReload
+            // 
+            this.btnReload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReload.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnReload.Depth = 0;
+            this.btnReload.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReload.HighEmphasis = true;
+            this.btnReload.Icon = null;
+            this.btnReload.Location = new System.Drawing.Point(84, 6);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnReload.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnReload.Name = "btnReload";
+            this.btnReload.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnReload.Size = new System.Drawing.Size(72, 33);
+            this.btnReload.TabIndex = 5;
+            this.btnReload.Text = "Reload";
+            this.btnReload.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnReload.UseAccentColor = false;
+            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // frmMain
             // 
@@ -691,6 +762,8 @@
             this.ExtendSP.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExtendSP)).EndInit();
             this.ExtendSP.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WView)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.grbValues.ResumeLayout(false);
@@ -737,5 +810,8 @@
         private TableLayoutPanel tableLayoutPanel4;
         private MaterialSkin2DotNet.Controls.MaterialListBox LstValues;
         private MaterialSkin2DotNet.Controls.MaterialButton btnClearValues;
+        private TableLayoutPanel tableLayoutPanel2;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnLaunch;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnReload;
     }
 }
