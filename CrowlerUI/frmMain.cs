@@ -21,7 +21,6 @@ namespace CrawlerUI
     {
 
         #region Variables
-
         public List<clsHtmlElem> Values { get; set; } = new List<clsHtmlElem>();
         public MaterialMessage Message { get; set; } = new MaterialMessage();
         public bool AddZone { get; set; } = false;
@@ -136,7 +135,20 @@ namespace CrawlerUI
 
         private void btnExpotLog_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (SaveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string LogFilePath = SaveDialog.FileName;
+                    File.AppendAllText(LogFilePath, rchLog.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
         }
 
         private void btnClearLog_Click(object sender, EventArgs e)

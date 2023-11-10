@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem4 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem5 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem6 = new MaterialSkin2DotNet.MaterialListBoxItem();
+            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem1 = new MaterialSkin2DotNet.MaterialListBoxItem();
+            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem2 = new MaterialSkin2DotNet.MaterialListBoxItem();
+            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem3 = new MaterialSkin2DotNet.MaterialListBoxItem();
             this.btnHome = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.BtnData = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnSettings = new MaterialSkin2DotNet.Controls.MaterialButton();
@@ -66,6 +66,7 @@
             this.btnGo = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox();
             this.btnReload = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.SaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.tblMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSp)).BeginInit();
             this.MainSp.Panel1.SuspendLayout();
@@ -277,18 +278,18 @@
             this.LstToolbox.Depth = 0;
             this.LstToolbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LstToolbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            materialListBoxItem4.SecondaryText = "";
-            materialListBoxItem4.Tag = null;
-            materialListBoxItem4.Text = "Add Value";
-            materialListBoxItem5.SecondaryText = "";
-            materialListBoxItem5.Tag = null;
-            materialListBoxItem5.Text = "Prevent Links";
-            materialListBoxItem6.SecondaryText = "";
-            materialListBoxItem6.Tag = null;
-            materialListBoxItem6.Text = "Scrolling tool";
-            this.LstToolbox.Items.Add(materialListBoxItem4);
-            this.LstToolbox.Items.Add(materialListBoxItem5);
-            this.LstToolbox.Items.Add(materialListBoxItem6);
+            materialListBoxItem1.SecondaryText = "";
+            materialListBoxItem1.Tag = null;
+            materialListBoxItem1.Text = "Add Value";
+            materialListBoxItem2.SecondaryText = "";
+            materialListBoxItem2.Tag = null;
+            materialListBoxItem2.Text = "Prevent Links";
+            materialListBoxItem3.SecondaryText = "";
+            materialListBoxItem3.Tag = null;
+            materialListBoxItem3.Text = "Scrolling tool";
+            this.LstToolbox.Items.Add(materialListBoxItem1);
+            this.LstToolbox.Items.Add(materialListBoxItem2);
+            this.LstToolbox.Items.Add(materialListBoxItem3);
             this.LstToolbox.Location = new System.Drawing.Point(3, 123);
             this.LstToolbox.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.LstToolbox.Name = "LstToolbox";
@@ -731,6 +732,10 @@
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
+            // SaveDialog
+            // 
+            this.SaveDialog.DefaultExt = "txt";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -813,5 +818,6 @@
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin2DotNet.Controls.MaterialButton btnLaunch;
         private MaterialSkin2DotNet.Controls.MaterialButton btnReload;
+        private SaveFileDialog SaveDialog;
     }
 }
