@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibStructure", "LibStructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibGeneralUtilities", "LibGeneralUtilities\LibGeneralUtilities.csproj", "{5202C0C9-1BD9-464F-ABEA-5119C1550A68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialSkin2DotNet", "MaterialSkin2DotNet\MaterialSkin2DotNet.csproj", "{61464681-EFAE-40C3-8471-8FCE58EB4866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialSkin2DotNet", "MaterialSkin2DotNet-master\MaterialSkin2DotNet\MaterialSkin2DotNet.csproj", "{AA63C708-580C-4BDD-892F-7C145CDD8615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{5202C0C9-1BD9-464F-ABEA-5119C1550A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5202C0C9-1BD9-464F-ABEA-5119C1550A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5202C0C9-1BD9-464F-ABEA-5119C1550A68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61464681-EFAE-40C3-8471-8FCE58EB4866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61464681-EFAE-40C3-8471-8FCE58EB4866}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61464681-EFAE-40C3-8471-8FCE58EB4866}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61464681-EFAE-40C3-8471-8FCE58EB4866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
