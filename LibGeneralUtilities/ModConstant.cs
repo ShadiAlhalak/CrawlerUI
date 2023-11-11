@@ -8,9 +8,14 @@ namespace LibGeneralUtilities
 {
     public static class ModConstant
     {
-        #region Files Names
+        #region Folder & Files Names
+        public const string cnst_SettingsFolder  = "Settings";
+        public const string cnst_TrainingFilesFolder = "Training Files";
+        public const string cnst_ResultFolder = "Result";
+        public const string cnst_ValuesFileName = "Values";
         public const string cnst_LinksDisable_ScriptFileName = "LinksDisable";
         public const string cnst_Mouse_ScriptFileName = "Mouse";
+        public const string cnst_OutputFolder = "Output";
         #endregion
 
         #region Extetions
@@ -23,7 +28,6 @@ namespace LibGeneralUtilities
 
         #region URLs 
         public const string HomeUrl = "http://www.amazon.ae/";
-
         #endregion
 
         #region Validation

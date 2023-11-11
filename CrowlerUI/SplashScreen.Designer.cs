@@ -63,6 +63,7 @@
             // 
             // spTimer
             // 
+            this.spTimer.Interval = 20;
             this.spTimer.Tick += new System.EventHandler(this.spTimer_Tick);
             // 
             // MtProBar

@@ -282,9 +282,32 @@ namespace CrawlerUI
             }
         }
 
+        private void picSettings_Click_1(object sender, EventArgs e)
+        {
+            frmSettings settings = new frmSettings();
+            settings.ShowDialog();
+        }
+
+        private void pivAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout about = new frmAbout();
+            about.ShowDialog();
+        }
+
+        private void picHelp_Click(object sender, EventArgs e)
+        {
+            frmHelp help = new frmHelp();
+            help.ShowDialog();
+        }
+
         private void picExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         #region Core
@@ -356,17 +379,35 @@ namespace CrawlerUI
 
         private async void btnLaunch_Click(object sender, EventArgs e)
         {
+            string ErrorMessage = string.Empty;
             try
             {
+                rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
+                rchLog.ScrollToCaret();
+                rchLog.AppendText(ModResoucres.cnst_StartProcessing);
+                //1-Get Training output folder path
+                string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
+
+                //2-Full html file
                 var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
                 //var fullhtml2 =await  WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.innerHTML;");
                 //var fullhtml3 =await  WView.CoreWebView2.ExecuteScriptAsync("document.getElementsByTagName(\"html\")[0]\r\n.innerHTML;");
                 string SiteName = ModValidation.GetSiteName(txtURL.Text);
+                string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName+ModConstant.cnst_html_Extention);
                 if (!string.IsNullOrEmpty(SiteName))
                 {
-                    SiteName += ".html";
-                    File.WriteAllText(SiteName, fullhtml);
+                    File.WriteAllText(FullHtmlFilePath, fullhtml);
                 }
+                rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
+
+                //3-Serialize Values list to file
+                string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
+                clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath,ref ErrorMessage);
+                rchLog.AppendText(ModResoucres.cnst_ValuesFileHasBeenWritten);
+                rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
+                rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
+                rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
+                rchLog.ScrollToCaret();
             }
             catch (Exception ex)
             {
@@ -383,11 +424,6 @@ namespace CrawlerUI
         #region Methods
 
         #endregion
-
-        private void picHome_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
     }

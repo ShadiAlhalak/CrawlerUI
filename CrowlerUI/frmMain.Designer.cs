@@ -638,6 +638,7 @@
             this.txtURL.TabIndex = 4;
             this.txtURL.Text = "";
             this.txtURL.TrailingIcon = null;
+            this.txtURL.UseAccent = false;
             this.txtURL.UseTallSize = false;
             this.txtURL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtURL_KeyDown);
             // 
@@ -701,6 +702,7 @@
             this.pivAbout.Size = new System.Drawing.Size(50, 46);
             this.pivAbout.TabIndex = 18;
             this.pivAbout.TabStop = false;
+            this.pivAbout.Click += new System.EventHandler(this.pivAbout_Click);
             // 
             // picHelp
             // 
@@ -713,6 +715,7 @@
             this.picHelp.Size = new System.Drawing.Size(50, 46);
             this.picHelp.TabIndex = 19;
             this.picHelp.TabStop = false;
+            this.picHelp.Click += new System.EventHandler(this.picHelp_Click);
             // 
             // picExit
             // 
@@ -737,7 +740,6 @@
             this.picHome.Size = new System.Drawing.Size(44, 40);
             this.picHome.TabIndex = 17;
             this.picHome.TabStop = false;
-            this.picHome.Click += new System.EventHandler(this.picHome_Click);
             // 
             // PicDarkMode
             // 
@@ -762,6 +764,7 @@
             this.picSettings.Size = new System.Drawing.Size(44, 40);
             this.picSettings.TabIndex = 23;
             this.picSettings.TabStop = false;
+            this.picSettings.Click += new System.EventHandler(this.picSettings_Click_1);
             // 
             // SaveDialog
             // 
@@ -769,6 +772,7 @@
             // 
             // frmMain
             // 
+            this.AccentColor = MaterialSkin2DotNet.Accent.Cyan400;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -777,6 +781,7 @@
             this.Name = "frmMain";
             this.Text = "Smart Crawler";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tblMain.ResumeLayout(false);
             this.MainSp.Panel1.ResumeLayout(false);
