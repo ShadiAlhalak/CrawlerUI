@@ -27,8 +27,8 @@ namespace CrawlerUI
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
         public bool IsSideBarOpen { get; set; } = false;
-        public bool DarkMode { get; set; } = false;
-        public MaterialSkinManager materialSkinManager { get; set; } 
+        public bool DarkMode { get; set; } = true;
+        public MaterialSkinManager materialSkinManager { get; set; }
         #endregion
 
         #region Constractor
@@ -42,9 +42,15 @@ namespace CrawlerUI
             //materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
             materialSkinManager = materialSkinManager = MaterialSkinManager.Instance;
+            //Light Mode
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+            //DarkMode
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            this.Refresh();
         }
 
         #endregion
