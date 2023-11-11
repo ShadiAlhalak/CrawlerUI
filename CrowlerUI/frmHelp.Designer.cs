@@ -30,12 +30,12 @@
         private void InitializeComponent()
         {
             this.tblAbout = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblDescriptionDetails = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblDescriptionDetails = new System.Windows.Forms.Label();
             this.tblAbout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,19 +62,6 @@
             this.tblAbout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.85714F));
             this.tblAbout.Size = new System.Drawing.Size(794, 383);
             this.tblAbout.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(140, 233);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(651, 50);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "SmartCrawler@SAM.com";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTitle
             // 
@@ -104,19 +91,18 @@
             this.label1.Text = "Email:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblDescriptionDetails
+            // label5
             // 
-            this.lblDescriptionDetails.AutoSize = true;
-            this.tblAbout.SetColumnSpan(this.lblDescriptionDetails, 2);
-            this.lblDescriptionDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescriptionDetails.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDescriptionDetails.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblDescriptionDetails.Location = new System.Drawing.Point(3, 133);
-            this.lblDescriptionDetails.Name = "lblDescriptionDetails";
-            this.lblDescriptionDetails.Size = new System.Drawing.Size(788, 50);
-            this.lblDescriptionDetails.TabIndex = 6;
-            this.lblDescriptionDetails.Text = "If you have a problem or sugesstion please contact with us.";
-            this.lblDescriptionDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Location = new System.Drawing.Point(140, 233);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(651, 50);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "SmartCrawler@SAM.com";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
@@ -145,6 +131,20 @@
             this.label3.Text = "www.SAM.com";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblDescriptionDetails
+            // 
+            this.lblDescriptionDetails.AutoSize = true;
+            this.tblAbout.SetColumnSpan(this.lblDescriptionDetails, 2);
+            this.lblDescriptionDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDescriptionDetails.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDescriptionDetails.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblDescriptionDetails.Location = new System.Drawing.Point(3, 133);
+            this.lblDescriptionDetails.Name = "lblDescriptionDetails";
+            this.lblDescriptionDetails.Size = new System.Drawing.Size(788, 50);
+            this.lblDescriptionDetails.TabIndex = 6;
+            this.lblDescriptionDetails.Text = "If you have a problem or sugesstion please contact with us.";
+            this.lblDescriptionDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // frmHelp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -157,7 +157,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "frmHelp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "About";
+            this.Text = "Help";
             this.tblAbout.ResumeLayout(false);
             this.tblAbout.PerformLayout();
             this.ResumeLayout(false);

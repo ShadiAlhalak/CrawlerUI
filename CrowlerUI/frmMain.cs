@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using MaterialSkin2DotNet.Controls;
 using Microsoft.VisualBasic;
+using System.Dynamic;
 
 namespace CrawlerUI
 {
@@ -43,10 +44,12 @@ namespace CrawlerUI
 
             materialSkinManager = materialSkinManager = MaterialSkinManager.Instance;
             //Light Mode
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+            //materialSkinManager.AddFormToManage(this);
+            //materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+
             //DarkMode
+            PicDarkMode.BackgroundImage = Properties.Resources.moon_39_512;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
@@ -61,9 +64,17 @@ namespace CrawlerUI
 
         private void btnBrawserHome_Click(object sender, EventArgs e)
         {
+            string ErrorMessage = string.Empty;
             try
             {
-                WView.Source = new Uri(LibGeneralUtilities.ModConstant.HomeUrl);
+                progBar.Value = 0;
+                progTimer.Enabled = true;
+                clsSettings settings = clsSettings.loadSettings(ref ErrorMessage);
+                if (settings != null && !string.IsNullOrEmpty(settings.HomePageUrl))
+                {
+                    txtURL.Text = settings.HomePageUrl;
+                    WView.Source = new Uri(settings.HomePageUrl);
+                }
             }
             catch (Exception ex)
             {
@@ -77,6 +88,8 @@ namespace CrawlerUI
         {
             if (WView.CanGoBack)
             {
+                progBar.Value = 0;
+                progTimer.Enabled = true;
                 WView.GoBack();
             }
         }
@@ -85,6 +98,8 @@ namespace CrawlerUI
         {
             if (WView.CanGoForward)
             {
+                progBar.Value = 0;
+                progTimer.Enabled = true;
                 WView.GoForward();
             }
         }
@@ -93,6 +108,8 @@ namespace CrawlerUI
         {
             try
             {
+                progBar.Value = 0;
+                progTimer.Enabled = true;
                 WView.Reload();
             }
             catch (Exception ex)
@@ -107,6 +124,8 @@ namespace CrawlerUI
         {
             try
             {
+                progBar.Value = 0;
+                progTimer.Enabled = true;
                 string ValidUrl = ModValidation.ValidateURL(txtURL.Text);
                 txtURL.Text = ValidUrl;
                 WView.Source = new Uri(ValidUrl);
@@ -131,9 +150,17 @@ namespace CrawlerUI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            string ErrorMessage = string.Empty;
             try
             {
-                txtURL.Text = WView.Source.ToString();
+                progBar.Value = 0;
+                progTimer.Enabled = true;
+                clsSettings settings = clsSettings.loadSettings(ref ErrorMessage);
+                if (settings != null && !string.IsNullOrEmpty(settings.HomePageUrl))
+                {
+                    txtURL.Text = settings.HomePageUrl;
+                    WView.Source = new Uri(settings.HomePageUrl);
+                }
             }
             catch (Exception ex)
             {
@@ -184,6 +211,7 @@ namespace CrawlerUI
         {
             try
             {
+
                 MaterialSwitch materialSwitch = (MaterialSwitch)sender;
                 if (materialSwitch.Checked)
                 {
@@ -191,6 +219,8 @@ namespace CrawlerUI
                     Message.MessageType = ModResoucres.MsgType_Info;
                     Message.Message = ModResoucres.MsgWaitUntilReloadPage + ".\n" + ModResoucres.MsgAddValuesEnabled;
                     Message.ShowMessage();
+                    progTimer.Enabled = true;
+                    progBar.Value = 0;
                     WView.Reload();
                 }
                 else
@@ -199,6 +229,8 @@ namespace CrawlerUI
                     Message.MessageType = ModResoucres.MsgType_Info;
                     Message.Message = ModResoucres.MsgWaitUntilReloadPage + ".\n" + ModResoucres.MsgAddValuesDisabled;
                     Message.ShowMessage();
+                    progTimer.Enabled = true;
+                    progBar.Value = 0;
                     WView.Reload();
                 }
             }
@@ -227,6 +259,8 @@ namespace CrawlerUI
                     Message = new MaterialMessage(ModResoucres.MsgPreventLinksDisabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
                     Message.ShowMessage();
                 }
+                progTimer.Enabled = true;
+                progBar.Value = 0;
                 WView.Reload();
             }
             catch (Exception ex)
@@ -344,6 +378,8 @@ namespace CrawlerUI
                     string script = File.ReadAllText(MouseScriptPath);
                     WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
+                progTimer.Enabled = false;
+                progBar.Value = 100;
             }
             catch (Exception ex)
             {
@@ -393,7 +429,7 @@ namespace CrawlerUI
                 //var fullhtml2 =await  WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.innerHTML;");
                 //var fullhtml3 =await  WView.CoreWebView2.ExecuteScriptAsync("document.getElementsByTagName(\"html\")[0]\r\n.innerHTML;");
                 string SiteName = ModValidation.GetSiteName(txtURL.Text);
-                string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName+ModConstant.cnst_html_Extention);
+                string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName + ModConstant.cnst_html_Extention);
                 if (!string.IsNullOrEmpty(SiteName))
                 {
                     File.WriteAllText(FullHtmlFilePath, fullhtml);
@@ -402,7 +438,7 @@ namespace CrawlerUI
 
                 //3-Serialize Values list to file
                 string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
-                clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath,ref ErrorMessage);
+                clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath, ref ErrorMessage);
                 rchLog.AppendText(ModResoucres.cnst_ValuesFileHasBeenWritten);
                 rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
                 rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
@@ -417,6 +453,7 @@ namespace CrawlerUI
             }
         }
 
+
         #endregion
 
         #endregion
@@ -425,6 +462,20 @@ namespace CrawlerUI
 
         #endregion
 
+        private void progTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (progBar.Value < 90)
+                {
+                    progBar.Value += progBar.Step;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
+        }
     }
 }

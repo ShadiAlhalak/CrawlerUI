@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem1 = new MaterialSkin2DotNet.MaterialListBoxItem();
             MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem2 = new MaterialSkin2DotNet.MaterialListBoxItem();
             MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem3 = new MaterialSkin2DotNet.MaterialListBoxItem();
@@ -42,9 +43,10 @@
             this.btnSwPrevLinks = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwScrolling = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.ExtendSP = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tblWebViewer = new System.Windows.Forms.TableLayoutPanel();
             this.WView = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.btnLaunch = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.progBar = new MaterialSkin2DotNet.Controls.MaterialProgressBar();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.grbValues = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -70,6 +72,7 @@
             this.PicDarkMode = new System.Windows.Forms.PictureBox();
             this.picSettings = new System.Windows.Forms.PictureBox();
             this.SaveDialog = new System.Windows.Forms.SaveFileDialog();
+            this.progTimer = new System.Windows.Forms.Timer(this.components);
             this.tblMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSp)).BeginInit();
             this.MainSp.Panel1.SuspendLayout();
@@ -86,7 +89,7 @@
             this.ExtendSP.Panel1.SuspendLayout();
             this.ExtendSP.Panel2.SuspendLayout();
             this.ExtendSP.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tblWebViewer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WView)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.grbValues.SuspendLayout();
@@ -288,7 +291,7 @@
             // 
             // ExtendSP.Panel1
             // 
-            this.ExtendSP.Panel1.Controls.Add(this.tableLayoutPanel2);
+            this.ExtendSP.Panel1.Controls.Add(this.tblWebViewer);
             // 
             // ExtendSP.Panel2
             // 
@@ -297,32 +300,34 @@
             this.ExtendSP.SplitterDistance = 546;
             this.ExtendSP.TabIndex = 0;
             // 
-            // tableLayoutPanel2
+            // tblWebViewer
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Controls.Add(this.WView, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnLaunch, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(546, 379);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.tblWebViewer.ColumnCount = 2;
+            this.tblWebViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tblWebViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblWebViewer.Controls.Add(this.WView, 0, 1);
+            this.tblWebViewer.Controls.Add(this.btnLaunch, 0, 2);
+            this.tblWebViewer.Controls.Add(this.progBar, 0, 0);
+            this.tblWebViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblWebViewer.Location = new System.Drawing.Point(0, 0);
+            this.tblWebViewer.Name = "tblWebViewer";
+            this.tblWebViewer.RowCount = 3;
+            this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.tblWebViewer.Size = new System.Drawing.Size(546, 379);
+            this.tblWebViewer.TabIndex = 0;
             // 
             // WView
             // 
             this.WView.AllowExternalDrop = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.WView, 2);
+            this.tblWebViewer.SetColumnSpan(this.WView, 2);
             this.WView.CreationProperties = null;
             this.WView.DefaultBackgroundColor = System.Drawing.Color.White;
             this.WView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WView.Location = new System.Drawing.Point(3, 3);
+            this.WView.Location = new System.Drawing.Point(3, 13);
             this.WView.Name = "WView";
-            this.WView.Size = new System.Drawing.Size(540, 331);
+            this.WView.Size = new System.Drawing.Size(540, 317);
             this.WView.Source = new System.Uri("https://www.amazon.com/", System.UriKind.Absolute);
             this.WView.TabIndex = 0;
             this.WView.ZoomFactor = 1D;
@@ -333,24 +338,36 @@
             // btnLaunch
             // 
             this.btnLaunch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel2.SetColumnSpan(this.btnLaunch, 2);
+            this.tblWebViewer.SetColumnSpan(this.btnLaunch, 2);
             this.btnLaunch.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnLaunch.Depth = 0;
             this.btnLaunch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLaunch.HighEmphasis = true;
             this.btnLaunch.Icon = null;
-            this.btnLaunch.Location = new System.Drawing.Point(4, 343);
+            this.btnLaunch.Location = new System.Drawing.Point(4, 339);
             this.btnLaunch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLaunch.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLaunch.Size = new System.Drawing.Size(538, 30);
+            this.btnLaunch.Size = new System.Drawing.Size(538, 34);
             this.btnLaunch.TabIndex = 0;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLaunch.UseAccentColor = false;
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
+            // 
+            // progBar
+            // 
+            this.tblWebViewer.SetColumnSpan(this.progBar, 2);
+            this.progBar.Depth = 0;
+            this.progBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progBar.Location = new System.Drawing.Point(3, 3);
+            this.progBar.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.progBar.Name = "progBar";
+            this.progBar.Size = new System.Drawing.Size(540, 5);
+            this.progBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progBar.TabIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -505,6 +522,7 @@
             // rchLog
             // 
             this.rchLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rchLog.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rchLog.Location = new System.Drawing.Point(3, 3);
             this.rchLog.Name = "rchLog";
             this.TPLLog.SetRowSpan(this.rchLog, 3);
@@ -770,6 +788,11 @@
             // 
             this.SaveDialog.DefaultExt = "txt";
             // 
+            // progTimer
+            // 
+            this.progTimer.Interval = 25;
+            this.progTimer.Tick += new System.EventHandler(this.progTimer_Tick);
+            // 
             // frmMain
             // 
             this.AccentColor = MaterialSkin2DotNet.Accent.Cyan400;
@@ -800,8 +823,8 @@
             this.ExtendSP.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExtendSP)).EndInit();
             this.ExtendSP.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.tblWebViewer.ResumeLayout(false);
+            this.tblWebViewer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WView)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.grbValues.ResumeLayout(false);
@@ -851,7 +874,7 @@
         private TableLayoutPanel tableLayoutPanel4;
         private MaterialSkin2DotNet.Controls.MaterialListBox LstValues;
         private MaterialSkin2DotNet.Controls.MaterialButton btnClearValues;
-        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel tblWebViewer;
         private MaterialSkin2DotNet.Controls.MaterialButton btnLaunch;
         private MaterialSkin2DotNet.Controls.MaterialButton btnReload;
         private SaveFileDialog SaveDialog;
@@ -862,5 +885,7 @@
         private PictureBox picExit;
         private PictureBox PicDarkMode;
         private PictureBox picSettings;
+        private MaterialSkin2DotNet.Controls.MaterialProgressBar progBar;
+        private System.Windows.Forms.Timer progTimer;
     }
 }

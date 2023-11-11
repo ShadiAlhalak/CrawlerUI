@@ -86,10 +86,11 @@ namespace CrawlerUI
                 Settings.OutputFolder = txtOutput.Text;
                 Settings.SelectionColor = cmbColor.Text;
                 //Color color = Color.FromName(cmbColor.Text);
-
-                Settings.SaveSettings(ref ErrorMessage);
-
-                this.Close();
+                if (Valudation(Settings))
+                {
+                    Settings.SaveSettings(ref ErrorMessage);
+                    this.Close();
+                }   
             }
             catch (Exception ex)
             {
@@ -97,6 +98,35 @@ namespace CrawlerUI
                 Message.MessageType = ModResoucres.MsgType_Error;
                 Message.ShowMessage();
             }
+        }
+
+        public bool Valudation(clsSettings settings)
+        {
+            bool validData = true;
+            try
+            {
+                if (settings == null || string.IsNullOrEmpty(settings.AIServiceUrl) || string.IsNullOrEmpty(settings.OutputFolder) || string.IsNullOrEmpty(settings.HomePageUrl) || string.IsNullOrEmpty(settings.SelectionColor))
+                {
+                    validData = false;
+                    Message.Message = ModResoucres.cnst_AllSettingsAreRequired;
+                    Message.MessageType = ModResoucres.MsgType_Error;
+                    Message.ShowMessage();
+                    validData = false;
+                    return validData;
+                }
+                if (!Directory.Exists(settings.OutputFolder))
+                {
+                    Directory.CreateDirectory(settings.OutputFolder);
+                }
+            }
+            catch (Exception ex)
+            {
+                validData = false;
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+            return validData;
         }
 
         #endregion

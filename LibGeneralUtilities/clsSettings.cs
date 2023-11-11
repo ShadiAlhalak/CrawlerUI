@@ -14,7 +14,7 @@ namespace LibGeneralUtilities
     {
         #region Variables
         public string AIServiceUrl { get; set; } = string.Empty;
-        public string HomePageUrl { get; set; } = string.Empty;
+        public string HomePageUrl { get; set; } = LibGeneralUtilities.ModConstant.HomeUrl;
         public string OutputFolder { get; set; } = string.Empty;
         public string SelectionColor { get; set; } = "BlueViolet";
         #endregion
