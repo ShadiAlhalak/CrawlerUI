@@ -36,6 +36,7 @@ Same features mentioned at Leonardo's Repo.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>1.1.2</AssemblyVersion>
     <FileVersion>1.1.2</FileVersion>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

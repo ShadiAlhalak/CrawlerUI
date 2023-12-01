@@ -19,6 +19,11 @@ namespace LibGeneralUtilities
             return ModConstant.cnst_LinksDisable_ScriptFileName + ModConstant.cnst_js_Extention;
         }
 
+        public static string GetAllElemScriptPath()
+        {
+            return ModConstant.cnst_GetAllElem_ScriptFileName + ModConstant.cnst_js_Extention;
+        }
+
         public static string GetAppDataPath()
         {
             string AppData = string.Empty;

@@ -16,6 +16,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using MaterialSkin2DotNet.Controls;
 using Microsoft.VisualBasic;
 using System.Dynamic;
+using HtmlAgilityPack;
+using System.Net;
 
 namespace CrawlerUI
 {
@@ -425,9 +427,34 @@ namespace CrawlerUI
                 string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
 
                 //2-Full html file
-                var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
-                //var fullhtml2 =await  WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.innerHTML;");
-                //var fullhtml3 =await  WView.CoreWebView2.ExecuteScriptAsync("document.getElementsByTagName(\"html\")[0]\r\n.innerHTML;");
+                string fullhtml;
+                ////* Try somthing
+                using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                {
+                    fullhtml = await client.GetStringAsync(txtURL.Text);
+                }   
+
+                //string fullhtml;
+                //// obtain some arbitrary html....
+                //using (var client = new WebClient())
+                //{
+                //    fullhtml = client.DownloadString(txtURL.Text);
+                //}
+                //// use the html agility pack: http://www.codeplex.com/htmlagilitypack
+                //HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                //doc.LoadHtml(html);
+                //StringBuilder sb = new StringBuilder();
+                //foreach (HtmlTextNode node in doc.DocumentNode.SelectNodes("//text()"))
+                //{
+                //    sb.AppendLine(node.Text);
+                //}
+                //string final = sb.ToString();
+
+                //*
+                //string GetAllElemPath = ModPathes.GetAllElemScriptPath();
+                //string GetAllElemScr = File.ReadAllText(GetAllElemPath);
+                //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.textContent");
+                //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
                 string SiteName = ModValidation.GetSiteName(txtURL.Text);
                 string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName + ModConstant.cnst_html_Extention);
                 if (!string.IsNullOrEmpty(SiteName))
