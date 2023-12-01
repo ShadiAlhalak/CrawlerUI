@@ -32,11 +32,16 @@
             this.grpHtmlEditor = new System.Windows.Forms.GroupBox();
             this.tblPanelHtmlEditor = new System.Windows.Forms.TableLayoutPanel();
             this.tblHEditorTools = new System.Windows.Forms.TableLayoutPanel();
-            this.swHEBold = new MaterialSkin2DotNet.Controls.MaterialSwitch();
-            this.swHEItalic = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnHESave = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnHEReload = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.lblZoomText = new MaterialSkin2DotNet.Controls.MaterialLabel();
+            this.btnZoomIn = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnZoomOut = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnResetZoom = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.swHEWrap = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.rchHtmlEditor = new System.Windows.Forms.RichTextBox();
+            this.HtmlSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.HtmlOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpHtmlEditor.SuspendLayout();
             this.tblPanelHtmlEditor.SuspendLayout();
@@ -57,7 +62,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 383);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(934, 472);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // grpHtmlEditor
@@ -66,7 +71,7 @@
             this.grpHtmlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpHtmlEditor.Location = new System.Drawing.Point(8, 8);
             this.grpHtmlEditor.Name = "grpHtmlEditor";
-            this.grpHtmlEditor.Size = new System.Drawing.Size(778, 367);
+            this.grpHtmlEditor.Size = new System.Drawing.Size(918, 456);
             this.grpHtmlEditor.TabIndex = 0;
             this.grpHtmlEditor.TabStop = false;
             this.grpHtmlEditor.Text = "Html Editor";
@@ -83,62 +88,35 @@
             this.tblPanelHtmlEditor.RowCount = 2;
             this.tblPanelHtmlEditor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblPanelHtmlEditor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblPanelHtmlEditor.Size = new System.Drawing.Size(772, 341);
+            this.tblPanelHtmlEditor.Size = new System.Drawing.Size(912, 430);
             this.tblPanelHtmlEditor.TabIndex = 0;
             // 
             // tblHEditorTools
             // 
-            this.tblHEditorTools.ColumnCount = 7;
+            this.tblHEditorTools.ColumnCount = 9;
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tblHEditorTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tblHEditorTools.Controls.Add(this.swHEBold, 0, 0);
-            this.tblHEditorTools.Controls.Add(this.swHEItalic, 1, 0);
-            this.tblHEditorTools.Controls.Add(this.btnHESave, 6, 0);
-            this.tblHEditorTools.Controls.Add(this.btnHEReload, 5, 0);
+            this.tblHEditorTools.Controls.Add(this.btnHESave, 8, 0);
+            this.tblHEditorTools.Controls.Add(this.btnHEReload, 7, 0);
+            this.tblHEditorTools.Controls.Add(this.lblZoomText, 0, 0);
+            this.tblHEditorTools.Controls.Add(this.btnZoomIn, 1, 0);
+            this.tblHEditorTools.Controls.Add(this.btnZoomOut, 2, 0);
+            this.tblHEditorTools.Controls.Add(this.btnResetZoom, 3, 0);
+            this.tblHEditorTools.Controls.Add(this.swHEWrap, 4, 0);
             this.tblHEditorTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblHEditorTools.Location = new System.Drawing.Point(3, 3);
             this.tblHEditorTools.Name = "tblHEditorTools";
             this.tblHEditorTools.RowCount = 1;
             this.tblHEditorTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblHEditorTools.Size = new System.Drawing.Size(766, 34);
+            this.tblHEditorTools.Size = new System.Drawing.Size(906, 34);
             this.tblHEditorTools.TabIndex = 0;
-            // 
-            // swHEBold
-            // 
-            this.swHEBold.AutoSize = true;
-            this.swHEBold.Depth = 0;
-            this.swHEBold.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.swHEBold.Location = new System.Drawing.Point(0, 0);
-            this.swHEBold.Margin = new System.Windows.Forms.Padding(0);
-            this.swHEBold.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.swHEBold.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.swHEBold.Name = "swHEBold";
-            this.swHEBold.Ripple = true;
-            this.swHEBold.Size = new System.Drawing.Size(109, 34);
-            this.swHEBold.TabIndex = 0;
-            this.swHEBold.Text = "Bold";
-            this.swHEBold.UseVisualStyleBackColor = true;
-            // 
-            // swHEItalic
-            // 
-            this.swHEItalic.AutoSize = true;
-            this.swHEItalic.Depth = 0;
-            this.swHEItalic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.swHEItalic.Location = new System.Drawing.Point(109, 0);
-            this.swHEItalic.Margin = new System.Windows.Forms.Padding(0);
-            this.swHEItalic.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.swHEItalic.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.swHEItalic.Name = "swHEItalic";
-            this.swHEItalic.Ripple = true;
-            this.swHEItalic.Size = new System.Drawing.Size(109, 34);
-            this.swHEItalic.TabIndex = 1;
-            this.swHEItalic.Text = "Italic";
-            this.swHEItalic.UseVisualStyleBackColor = true;
             // 
             // btnHESave
             // 
@@ -148,17 +126,18 @@
             this.btnHESave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHESave.HighEmphasis = true;
             this.btnHESave.Icon = null;
-            this.btnHESave.Location = new System.Drawing.Point(658, 6);
+            this.btnHESave.Location = new System.Drawing.Point(800, 6);
             this.btnHESave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHESave.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnHESave.Name = "btnHESave";
             this.btnHESave.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHESave.Size = new System.Drawing.Size(104, 22);
+            this.btnHESave.Size = new System.Drawing.Size(102, 22);
             this.btnHESave.TabIndex = 2;
             this.btnHESave.Text = "Save ";
             this.btnHESave.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHESave.UseAccentColor = false;
             this.btnHESave.UseVisualStyleBackColor = true;
+            this.btnHESave.Click += new System.EventHandler(this.btnHESave_Click);
             // 
             // btnHEReload
             // 
@@ -168,17 +147,112 @@
             this.btnHEReload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHEReload.HighEmphasis = true;
             this.btnHEReload.Icon = null;
-            this.btnHEReload.Location = new System.Drawing.Point(549, 6);
+            this.btnHEReload.Location = new System.Drawing.Point(690, 6);
             this.btnHEReload.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHEReload.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnHEReload.Name = "btnHEReload";
             this.btnHEReload.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHEReload.Size = new System.Drawing.Size(101, 22);
+            this.btnHEReload.Size = new System.Drawing.Size(102, 22);
             this.btnHEReload.TabIndex = 3;
             this.btnHEReload.Text = "Reload";
             this.btnHEReload.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHEReload.UseAccentColor = false;
             this.btnHEReload.UseVisualStyleBackColor = true;
+            this.btnHEReload.Click += new System.EventHandler(this.btnHEReload_Click);
+            // 
+            // lblZoomText
+            // 
+            this.lblZoomText.AutoSize = true;
+            this.lblZoomText.Depth = 0;
+            this.lblZoomText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblZoomText.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblZoomText.Location = new System.Drawing.Point(3, 0);
+            this.lblZoomText.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.lblZoomText.Name = "lblZoomText";
+            this.lblZoomText.Size = new System.Drawing.Size(86, 34);
+            this.lblZoomText.TabIndex = 5;
+            this.lblZoomText.Text = "Zoom Text :";
+            this.lblZoomText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomIn.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnZoomIn.Depth = 0;
+            this.btnZoomIn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnZoomIn.HighEmphasis = true;
+            this.btnZoomIn.Icon = null;
+            this.btnZoomIn.Location = new System.Drawing.Point(96, 6);
+            this.btnZoomIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnZoomIn.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnZoomIn.Size = new System.Drawing.Size(32, 22);
+            this.btnZoomIn.TabIndex = 6;
+            this.btnZoomIn.Text = "+";
+            this.btnZoomIn.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnZoomIn.UseAccentColor = false;
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomOut.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnZoomOut.Depth = 0;
+            this.btnZoomOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnZoomOut.HighEmphasis = true;
+            this.btnZoomOut.Icon = null;
+            this.btnZoomOut.Location = new System.Drawing.Point(136, 6);
+            this.btnZoomOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnZoomOut.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnZoomOut.Size = new System.Drawing.Size(32, 22);
+            this.btnZoomOut.TabIndex = 7;
+            this.btnZoomOut.Text = "-";
+            this.btnZoomOut.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnZoomOut.UseAccentColor = false;
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            // 
+            // btnResetZoom
+            // 
+            this.btnResetZoom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnResetZoom.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnResetZoom.Depth = 0;
+            this.btnResetZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnResetZoom.HighEmphasis = true;
+            this.btnResetZoom.Icon = null;
+            this.btnResetZoom.Location = new System.Drawing.Point(176, 6);
+            this.btnResetZoom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnResetZoom.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnResetZoom.Name = "btnResetZoom";
+            this.btnResetZoom.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnResetZoom.Size = new System.Drawing.Size(112, 22);
+            this.btnResetZoom.TabIndex = 8;
+            this.btnResetZoom.Text = "Reset zoom";
+            this.btnResetZoom.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnResetZoom.UseAccentColor = false;
+            this.btnResetZoom.UseVisualStyleBackColor = true;
+            this.btnResetZoom.Click += new System.EventHandler(this.btnResetZoom_Click);
+            // 
+            // swHEWrap
+            // 
+            this.swHEWrap.AutoSize = true;
+            this.swHEWrap.Depth = 0;
+            this.swHEWrap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.swHEWrap.Location = new System.Drawing.Point(292, 0);
+            this.swHEWrap.Margin = new System.Windows.Forms.Padding(0);
+            this.swHEWrap.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.swHEWrap.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.swHEWrap.Name = "swHEWrap";
+            this.swHEWrap.Ripple = true;
+            this.swHEWrap.Size = new System.Drawing.Size(150, 34);
+            this.swHEWrap.TabIndex = 4;
+            this.swHEWrap.Text = "Wrap Text";
+            this.swHEWrap.UseVisualStyleBackColor = true;
+            this.swHEWrap.CheckedChanged += new System.EventHandler(this.swHEWrap_CheckedChanged);
             // 
             // rchHtmlEditor
             // 
@@ -188,15 +262,27 @@
             this.rchHtmlEditor.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.rchHtmlEditor.Location = new System.Drawing.Point(3, 43);
             this.rchHtmlEditor.Name = "rchHtmlEditor";
-            this.rchHtmlEditor.Size = new System.Drawing.Size(766, 295);
+            this.rchHtmlEditor.Size = new System.Drawing.Size(906, 384);
             this.rchHtmlEditor.TabIndex = 1;
             this.rchHtmlEditor.Text = "HTML Editor";
+            this.rchHtmlEditor.WordWrap = false;
+            // 
+            // HtmlSaveFileDialog
+            // 
+            this.HtmlSaveFileDialog.DefaultExt = "html";
+            this.HtmlSaveFileDialog.Filter = "html files (*.html)|*.html|txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            this.HtmlSaveFileDialog.RestoreDirectory = true;
+            // 
+            // HtmlOpenFileDialog
+            // 
+            this.HtmlOpenFileDialog.DefaultExt = "html";
+            this.HtmlOpenFileDialog.Filter = "html files (*.html)|*.html|txt files (*.txt)|*.txt|All files (*.*)|*.*";
             // 
             // htmlEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(940, 539);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "htmlEditor";
             this.Text = "htmlEditor";
@@ -215,10 +301,15 @@
         private GroupBox grpHtmlEditor;
         private TableLayoutPanel tblPanelHtmlEditor;
         private TableLayoutPanel tblHEditorTools;
-        private MaterialSkin2DotNet.Controls.MaterialSwitch swHEBold;
-        private MaterialSkin2DotNet.Controls.MaterialSwitch swHEItalic;
         private MaterialSkin2DotNet.Controls.MaterialButton btnHESave;
         private MaterialSkin2DotNet.Controls.MaterialButton btnHEReload;
         private RichTextBox rchHtmlEditor;
+        private MaterialSkin2DotNet.Controls.MaterialSwitch swHEWrap;
+        private MaterialSkin2DotNet.Controls.MaterialLabel lblZoomText;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnZoomIn;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnZoomOut;
+        private SaveFileDialog HtmlSaveFileDialog;
+        private OpenFileDialog HtmlOpenFileDialog;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnResetZoom;
     }
 }

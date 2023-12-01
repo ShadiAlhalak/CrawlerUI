@@ -21,163 +21,164 @@ namespace CrawlerUI
         public Color DefaultColor { get; set; } = Color.WhiteSmoke;
         public Color TagColor { get; set; } = Color.RoyalBlue;
         public Color BracketsColor { get; set; } = Color.DimGray;
-        public Color StringColor { get; set; } = Color.OrangeRed;
+        public Color StringColor { get; set; } = Color.Orange;
         public Color LinkColor { get; set; } = Color.DarkCyan;
+        public MaterialMessage Message { get; set; } = new MaterialMessage();
         #endregion
 
         #region Constructor
 
         public htmlEditor(string html)
         {
-            FullHtml = File.ReadAllText("C:\\Users\\shadi\\AppData\\Roaming\\Smart Crawler\\Output\\2023-12-01 15-41-24\\Training Files\\amazonae.html", Encoding.UTF8);
+            try
+            {
+                InitializeComponent();
 
-            InitializeComponent();
-            SetHtmlEditorText(FullHtml);
-            ColorHtmlTags(rchHtmlEditor);
+                if (string.IsNullOrEmpty(html))
+                {
+                    FullHtml = File.ReadAllText("C:\\Users\\shadi\\AppData\\Roaming\\Smart Crawler\\Output\\2023-12-01 15-41-24\\Training Files\\amazonae.html", Encoding.UTF8);
+                }
+                if (!string.IsNullOrEmpty(FullHtml))
+                {
+                    SetHtmlEditorText();
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        public htmlEditor(FileInfo FileInf)
+        {
+            try
+            {
+                InitializeComponent();
+                if (FileInf.Exists)
+                {
+                    FullHtml = File.ReadAllText(FileInf.FullName, Encoding.UTF8);
+                }
+                if (!string.IsNullOrEmpty(FullHtml))
+                {
+                    SetHtmlEditorText();
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+
         }
 
         #endregion
 
         #region Methods
 
-        private void SetHtmlEditorText(string FullHtml)
+        private void SetHtmlEditorText()
         {
             try
             {
                 FullHtml = modHtmlTextProcessing.PreProcessingHtml(FullHtml);
+                ColorHtmlTags();
+                ColoringStringValues();
                 rchHtmlEditor.Text = FullHtml;
             }
             catch (Exception ex)
             {
-
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
-        private void ColorHtmlTags(RichTextBox richTextBox)
+        private void ColorHtmlTags()
         {
-            // Get the current text of the RichTextBox
-            string text = richTextBox.Text;
-
-            // Loop through each HTML tag and color it
-            foreach (string tag in ModConstant.HTMLTagsList)
+            try
             {
-                // Find all instances of the tag in the text
-                int tagIndex = text.IndexOf("<" + tag);
-                while (tagIndex != -1)
+                // Get the current text of the RichTextBox
+                string text = rchHtmlEditor.Text;
+
+                // Loop through each HTML tag and color it
+                foreach (string tag in ModConstant.HTMLTagsList)
                 {
-                    // Color the tag
-                    richTextBox.Select(tagIndex, tag.Length + 1);
-                    richTextBox.SelectionColor = TagColor;
-
-                    // Find the next instance of the tag
-                    tagIndex = text.IndexOf("<" + tag, tagIndex + tag.Length);
-                }
-
-                // Find all instances of the tag in the text
-                tagIndex = text.IndexOf("/" + tag + ">");
-                while (tagIndex != -1)
-                {
-                    // Color the tag
-                    richTextBox.Select(tagIndex, tag.Length + 1);
-                    richTextBox.SelectionColor = TagColor;
-
-                    // Find the next instance of the tag
-                    tagIndex = text.IndexOf("/" + tag + ">", tagIndex + tag.Length);
-                }
-            }
-
-            // Find all instances of the tag in the text
-            int index = text.IndexOf("<");
-            while (index != -1)
-            {
-                // Color the tag
-                richTextBox.Select(index, 1);
-                richTextBox.SelectionColor = BracketsColor;
-
-                // Find the next instance of the tag
-                index = text.IndexOf("<", index + 1);
-            }
-
-            // Find all instances of the tag in the text
-            index = text.IndexOf(">");
-            while (index != -1)
-            {
-                // Color the tag
-                richTextBox.Select(index, 1);
-                richTextBox.SelectionColor = BracketsColor;
-
-                // Find the next instance of the tag
-                index = text.IndexOf(">", index + 1);
-            }
-        }
-
-        private void ColoringTags()
-        {
-            // Loop through each word in the list
-            foreach (string tag in ModConstant.HTMLTagsList)
-            {
-                int StartIndex = 0;
-                while ((StartIndex = FullHtml.IndexOf("<" + tag, StartIndex)) != -1)
-                {
-                    // If the word is found, set the color of the text
-                    if (StartIndex != -1)
+                    // Find all instances of the tag in the text
+                    int tagIndex = text.IndexOf("<" + tag);
+                    while (tagIndex != -1)
                     {
-                        rchHtmlEditor.SelectionStart = StartIndex;
-                        rchHtmlEditor.SelectionLength = tag.Length;
+                        // Color the tag
+                        rchHtmlEditor.Select(tagIndex, tag.Length + 1);
                         rchHtmlEditor.SelectionColor = TagColor;
+
+                        // Find the next instance of the tag
+                        tagIndex = text.IndexOf("<" + tag, tagIndex + tag.Length);
                     }
-                    StartIndex++;
+
+                    // Find all instances of the tag in the text
+                    tagIndex = text.IndexOf("/" + tag + ">");
+                    while (tagIndex != -1)
+                    {
+                        // Color the tag
+                        rchHtmlEditor.Select(tagIndex, tag.Length + 1);
+                        rchHtmlEditor.SelectionColor = TagColor;
+
+                        // Find the next instance of the tag
+                        tagIndex = text.IndexOf("/" + tag + ">", tagIndex + tag.Length);
+                    }
                 }
-            }
-        }
 
-        private void OriginalColorHtmlTags(RichTextBox richTextBox)
-        {
-            // Define the HTML tags that you want to color
-            string[] htmlTags = { "html", "head", "title", "body", "div", "p", "span", "a", "img", "ul", "ol", "li", "table", "tr", "td", "th" };
-
-            // Define the colors that you want to use for each tag
-            Dictionary<string, Color> tagColors = new Dictionary<string, Color>
-    {
-        { "html", Color.Blue },
-        { "head", Color.Blue },
-        { "title", Color.Blue },
-        { "body", Color.Blue },
-        { "div", Color.Red },
-        { "p", Color.Red },
-        { "span", Color.Red },
-        { "a", Color.Green },
-        { "img", Color.Purple },
-        { "ul", Color.Orange },
-        { "ol", Color.Orange },
-        { "li", Color.Orange },
-        { "table", Color.DarkCyan },
-        { "tr", Color.DarkCyan },
-        { "td", Color.DarkCyan },
-        { "th", Color.DarkCyan }
-    };
-
-            // Get the current text of the RichTextBox
-            string text = richTextBox.Text;
-
-            // Loop through each HTML tag and color it
-            foreach (string tag in htmlTags)
-            {
                 // Find all instances of the tag in the text
-                int index = text.IndexOf("<" + tag);
-
+                int index = text.IndexOf("<");
                 while (index != -1)
                 {
-                    // Find the end of the tag
-                    int endIndex = text.IndexOf(">", index);
-
                     // Color the tag
-                    richTextBox.Select(index, endIndex - index + 1);
-                    richTextBox.SelectionColor = tagColors[tag];
+                    rchHtmlEditor.Select(index, 1);
+                    rchHtmlEditor.SelectionColor = BracketsColor;
 
                     // Find the next instance of the tag
-                    index = text.IndexOf("<" + tag, endIndex);
+                    index = text.IndexOf("<", index + 1);
                 }
+
+                // Find all instances of the tag in the text
+                index = text.IndexOf(">");
+                while (index != -1)
+                {
+                    // Color the tag
+                    rchHtmlEditor.Select(index, 1);
+                    rchHtmlEditor.SelectionColor = BracketsColor;
+
+                    // Find the next instance of the tag
+                    index = text.IndexOf(">", index + 1);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void ColoringStringValues()
+        {
+            try
+            {
+                List<HtmlSection> StringSections = modHtmlTextProcessing.GetStringValues(FullHtml);
+                foreach (HtmlSection Section in StringSections)
+                {
+                    rchHtmlEditor.Select(Section.Start, Section.Length);
+                    rchHtmlEditor.SelectionColor = StringColor;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
@@ -185,6 +186,105 @@ namespace CrawlerUI
 
         #region Events
 
+
+        private void btnHESave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (HtmlSaveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(HtmlSaveFileDialog.FileName, rchHtmlEditor.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void btnHEReload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (HtmlOpenFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    FullHtml = File.ReadAllText(HtmlOpenFileDialog.FileName);
+                    SetHtmlEditorText();
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rchHtmlEditor.ZoomFactor < 3)
+                {
+                    rchHtmlEditor.ZoomFactor += 0.5f;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (rchHtmlEditor.ZoomFactor > 1)
+                {
+                    rchHtmlEditor.ZoomFactor -= 0.5f;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void swHEWrap_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                rchHtmlEditor.WordWrap = swHEWrap.Checked;
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void btnResetZoom_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                rchHtmlEditor.ZoomFactor = 1;
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
         #endregion
+
     }
 }

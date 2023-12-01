@@ -16,6 +16,8 @@ namespace LibGeneralUtilities
             {
                 Output = RemoveScripts(FullHtml);
                 Output = RemoveStyles(Output);
+                Output = RemoveLinks(Output);
+                Output = RemoveMetaData(Output);
                 Output = RemoveComments(Output);
                 Output = RemoveEmptyLines(Output);
             }
@@ -97,8 +99,66 @@ namespace LibGeneralUtilities
                 {
                     int EndIndex = HtmlText.IndexOf("/style>", StartIndex) + 7;
                     Styles.Add(new HtmlSection(StartIndex, EndIndex));
-                    // Find the next instance of the tag
+                    // Find the next instance of the style
                     StartIndex = HtmlText.IndexOf("<style", EndIndex);
+                }
+                Styles.Reverse();
+                foreach (HtmlSection Sec in Styles)
+                {
+                    HtmlText = HtmlText.Remove(Sec.Start, Sec.End - Sec.Start);
+                }
+                Output = HtmlText;
+            }
+            catch (Exception ex)
+            {
+                Output = HtmlText;
+            }
+            return Output;
+        }
+
+        public static string RemoveLinks(string HtmlText)
+        {
+            string Output = string.Empty;
+            try
+            {
+                List<HtmlSection> Styles = new List<HtmlSection>();
+                // Find all instances of the link in the text
+                int StartIndex = HtmlText.IndexOf("<link");
+                while (StartIndex != -1)
+                {
+                    int EndIndex = HtmlText.IndexOf(">", StartIndex) + 1;
+                    Styles.Add(new HtmlSection(StartIndex, EndIndex));
+                    // Find the next instance of the link
+                    StartIndex = HtmlText.IndexOf("<link", EndIndex);
+                }
+                Styles.Reverse();
+                foreach (HtmlSection Sec in Styles)
+                {
+                    HtmlText = HtmlText.Remove(Sec.Start, Sec.End - Sec.Start);
+                }
+                Output = HtmlText;
+            }
+            catch (Exception ex)
+            {
+                Output = HtmlText;
+            }
+            return Output;
+        }
+
+        public static string RemoveMetaData(string HtmlText)
+        {
+            string Output = string.Empty;
+            try
+            {
+                List<HtmlSection> Styles = new List<HtmlSection>();
+                // Find all instances of the metas in the text
+                int StartIndex = HtmlText.IndexOf("<meta");
+                while (StartIndex != -1)
+                {
+                    int EndIndex = HtmlText.IndexOf(">", StartIndex) + 1;
+                    Styles.Add(new HtmlSection(StartIndex, EndIndex));
+                    // Find the next instance of the meta
+                    StartIndex = HtmlText.IndexOf("<meta", EndIndex);
                 }
                 Styles.Reverse();
                 foreach (HtmlSection Sec in Styles)
@@ -127,5 +187,34 @@ namespace LibGeneralUtilities
             }
             return Output;
         }
+
+        public static List<HtmlSection> GetStringValues(string HtmlText)
+        {
+            List<HtmlSection> StringSection = new List<HtmlSection>();
+            try
+            {
+                int StartIndex = HtmlText.IndexOf("\"");
+                while (StartIndex != -1)
+                {
+                    int EndIndex = HtmlText.IndexOf("\"", StartIndex+1);
+                    if (EndIndex != -1)
+                    {
+                        StringSection.Add(new HtmlSection(StartIndex, EndIndex));
+                        // Find the next instance of the script
+                        StartIndex = HtmlText.IndexOf("\"", EndIndex+1);
+                    }
+                    else
+                    {
+                        StartIndex = -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return StringSection;
+        }
+
     }
 }
