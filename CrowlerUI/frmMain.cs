@@ -18,6 +18,7 @@ using Microsoft.VisualBasic;
 using System.Dynamic;
 using HtmlAgilityPack;
 using System.Net;
+using System.IO;
 
 namespace CrawlerUI
 {
@@ -27,6 +28,7 @@ namespace CrawlerUI
         #region Variables
         public List<clsHtmlElem> Values { get; set; } = new List<clsHtmlElem>();
         public MaterialMessage Message { get; set; } = new MaterialMessage();
+        public string CurrentHtmlText { get; set; } = string.Empty;
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
         public bool IsSideBarOpen { get; set; } = false;
@@ -145,6 +147,42 @@ namespace CrawlerUI
             if (e.KeyCode == Keys.Enter)
             {
                 btnGo.PerformClick();
+            }
+        }
+
+        private void btnInspect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                htmlEditor Editor = null;
+                if (string.IsNullOrEmpty(CurrentHtmlText))
+                {
+                    FileInfo Fileinf = new FileInfo(ModPathes.GetHtmlTextTempFile());
+                    if (Fileinf.Exists)
+                    {
+                        Editor = new htmlEditor(Fileinf);
+                    }
+                }
+                else
+                {
+                    Editor = new htmlEditor(CurrentHtmlText);
+                }
+                if (Editor is null)
+                {
+                    Message.Message = ModResoucres.cnst_InspectThisUrlIsNotPossibleNowTryReloadPage;
+                    Message.MessageType = ModResoucres.MsgType_Error;
+                    Message.ShowMessage();
+                }
+                else
+                {
+                    Editor.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
@@ -363,7 +401,7 @@ namespace CrawlerUI
             }
         }
 
-        private void WView_NavigationCompleted_1(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        private async void WView_NavigationCompleted_1(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
             try
             {
@@ -372,13 +410,18 @@ namespace CrawlerUI
                 {
                     string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
                     string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
-                    WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
+                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
                 }
                 if (AddZone)
                 {
                     string MouseScriptPath = ModPathes.GetMouseScriptPath();
                     string script = File.ReadAllText(MouseScriptPath);
-                    WView.CoreWebView2.ExecuteScriptAsync(script);
+                    await WView.CoreWebView2.ExecuteScriptAsync(script);
+                }
+                using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                {
+                    CurrentHtmlText = await client.GetStringAsync(txtURL.Text);
+                    File.WriteAllText(ModPathes.GetHtmlTextTempFile(), CurrentHtmlText);
                 }
                 progTimer.Enabled = false;
                 progBar.Value = 100;
@@ -395,14 +438,15 @@ namespace CrawlerUI
         {
             try
             {
-                clsHtmlElem jsonObject = JsonConvert.DeserializeObject<clsHtmlElem>(e.WebMessageAsJson);
-                //var elem = await WView.CoreWebView2.ExecuteScriptAsync("document.querySelector(." + jsonObject.ClassName + ");");
-                rchLog.AppendText(jsonObject.ObjectToString());
+                clsHtmlElem? jsonObject = JsonConvert.DeserializeObject<clsHtmlElem>(e.WebMessageAsJson);
+                if (jsonObject is null) return;
+
+                rchLog.AppendText(jsonObject?.ObjectToString());
                 rchLog.ScrollToCaret();
-                switch (jsonObject.Key)
+                switch (jsonObject?.Key)
                 {
                     case "click":
-                        LstValues.AddItem(jsonObject.Value);
+                        LstValues.AddItem(jsonObject?.Value);
                         Values.Add(jsonObject);
                         break;
                 }
@@ -432,7 +476,7 @@ namespace CrawlerUI
                 using (HttpClient client = new HttpClient())// actually only one object should be created by Application
                 {
                     fullhtml = await client.GetStringAsync(txtURL.Text);
-                }   
+                }
 
                 //string fullhtml;
                 //// obtain some arbitrary html....
@@ -504,5 +548,6 @@ namespace CrawlerUI
             }
 
         }
+
     }
 }

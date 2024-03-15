@@ -33,14 +33,10 @@ namespace CrawlerUI
             try
             {
                 InitializeComponent();
-
+                FullHtml = html;
                 if (string.IsNullOrEmpty(html))
                 {
                     FullHtml = File.ReadAllText("C:\\Users\\shadi\\AppData\\Roaming\\Smart Crawler\\Output\\2023-12-01 15-41-24\\Training Files\\amazonae.html", Encoding.UTF8);
-                }
-                if (!string.IsNullOrEmpty(FullHtml))
-                {
-                    SetHtmlEditorText();
                 }
             }
             catch (Exception ex)
@@ -59,10 +55,6 @@ namespace CrawlerUI
                 if (FileInf.Exists)
                 {
                     FullHtml = File.ReadAllText(FileInf.FullName, Encoding.UTF8);
-                }
-                if (!string.IsNullOrEmpty(FullHtml))
-                {
-                    SetHtmlEditorText();
                 }
             }
             catch (Exception ex)
@@ -83,9 +75,14 @@ namespace CrawlerUI
             try
             {
                 FullHtml = modHtmlTextProcessing.PreProcessingHtml(FullHtml);
-                ColorHtmlTags();
-                ColoringStringValues();
-                rchHtmlEditor.Text = FullHtml;
+                if (!string.IsNullOrEmpty(FullHtml))
+                {
+                    rchHtmlEditor.Text = FullHtml;
+                    //rchHtmlEditor.SuspendLayout();
+                    ColorHtmlTags(rchHtmlEditor);
+                    ColoringStringValues();
+                    //rchHtmlEditor.ResumeLayout();
+                }
             }
             catch (Exception ex)
             {
@@ -95,7 +92,7 @@ namespace CrawlerUI
             }
         }
 
-        private void ColorHtmlTags()
+        private void ColorHtmlTags(RichTextBox rchHtmlEditor)
         {
             try
             {
@@ -186,6 +183,13 @@ namespace CrawlerUI
 
         #region Events
 
+        private void htmlEditor_Load(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(FullHtml))
+            {
+                SetHtmlEditorText();
+            }
+        }
 
         private void btnHESave_Click(object sender, EventArgs e)
         {

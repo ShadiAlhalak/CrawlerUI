@@ -60,9 +60,46 @@ namespace LibGeneralUtilities
             return SettingsFolder;
         }
 
+        public static string GetTempFolderPath()
+        {
+            string TempFolder = string.Empty;
+            try
+            {
+                TempFolder = Path.Combine(GetAppDataPath(), ModConstant.cnst_TempFolder);
+                if (!Directory.Exists(TempFolder))
+                {
+                    Directory.CreateDirectory(TempFolder);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Must add log
+            }
+            return TempFolder;
+        }
+
         public static string GetSettingsFilePath()
         {
             return Path.Combine(GetSettingsFolderPath(), ModConstant.cnst_SettingsFolder + ModConstant.cnst_xml_Extention);
+        }
+
+        public static string GetHtmlTextTempFile()
+        {
+            string HtmlTextTempFile = string.Empty;
+            try
+            {
+                string TempFolder = GetTempFolderPath();
+                if (!string.IsNullOrEmpty(TempFolder))
+                {
+                    HtmlTextTempFile = Path.Combine(TempFolder, ModConstant.cnst_HtmlTextFile + ModConstant.cnst_html_Extention);
+                }
+            }
+            catch (Exception)
+            {
+                //Must add log
+                HtmlTextTempFile = string.Empty;
+            }
+            return HtmlTextTempFile;
         }
 
         public static string GetGeneralOutputFolder(ref string ErrorMessage)

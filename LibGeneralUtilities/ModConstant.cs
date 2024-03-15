@@ -10,6 +10,8 @@ namespace LibGeneralUtilities
     {
         #region Folder & Files Names
         public const string cnst_SettingsFolder = "Settings";
+        public const string cnst_TempFolder = "Temp";      
+        public const string cnst_HtmlTextFile = "HtmlText";
         public const string cnst_TrainingFilesFolder = "Training Files";
         public const string cnst_ResultFolder = "Result";
         public const string cnst_ValuesFileName = "Values";

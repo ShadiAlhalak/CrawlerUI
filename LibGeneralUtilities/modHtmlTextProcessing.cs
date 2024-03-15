@@ -196,12 +196,12 @@ namespace LibGeneralUtilities
                 int StartIndex = HtmlText.IndexOf("\"");
                 while (StartIndex != -1)
                 {
-                    int EndIndex = HtmlText.IndexOf("\"", StartIndex+1);
+                    int EndIndex = HtmlText.IndexOf("\"", StartIndex + 1);
                     if (EndIndex != -1)
                     {
                         StringSection.Add(new HtmlSection(StartIndex, EndIndex));
                         // Find the next instance of the script
-                        StartIndex = HtmlText.IndexOf("\"", EndIndex+1);
+                        StartIndex = HtmlText.IndexOf("\"", EndIndex + 1);
                     }
                     else
                     {

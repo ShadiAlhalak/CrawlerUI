@@ -286,6 +286,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "htmlEditor";
             this.Text = "htmlEditor";
+            this.Load += new System.EventHandler(this.htmlEditor_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.grpHtmlEditor.ResumeLayout(false);
             this.tblPanelHtmlEditor.ResumeLayout(false);

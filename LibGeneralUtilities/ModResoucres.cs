@@ -17,8 +17,8 @@ namespace LibGeneralUtilities
         public const string MsgAddValuesDisabled = "Add Values Disabled";
         public const string cnst_FullHtmlSavedDone = "Fullhtml saved done";
         public const string cnst_SettingsFileISNotExist = "Settings file is not exist.";
-        public const string cnst_AllSettingsAreRequired = " All settings are required.";
-
+        public const string cnst_AllSettingsAreRequired = "All settings are required.";
+        public const string cnst_InspectThisUrlIsNotPossibleNowTryReloadPage = "Inspect this URl is not possible try reload page";
         #endregion
 
         #region Log

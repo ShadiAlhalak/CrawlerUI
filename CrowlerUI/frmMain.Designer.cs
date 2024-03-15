@@ -57,13 +57,14 @@
             this.btnExpotLog = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnClearLog = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.rchLog = new System.Windows.Forms.RichTextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbpUrlControl = new System.Windows.Forms.TableLayoutPanel();
             this.btnForward = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnBack = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnBrawserHome = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnGo = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox();
             this.btnReload = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnInspect = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tblSideBar = new System.Windows.Forms.TableLayoutPanel();
             this.pivAbout = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
@@ -96,7 +97,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.grpLog.SuspendLayout();
             this.TPLLog.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tbpUrlControl.SuspendLayout();
             this.tblSideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pivAbout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
@@ -112,7 +113,7 @@
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblMain.Controls.Add(this.MainSp, 1, 1);
-            this.tblMain.Controls.Add(this.tableLayoutPanel1, 1, 0);
+            this.tblMain.Controls.Add(this.tbpUrlControl, 1, 0);
             this.tblMain.Controls.Add(this.tblSideBar, 0, 0);
             this.tblMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMain.Location = new System.Drawing.Point(3, 64);
@@ -530,29 +531,30 @@
             this.rchLog.TabIndex = 3;
             this.rchLog.Text = "";
             // 
-            // tableLayoutPanel1
+            // tbpUrlControl
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.btnForward, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnBack, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnBrawserHome, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnGo, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtURL, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnReload, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(58, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(889, 45);
-            this.tableLayoutPanel1.TabIndex = 2;
+            this.tbpUrlControl.ColumnCount = 7;
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tbpUrlControl.Controls.Add(this.btnForward, 4, 0);
+            this.tbpUrlControl.Controls.Add(this.btnBack, 3, 0);
+            this.tbpUrlControl.Controls.Add(this.btnBrawserHome, 1, 0);
+            this.tbpUrlControl.Controls.Add(this.btnGo, 6, 0);
+            this.tbpUrlControl.Controls.Add(this.txtURL, 5, 0);
+            this.tbpUrlControl.Controls.Add(this.btnReload, 2, 0);
+            this.tbpUrlControl.Controls.Add(this.btnInspect, 0, 0);
+            this.tbpUrlControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbpUrlControl.Location = new System.Drawing.Point(58, 3);
+            this.tbpUrlControl.Name = "tbpUrlControl";
+            this.tbpUrlControl.RowCount = 1;
+            this.tbpUrlControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbpUrlControl.Size = new System.Drawing.Size(889, 45);
+            this.tbpUrlControl.TabIndex = 2;
             // 
             // btnForward
             // 
@@ -562,7 +564,7 @@
             this.btnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnForward.HighEmphasis = true;
             this.btnForward.Icon = null;
-            this.btnForward.Location = new System.Drawing.Point(214, 6);
+            this.btnForward.Location = new System.Drawing.Point(294, 6);
             this.btnForward.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnForward.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnForward.Name = "btnForward";
@@ -583,7 +585,7 @@
             this.btnBack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBack.HighEmphasis = true;
             this.btnBack.Icon = null;
-            this.btnBack.Location = new System.Drawing.Point(164, 6);
+            this.btnBack.Location = new System.Drawing.Point(244, 6);
             this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBack.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnBack.Name = "btnBack";
@@ -604,7 +606,7 @@
             this.btnBrawserHome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBrawserHome.HighEmphasis = true;
             this.btnBrawserHome.Icon = null;
-            this.btnBrawserHome.Location = new System.Drawing.Point(4, 6);
+            this.btnBrawserHome.Location = new System.Drawing.Point(84, 6);
             this.btnBrawserHome.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBrawserHome.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnBrawserHome.Name = "btnBrawserHome";
@@ -647,12 +649,12 @@
             this.txtURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtURL.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtURL.LeadingIcon = null;
-            this.txtURL.Location = new System.Drawing.Point(263, 3);
+            this.txtURL.Location = new System.Drawing.Point(343, 3);
             this.txtURL.MaxLength = 50;
             this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
             this.txtURL.Multiline = false;
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(563, 36);
+            this.txtURL.Size = new System.Drawing.Size(483, 36);
             this.txtURL.TabIndex = 4;
             this.txtURL.Text = "";
             this.txtURL.TrailingIcon = null;
@@ -668,7 +670,7 @@
             this.btnReload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnReload.HighEmphasis = true;
             this.btnReload.Icon = null;
-            this.btnReload.Location = new System.Drawing.Point(84, 6);
+            this.btnReload.Location = new System.Drawing.Point(164, 6);
             this.btnReload.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnReload.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnReload.Name = "btnReload";
@@ -680,6 +682,26 @@
             this.btnReload.UseAccentColor = false;
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            // 
+            // btnInspect
+            // 
+            this.btnInspect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnInspect.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnInspect.Depth = 0;
+            this.btnInspect.HighEmphasis = true;
+            this.btnInspect.Icon = null;
+            this.btnInspect.Location = new System.Drawing.Point(4, 6);
+            this.btnInspect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnInspect.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnInspect.Name = "btnInspect";
+            this.btnInspect.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnInspect.Size = new System.Drawing.Size(72, 33);
+            this.btnInspect.TabIndex = 6;
+            this.btnInspect.Text = "Inspect";
+            this.btnInspect.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnInspect.UseAccentColor = false;
+            this.btnInspect.UseVisualStyleBackColor = true;
+            this.btnInspect.Click += new System.EventHandler(this.btnInspect_Click);
             // 
             // tblSideBar
             // 
@@ -832,8 +854,8 @@
             this.tableLayoutPanel4.PerformLayout();
             this.grpLog.ResumeLayout(false);
             this.TPLLog.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tbpUrlControl.ResumeLayout(false);
+            this.tbpUrlControl.PerformLayout();
             this.tblSideBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pivAbout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
@@ -856,7 +878,7 @@
         private MaterialSkin2DotNet.Controls.MaterialButton btnClearLog;
         private Microsoft.Web.WebView2.WinForms.WebView2 WView;
         private GroupBox grpTools;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tbpUrlControl;
         private MaterialSkin2DotNet.Controls.MaterialButton btnForward;
         private MaterialSkin2DotNet.Controls.MaterialButton btnBack;
         private MaterialSkin2DotNet.Controls.MaterialButton btnBrawserHome;
@@ -887,5 +909,6 @@
         private PictureBox picSettings;
         private MaterialSkin2DotNet.Controls.MaterialProgressBar progBar;
         private System.Windows.Forms.Timer progTimer;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnInspect;
     }
 }
