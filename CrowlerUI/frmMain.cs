@@ -418,11 +418,11 @@ namespace CrawlerUI
                     string script = File.ReadAllText(MouseScriptPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
-                using (HttpClient client = new HttpClient())// actually only one object should be created by Application
-                {
-                    CurrentHtmlText = await client.GetStringAsync(txtURL.Text);
-                    File.WriteAllText(ModPathes.GetHtmlTextTempFile(), CurrentHtmlText);
-                }
+                //using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                //{
+                //    CurrentHtmlText = await client.GetStringAsync(txtURL.Text);
+                //    File.WriteAllText(ModPathes.GetHtmlTextTempFile(), CurrentHtmlText);
+                //}
                 progTimer.Enabled = false;
                 progBar.Value = 100;
             }
@@ -504,6 +504,7 @@ namespace CrawlerUI
                 if (!string.IsNullOrEmpty(SiteName))
                 {
                     File.WriteAllText(FullHtmlFilePath, fullhtml);
+                    //htmlSplitter.SplitHtml(fullhtml);
                 }
                 rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 

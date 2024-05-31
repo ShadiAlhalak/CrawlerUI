@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibGeneralUtilities\LibGeneralUtilities.csproj" />
+    <ProjectReference Include="..\LibHtmlSplitter\LibHtmlSplitter.csproj" />
     <ProjectReference Include="..\LibStructure\LibStructure.csproj" />
     <ProjectReference Include="..\LogManagment\LogManagment.csproj" />
     <ProjectReference Include="..\MaterialSkin2DotNet-master\MaterialSkin2DotNet\MaterialSkin2DotNet.csproj" />

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibGeneralUtilities", "LibG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialSkin2DotNet", "MaterialSkin2DotNet-master\MaterialSkin2DotNet\MaterialSkin2DotNet.csproj", "{AA63C708-580C-4BDD-892F-7C145CDD8615}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibHtmlSplitter", "LibHtmlSplitter\LibHtmlSplitter.csproj", "{70D59CFD-5F77-4841-87FE-CE0E971578CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,14 @@ Global
 		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Release|x64.ActiveCfg = Release|x64
 		{AA63C708-580C-4BDD-892F-7C145CDD8615}.Release|x64.Build.0 = Release|x64
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Debug|x64.Build.0 = Debug|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Release|x64.ActiveCfg = Release|Any CPU
+		{70D59CFD-5F77-4841-87FE-CE0E971578CA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
