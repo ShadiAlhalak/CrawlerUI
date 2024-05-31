@@ -16,13 +16,13 @@ namespace LibStructure
         public string ClassName;
         public string Value;
         public string tagName;
-
+        public string href;
         public string ObjectToString()
         {
             string HtmlElem = string.Empty;
             try
             {
-                HtmlElem = $"Id: {this.Id}    , ClassName: {this.ClassName}    , Tag: {this.tagName}     , Value: {this.Value} \n";
+                HtmlElem = $"Id: {this.Id}    , ClassName: {this.ClassName}    , Tag: {this.tagName}     , Value: {this.Value}     , href: {this.href}\n";
             }
             catch (Exception ex)
             { }
