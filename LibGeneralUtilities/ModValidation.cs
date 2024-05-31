@@ -10,43 +10,43 @@ namespace LibGeneralUtilities
     {
         public static string ValidateURL(string URL)
         {
-            string ValidURL = string.Empty;
-            try
-            {
-                if (string.IsNullOrEmpty(URL)) return ValidURL;
+            string ValidURL = URL;
+            //try
+            //{
+            //    if (string.IsNullOrEmpty(URL)) return ValidURL;
 
-                //1-Remove http or https 
-                string PureUrl = URL.Replace(ModConstant.cnst_HttpsPrefix, string.Empty).Replace(ModConstant.cnst_HttpPrefix, string.Empty);
-                PureUrl = PureUrl.Replace(ModConstant.cnst_HttpSuffix, string.Empty);
+            //    //1-Remove http or https 
+            //    string PureUrl = URL.Replace(ModConstant.cnst_HttpsPrefix, string.Empty).Replace(ModConstant.cnst_HttpPrefix, string.Empty);
+            //    PureUrl = PureUrl.Replace(ModConstant.cnst_HttpSuffix, string.Empty);
 
-                //2-Replace charcters
-                PureUrl = PureUrl.Replace("/", string.Empty);
-                PureUrl = PureUrl.Replace("\\", string.Empty);
+            //    //2-Replace charcters
+            //    PureUrl = PureUrl.Replace("/", string.Empty);
+            //    PureUrl = PureUrl.Replace("\\", string.Empty);
 
-                //3-Replaceword Wide Web
-                PureUrl = PureUrl.Replace(ModConstant.cnst_WorldWideWeb, string.Empty);
+            //    //3-Replaceword Wide Web
+            //    PureUrl = PureUrl.Replace(ModConstant.cnst_WorldWideWeb, string.Empty);
 
-                //4-Check if .com .net etc is exist
-                string DotCom = ModConstant.cnst_comertialSite;
-                if (PureUrl?.Substring(PureUrl.Length - 4, 1) == ".")
-                {
-                    DotCom = PureUrl.Substring(PureUrl.Length - 4, 4);
-                    PureUrl = PureUrl.Replace(DotCom, string.Empty);
-                }
-                else
-                {
-                    PureUrl = PureUrl.Replace(".", string.Empty);
-                }
-                //5-Rebuild URl
-                if (!string.IsNullOrEmpty(PureUrl))
-                {
-                    ValidURL = string.Concat(ModConstant.cnst_HttpsPrefix, ModConstant.cnst_HttpSuffix, ModConstant.cnst_WorldWideWeb, PureUrl, DotCom + "/");
-                }
-            }
-            catch (Exception)
-            {
+            //    //4-Check if .com .net etc is exist
+            //    string DotCom = ModConstant.cnst_comertialSite;
+            //    if (PureUrl?.Substring(PureUrl.Length - 4, 1) == ".")
+            //    {
+            //        DotCom = PureUrl.Substring(PureUrl.Length - 4, 4);
+            //        PureUrl = PureUrl.Replace(DotCom, string.Empty);
+            //    }
+            //    else
+            //    {
+            //        PureUrl = PureUrl.Replace(".", string.Empty);
+            //    }
+            //    //5-Rebuild URl
+            //    if (!string.IsNullOrEmpty(PureUrl))
+            //    {
+            //        ValidURL = string.Concat(ModConstant.cnst_HttpsPrefix, ModConstant.cnst_HttpSuffix, ModConstant.cnst_WorldWideWeb, PureUrl, DotCom + "/");
+            //    }
+            //}
+            //catch (Exception)
+            //{
 
-            }
+            //}
             return ValidURL;
         }
 
