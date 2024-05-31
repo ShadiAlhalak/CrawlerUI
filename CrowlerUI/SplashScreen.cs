@@ -13,12 +13,12 @@ namespace CrawlerUI
 {
     public partial class SplashScreen : Form
     {
-        public frmMain Main { get; set; }
+        public frmLogin Main { get; set; }
 
         public SplashScreen()
         {
             InitializeComponent();
-            Main = new frmMain();
+            Main = new frmLogin();
             spTimer.Enabled = true;
         }
 
