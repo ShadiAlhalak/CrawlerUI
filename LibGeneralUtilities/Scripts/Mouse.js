@@ -32,7 +32,8 @@ let clickListener = function (event) {
         className: elem.className,
         id: elem.id,
         tagName: elem.tagName,
-        href: elem.href
+        href: elem.href,
+        src: elem.src
     };
     debugger;
     //document.querySelector("#"+elem.id);

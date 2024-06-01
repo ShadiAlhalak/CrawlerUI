@@ -11,18 +11,19 @@ namespace LibStructure
 {
     public class clsHtmlElem
     {
-        public string Key;
-        public string Id;
-        public string ClassName;
-        public string Value;
-        public string tagName;
-        public string href;
+        public string Key = string.Empty;
+        public string Id = string.Empty;
+        public string ClassName = string.Empty;
+        public string Value = string.Empty;
+        public string tagName = string.Empty;
+        public string href = string.Empty;
+        public string src = string.Empty;
         public string ObjectToString()
         {
             string HtmlElem = string.Empty;
             try
             {
-                HtmlElem = $"Id: {this.Id}    , ClassName: {this.ClassName}    , Tag: {this.tagName}     , Value: {this.Value}     , href: {this.href}\n";
+                HtmlElem = $"Id: {this.Id}    , ClassName: {this.ClassName}    , Tag: {this.tagName}     , Value: {this.Value}     , href: {this.href}     , src: {this.src}\n";
             }
             catch (Exception ex)
             { }
