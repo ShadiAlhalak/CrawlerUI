@@ -58,6 +58,7 @@ namespace CrawlerUI
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
             this.Refresh();
+            FillFields();
         }
 
         #endregion
@@ -406,7 +407,7 @@ namespace CrawlerUI
             try
             {
                 txtURL.Text = WView.Source.ToString();
-                if (PreventLinks && AddZone) 
+                if (PreventLinks && AddZone)
                 {
                     string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
                     string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
@@ -547,6 +548,65 @@ namespace CrawlerUI
 
         #endregion
 
+
+
+        #region Fields
+
+        private void btnAddField_Click(object sender, EventArgs e)
+        {
+            frmAddField AddFieldForm = new frmAddField();
+            if (AddFieldForm.ShowDialog() == DialogResult.OK)
+            {
+                FillFields();
+            }
+        }    
+
+        private void btnDeleteField_Click(object sender, EventArgs e)
+        {
+            if (lstFields.SelectedItem.Tag != null)
+            {
+                clsField deletedField = (clsField)lstFields.SelectedItem.Tag;
+                clsFields Fields = clsFields.GetFields();
+                Fields.LstFields.Remove(Fields.LstFields.FirstOrDefault(item=>item.Id == deletedField.Id));
+                Fields.SetFields();
+                lstFields.RemoveItemAt(lstFields.SelectedIndex);
+            }
+        }
+
+        private void btnClearFields_Click(object sender, EventArgs e)
+        {
+            clsFields Fields = new clsFields();
+            Fields.SetFields();
+            lstFields.Clear();
+        }
+
+        private void btnEditField_Click(object sender, EventArgs e)
+        {
+            if (lstFields.SelectedItem.Tag != null)
+            {
+                clsField EditedField = (clsField)lstFields.SelectedItem.Tag;
+                frmAddField AddFieldForm = new frmAddField(EditedField.Id);
+                if (AddFieldForm.ShowDialog() == DialogResult.OK)
+                {
+                    FillFields();
+                }
+            }
+
+        }
+
+        private void FillFields()
+        {
+            lstFields.Items.Clear();
+            foreach (clsField field in clsFields.GetFields().LstFields)
+            {
+                //lstFields.AddItem(item.Name);   
+                MaterialListBoxItem item = new MaterialListBoxItem(field.Name, field.Description, field);
+                lstFields.AddItem(item);
+            }
+        }
+
+        #endregion
+
         private void progTimer_Tick(object sender, EventArgs e)
         {
             try
@@ -558,10 +618,8 @@ namespace CrawlerUI
             }
             catch (Exception)
             {
-                throw;
+                //throw;
             }
-
         }
-
     }
 }

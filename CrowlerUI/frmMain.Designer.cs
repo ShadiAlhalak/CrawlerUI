@@ -29,19 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem1 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem2 = new MaterialSkin2DotNet.MaterialListBoxItem();
-            MaterialSkin2DotNet.MaterialListBoxItem materialListBoxItem3 = new MaterialSkin2DotNet.MaterialListBoxItem();
             this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.MainSp = new System.Windows.Forms.SplitContainer();
             this.ToolsSP = new System.Windows.Forms.SplitContainer();
             this.tblToolbox = new System.Windows.Forms.TableLayoutPanel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grpTools = new System.Windows.Forms.GroupBox();
             this.tblInToolBox = new System.Windows.Forms.TableLayoutPanel();
-            this.LstToolbox = new MaterialSkin2DotNet.Controls.MaterialListBox();
             this.btnSwAddValue = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwPrevLinks = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwScrolling = new MaterialSkin2DotNet.Controls.MaterialSwitch();
+            this.grpFields = new System.Windows.Forms.GroupBox();
+            this.tlpFields = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAddField = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnDeleteField = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.lstFields = new MaterialSkin2DotNet.Controls.MaterialListBox();
+            this.btnEditField = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnClearFields = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.ExtendSP = new System.Windows.Forms.SplitContainer();
             this.tblWebViewer = new System.Windows.Forms.TableLayoutPanel();
             this.WView = new Microsoft.Web.WebView2.WinForms.WebView2();
@@ -84,8 +88,14 @@
             this.ToolsSP.Panel2.SuspendLayout();
             this.ToolsSP.SuspendLayout();
             this.tblToolbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.grpTools.SuspendLayout();
             this.tblInToolBox.SuspendLayout();
+            this.grpFields.SuspendLayout();
+            this.tlpFields.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExtendSP)).BeginInit();
             this.ExtendSP.Panel1.SuspendLayout();
             this.ExtendSP.Panel2.SuspendLayout();
@@ -164,8 +174,7 @@
             // 
             this.tblToolbox.ColumnCount = 1;
             this.tblToolbox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblToolbox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblToolbox.Controls.Add(this.grpTools, 0, 0);
+            this.tblToolbox.Controls.Add(this.splitContainer1, 0, 0);
             this.tblToolbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblToolbox.Location = new System.Drawing.Point(0, 0);
             this.tblToolbox.Name = "tblToolbox";
@@ -175,13 +184,31 @@
             this.tblToolbox.Size = new System.Drawing.Size(206, 379);
             this.tblToolbox.TabIndex = 0;
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.grpTools);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.grpFields);
+            this.splitContainer1.Size = new System.Drawing.Size(200, 373);
+            this.splitContainer1.SplitterDistance = 184;
+            this.splitContainer1.TabIndex = 1;
+            // 
             // grpTools
             // 
             this.grpTools.Controls.Add(this.tblInToolBox);
             this.grpTools.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpTools.Location = new System.Drawing.Point(3, 3);
+            this.grpTools.Location = new System.Drawing.Point(0, 0);
             this.grpTools.Name = "grpTools";
-            this.grpTools.Size = new System.Drawing.Size(200, 373);
+            this.grpTools.Size = new System.Drawing.Size(200, 184);
             this.grpTools.TabIndex = 0;
             this.grpTools.TabStop = false;
             this.grpTools.Text = "Toolbox";
@@ -190,7 +217,6 @@
             // 
             this.tblInToolBox.ColumnCount = 1;
             this.tblInToolBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblInToolBox.Controls.Add(this.LstToolbox, 0, 3);
             this.tblInToolBox.Controls.Add(this.btnSwAddValue, 0, 0);
             this.tblInToolBox.Controls.Add(this.btnSwPrevLinks, 0, 1);
             this.tblInToolBox.Controls.Add(this.btnSwScrolling, 0, 2);
@@ -202,37 +228,8 @@
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblInToolBox.Size = new System.Drawing.Size(194, 347);
+            this.tblInToolBox.Size = new System.Drawing.Size(194, 158);
             this.tblInToolBox.TabIndex = 0;
-            // 
-            // LstToolbox
-            // 
-            this.LstToolbox.BackColor = System.Drawing.Color.White;
-            this.LstToolbox.BorderColor = System.Drawing.Color.LightGray;
-            this.LstToolbox.Depth = 0;
-            this.LstToolbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LstToolbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            materialListBoxItem1.SecondaryText = "";
-            materialListBoxItem1.Tag = null;
-            materialListBoxItem1.Text = "Add Value";
-            materialListBoxItem2.SecondaryText = "";
-            materialListBoxItem2.Tag = null;
-            materialListBoxItem2.Text = "Prevent Links";
-            materialListBoxItem3.SecondaryText = "";
-            materialListBoxItem3.Tag = null;
-            materialListBoxItem3.Text = "Scrolling tool";
-            this.LstToolbox.Items.Add(materialListBoxItem1);
-            this.LstToolbox.Items.Add(materialListBoxItem2);
-            this.LstToolbox.Items.Add(materialListBoxItem3);
-            this.LstToolbox.Location = new System.Drawing.Point(3, 123);
-            this.LstToolbox.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.LstToolbox.Name = "LstToolbox";
-            this.LstToolbox.SelectedIndex = -1;
-            this.LstToolbox.SelectedItem = null;
-            this.LstToolbox.Size = new System.Drawing.Size(188, 221);
-            this.LstToolbox.TabIndex = 0;
-            this.LstToolbox.Visible = false;
-            this.LstToolbox.SelectedIndexChanged += new MaterialSkin2DotNet.Controls.MaterialListBox.SelectedIndexChangedEventHandler(this.LstToolbox_SelectedIndexChanged);
             // 
             // btnSwAddValue
             // 
@@ -283,6 +280,137 @@
             this.btnSwScrolling.TabIndex = 2;
             this.btnSwScrolling.Text = "Scrolling tool";
             this.btnSwScrolling.UseVisualStyleBackColor = true;
+            // 
+            // grpFields
+            // 
+            this.grpFields.Controls.Add(this.tlpFields);
+            this.grpFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpFields.Location = new System.Drawing.Point(0, 0);
+            this.grpFields.Name = "grpFields";
+            this.grpFields.Size = new System.Drawing.Size(200, 185);
+            this.grpFields.TabIndex = 0;
+            this.grpFields.TabStop = false;
+            this.grpFields.Text = "Fields";
+            // 
+            // tlpFields
+            // 
+            this.tlpFields.ColumnCount = 2;
+            this.tlpFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpFields.Controls.Add(this.btnAddField, 0, 0);
+            this.tlpFields.Controls.Add(this.btnDeleteField, 1, 0);
+            this.tlpFields.Controls.Add(this.lstFields, 0, 2);
+            this.tlpFields.Controls.Add(this.btnEditField, 0, 1);
+            this.tlpFields.Controls.Add(this.btnClearFields, 1, 1);
+            this.tlpFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpFields.Location = new System.Drawing.Point(3, 23);
+            this.tlpFields.Name = "tlpFields";
+            this.tlpFields.RowCount = 3;
+            this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFields.Size = new System.Drawing.Size(194, 159);
+            this.tlpFields.TabIndex = 0;
+            // 
+            // btnAddField
+            // 
+            this.btnAddField.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddField.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAddField.Depth = 0;
+            this.btnAddField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddField.HighEmphasis = true;
+            this.btnAddField.Icon = null;
+            this.btnAddField.Location = new System.Drawing.Point(4, 6);
+            this.btnAddField.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAddField.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnAddField.Name = "btnAddField";
+            this.btnAddField.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAddField.Size = new System.Drawing.Size(89, 28);
+            this.btnAddField.TabIndex = 0;
+            this.btnAddField.Text = "Add";
+            this.btnAddField.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAddField.UseAccentColor = false;
+            this.btnAddField.UseVisualStyleBackColor = true;
+            this.btnAddField.Click += new System.EventHandler(this.btnAddField_Click);
+            // 
+            // btnDeleteField
+            // 
+            this.btnDeleteField.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDeleteField.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDeleteField.Depth = 0;
+            this.btnDeleteField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteField.HighEmphasis = true;
+            this.btnDeleteField.Icon = null;
+            this.btnDeleteField.Location = new System.Drawing.Point(101, 6);
+            this.btnDeleteField.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDeleteField.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnDeleteField.Name = "btnDeleteField";
+            this.btnDeleteField.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDeleteField.Size = new System.Drawing.Size(89, 28);
+            this.btnDeleteField.TabIndex = 1;
+            this.btnDeleteField.Text = "Delete";
+            this.btnDeleteField.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDeleteField.UseAccentColor = false;
+            this.btnDeleteField.UseVisualStyleBackColor = true;
+            this.btnDeleteField.Click += new System.EventHandler(this.btnDeleteField_Click);
+            // 
+            // lstFields
+            // 
+            this.lstFields.BackColor = System.Drawing.Color.White;
+            this.lstFields.BorderColor = System.Drawing.Color.LightGray;
+            this.tlpFields.SetColumnSpan(this.lstFields, 2);
+            this.lstFields.Depth = 0;
+            this.lstFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstFields.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lstFields.Location = new System.Drawing.Point(3, 83);
+            this.lstFields.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.lstFields.Name = "lstFields";
+            this.lstFields.SelectedIndex = -1;
+            this.lstFields.SelectedItem = null;
+            this.lstFields.Size = new System.Drawing.Size(188, 73);
+            this.lstFields.TabIndex = 2;
+            // 
+            // btnEditField
+            // 
+            this.btnEditField.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEditField.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnEditField.Depth = 0;
+            this.btnEditField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEditField.HighEmphasis = true;
+            this.btnEditField.Icon = null;
+            this.btnEditField.Location = new System.Drawing.Point(4, 46);
+            this.btnEditField.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnEditField.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnEditField.Name = "btnEditField";
+            this.btnEditField.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnEditField.Size = new System.Drawing.Size(89, 28);
+            this.btnEditField.TabIndex = 3;
+            this.btnEditField.Text = "Edit";
+            this.btnEditField.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnEditField.UseAccentColor = false;
+            this.btnEditField.UseVisualStyleBackColor = true;
+            this.btnEditField.Click += new System.EventHandler(this.btnEditField_Click);
+            // 
+            // btnClearFields
+            // 
+            this.btnClearFields.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearFields.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearFields.Depth = 0;
+            this.btnClearFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearFields.HighEmphasis = true;
+            this.btnClearFields.Icon = null;
+            this.btnClearFields.Location = new System.Drawing.Point(101, 46);
+            this.btnClearFields.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearFields.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnClearFields.Name = "btnClearFields";
+            this.btnClearFields.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearFields.Size = new System.Drawing.Size(89, 28);
+            this.btnClearFields.TabIndex = 4;
+            this.btnClearFields.Text = "Clear";
+            this.btnClearFields.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearFields.UseAccentColor = false;
+            this.btnClearFields.UseVisualStyleBackColor = true;
+            this.btnClearFields.Click += new System.EventHandler(this.btnClearFields_Click);
             // 
             // ExtendSP
             // 
@@ -838,9 +966,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.ToolsSP)).EndInit();
             this.ToolsSP.ResumeLayout(false);
             this.tblToolbox.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.grpTools.ResumeLayout(false);
             this.tblInToolBox.ResumeLayout(false);
             this.tblInToolBox.PerformLayout();
+            this.grpFields.ResumeLayout(false);
+            this.tlpFields.ResumeLayout(false);
+            this.tlpFields.PerformLayout();
             this.ExtendSP.Panel1.ResumeLayout(false);
             this.ExtendSP.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExtendSP)).EndInit();
@@ -884,7 +1019,6 @@
         private MaterialSkin2DotNet.Controls.MaterialButton btnBrawserHome;
         private MaterialSkin2DotNet.Controls.MaterialButton btnGo;
         private MaterialSkin2DotNet.Controls.MaterialTextBox txtURL;
-        private MaterialSkin2DotNet.Controls.MaterialListBox LstToolbox;
         private RichTextBox rchLog;
         private TableLayoutPanel tblInToolBox;
         private MaterialSkin2DotNet.Controls.MaterialSwitch btnSwAddValue;
@@ -910,5 +1044,13 @@
         private MaterialSkin2DotNet.Controls.MaterialProgressBar progBar;
         private System.Windows.Forms.Timer progTimer;
         private MaterialSkin2DotNet.Controls.MaterialButton btnInspect;
+        private SplitContainer splitContainer1;
+        private GroupBox grpFields;
+        private TableLayoutPanel tlpFields;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnAddField;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnDeleteField;
+        private MaterialSkin2DotNet.Controls.MaterialListBox lstFields;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnEditField;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnClearFields;
     }
 }

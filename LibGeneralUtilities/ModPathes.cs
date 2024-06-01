@@ -189,5 +189,11 @@ namespace LibGeneralUtilities
             }
             return ResultFolder;
         }
+
+        public static string GetFieldsSettingsFilePath()
+        {
+            return Path.Combine(GetSettingsFolderPath(), ModConstant.cnst_FieldsFileName + ModConstant.cnst_xml_Extention);
+        }
+   
     }
 }

@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibGeneralUtilities
+namespace LibStructure
 {
     public static class ModEnum
     {
+       public enum FieldsTypes
+        {
+            Text= 0 ,
+            Numerical
+        }
     }
 }

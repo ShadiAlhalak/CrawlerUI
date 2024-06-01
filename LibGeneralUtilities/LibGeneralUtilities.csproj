@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LibStructure\LibStructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Scripts\GetAllElem.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

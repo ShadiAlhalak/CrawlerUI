@@ -19,6 +19,7 @@ namespace LibGeneralUtilities
         public const string cnst_GetAllElem_ScriptFileName = "GetAllElem";
         public const string cnst_Mouse_ScriptFileName = "Mouse";
         public const string cnst_OutputFolder = "Output";
+        public const string cnst_FieldsFileName = "Fields";
         #endregion
 
         #region Extetions
