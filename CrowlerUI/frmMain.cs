@@ -406,13 +406,24 @@ namespace CrawlerUI
             try
             {
                 txtURL.Text = WView.Source.ToString();
-                if (PreventLinks)
+                if (PreventLinks && AddZone) 
+                {
+                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
+                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
+
+                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
+                    string script = File.ReadAllText(MouseScriptPath);
+
+                    LinksDisableScr += "\n" + script;
+                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
+                }
+                else if (PreventLinks)
                 {
                     string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
                     string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
                 }
-                if (AddZone)
+                else if (AddZone)
                 {
                     string MouseScriptPath = ModPathes.GetMouseScriptPath();
                     string script = File.ReadAllText(MouseScriptPath);
@@ -424,6 +435,7 @@ namespace CrawlerUI
                 //    File.WriteAllText(ModPathes.GetHtmlTextTempFile(), CurrentHtmlText);
                 //}
                 progTimer.Enabled = false;
+                System.Threading.Thread.Sleep(1000);
                 progBar.Value = 100;
             }
             catch (Exception ex)
@@ -431,6 +443,7 @@ namespace CrawlerUI
                 Message.Message = ex.Message;
                 Message.MessageType = ModResoucres.MsgType_Error;
                 Message.ShowMessage();
+                progBar.Value = 100;
             }
         }
 
