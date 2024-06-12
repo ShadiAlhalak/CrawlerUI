@@ -19,6 +19,8 @@ using System.Dynamic;
 using HtmlAgilityPack;
 using System.Net;
 using System.IO;
+using LibHtmlSplitter;
+using System.Diagnostics;
 
 namespace CrawlerUI
 {
@@ -46,7 +48,7 @@ namespace CrawlerUI
             //materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             //materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
-            materialSkinManager = materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager = MaterialSkinManager.Instance;
             //Light Mode
             //materialSkinManager.AddFormToManage(this);
             //materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -514,12 +516,29 @@ namespace CrawlerUI
                 //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.textContent");
                 //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
                 string SiteName = ModValidation.GetSiteName(txtURL.Text);
-                string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName + ModConstant.cnst_html_Extention);
+                string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName.Substring(0, 8) + ModConstant.cnst_html_Extention);
                 if (!string.IsNullOrEmpty(SiteName))
                 {
-                    File.WriteAllText(FullHtmlFilePath, fullhtml);
-                    //htmlSplitter.SplitHtml(fullhtml);
+                    //File.WriteAllText(FullHtmlFilePath, fullhtml);
+                    ////htmlSplitter.SplitHtml(fullhtml);
+                    string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
+                    string hh = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+
+                    clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(fullhtml);
+                    clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
+
+                    var groupedByParent = result.LstElements.GroupBy(s => s.ParentGuid);
+
+                    foreach (var group in groupedByParent)
+                    {
+                        Console.WriteLine($"Group: {group.Key}");
+                        foreach (var Item in group)
+                        {
+                            Debug.WriteLine($"  Value: {Item.TextContent}");
+                        }
+                    }
                 }
+
                 rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 
                 //3-Serialize Values list to file
@@ -538,7 +557,6 @@ namespace CrawlerUI
                 Message.ShowMessage();
             }
         }
-
 
         #endregion
 
@@ -559,7 +577,7 @@ namespace CrawlerUI
             {
                 FillFields();
             }
-        }    
+        }
 
         private void btnDeleteField_Click(object sender, EventArgs e)
         {
@@ -567,7 +585,7 @@ namespace CrawlerUI
             {
                 clsField deletedField = (clsField)lstFields.SelectedItem.Tag;
                 clsFields Fields = clsFields.GetFields();
-                Fields.LstFields.Remove(Fields.LstFields.FirstOrDefault(item=>item.Id == deletedField.Id));
+                Fields.LstFields.Remove(Fields.LstFields.FirstOrDefault(item => item.Id == deletedField.Id));
                 Fields.SetFields();
                 lstFields.RemoveItemAt(lstFields.SelectedIndex);
             }

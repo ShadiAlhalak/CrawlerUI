@@ -10,11 +10,30 @@ using System.Collections.Specialized;
 using System.Linq;
 using LibStructure;
 using System.Diagnostics;
+using System.Collections;
 
 namespace LibHtmlSplitter
 {
     public static class ModMain
     {
+        public static clsElements CrawlCore(clsElements AllElements, List<clsHtmlElem> Rules)
+        {
+            clsElements Result = new clsElements();
+            try
+            {
+                Result.LstElements = AllElements.LstElements.Where(elem => Rules.Any(rule =>
+                    !string.IsNullOrEmpty(elem.ClassName) && !string.IsNullOrEmpty(rule.ClassName) && rule.ClassName == elem.ClassName
+                    )).ToList();
+                //var filteredListA = listA.Where(a => listB.Any(b => b.Id == a.Id)).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Result;
+        }
+
         public static void htmlSplit(string FullHtml)
         {
             string newFullHtml = LibGeneralUtilities.modHtmlTextProcessing.PreProcessingHtml(FullHtml);
