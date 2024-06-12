@@ -21,6 +21,8 @@ using System.Net;
 using System.IO;
 using LibHtmlSplitter;
 using System.Diagnostics;
+using LogManagment;
+using Newtonsoft.Json.Linq;
 
 namespace CrawlerUI
 {
@@ -259,22 +261,22 @@ namespace CrawlerUI
                 if (materialSwitch.Checked)
                 {
                     AddZone = true;
-                    Message.MessageType = ModResoucres.MsgType_Info;
-                    Message.Message = ModResoucres.MsgWaitUntilReloadPage + ".\n" + ModResoucres.MsgAddValuesEnabled;
-                    Message.ShowMessage();
-                    progTimer.Enabled = true;
-                    progBar.Value = 0;
-                    WView.Reload();
+                    //Message.MessageType = ModResoucres.MsgType_Info;
+                    //Message.Message = ModResoucres.MsgWaitUntilReloadPage + ".\n" + ModResoucres.MsgAddValuesEnabled;
+                    //Message.ShowMessage();
+                    //progTimer.Enabled = true;
+                    //progBar.Value = 0;
+                    //WView.Reload();
                 }
                 else
                 {
                     AddZone = false;
-                    Message.MessageType = ModResoucres.MsgType_Info;
-                    Message.Message = ModResoucres.MsgWaitUntilReloadPage + ".\n" + ModResoucres.MsgAddValuesDisabled;
-                    Message.ShowMessage();
-                    progTimer.Enabled = true;
-                    progBar.Value = 0;
-                    WView.Reload();
+                    //Message.MessageType = ModResoucres.MsgType_Info;
+                    //Message.Message = ModResoucres.MsgWaitUntilReloadPage + ".\n" + ModResoucres.MsgAddValuesDisabled;
+                    //Message.ShowMessage();
+                    //progTimer.Enabled = true;
+                    //progBar.Value = 0;
+                    //WView.Reload();
                 }
             }
             catch (Exception ex)
@@ -293,18 +295,18 @@ namespace CrawlerUI
                 if (materialSwitch.Checked)
                 {
                     PreventLinks = true;
-                    Message = new MaterialMessage(ModResoucres.MsgPreventLinksEnabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
-                    Message.ShowMessage();
+                    //Message = new MaterialMessage(ModResoucres.MsgPreventLinksEnabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
+                    //Message.ShowMessage();
                 }
                 else
                 {
                     PreventLinks = false;
-                    Message = new MaterialMessage(ModResoucres.MsgPreventLinksDisabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
-                    Message.ShowMessage();
+                    //Message = new MaterialMessage(ModResoucres.MsgPreventLinksDisabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
+                    //Message.ShowMessage();
                 }
-                progTimer.Enabled = true;
-                progBar.Value = 0;
-                WView.Reload();
+                //progTimer.Enabled = true;
+                //progBar.Value = 0;
+                //WView.Reload();
             }
             catch (Exception ex)
             {
@@ -389,6 +391,7 @@ namespace CrawlerUI
 
         #region Core
 
+
         private void WView_CoreWebView2InitializationCompleted_1(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             try
@@ -409,36 +412,36 @@ namespace CrawlerUI
             try
             {
                 txtURL.Text = WView.Source.ToString();
-                if (PreventLinks && AddZone)
-                {
-                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
-                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
-
-                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
-                    string script = File.ReadAllText(MouseScriptPath);
-
-                    LinksDisableScr += "\n" + script;
-                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
-                }
-                else if (PreventLinks)
-                {
-                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
-                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
-                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
-                }
-                else if (AddZone)
-                {
-                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
-                    string script = File.ReadAllText(MouseScriptPath);
-                    await WView.CoreWebView2.ExecuteScriptAsync(script);
-                }
-                //using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                //if (PreventLinks && AddZone)
                 //{
-                //    CurrentHtmlText = await client.GetStringAsync(txtURL.Text);
-                //    File.WriteAllText(ModPathes.GetHtmlTextTempFile(), CurrentHtmlText);
+                //    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
+                //    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
+
+                //    string MouseScriptPath = ModPathes.GetMouseScriptPath();
+                //    string script = File.ReadAllText(MouseScriptPath);
+
+                //    LinksDisableScr += "\n" + script;
+                //    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
                 //}
-                progTimer.Enabled = false;
-                System.Threading.Thread.Sleep(1000);
+                //else if (PreventLinks)
+                //{
+                //    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
+                //    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
+                //    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
+                //}
+                //else if (AddZone)
+                //{
+                //    string MouseScriptPath = ModPathes.GetMouseScriptPath();
+                //    string script = File.ReadAllText(MouseScriptPath);
+                //    await WView.CoreWebView2.ExecuteScriptAsync(script);
+                //}
+                ////using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                ////{
+                ////    CurrentHtmlText = await client.GetStringAsync(txtURL.Text);
+                ////    File.WriteAllText(ModPathes.GetHtmlTextTempFile(), CurrentHtmlText);
+                ////}
+                //progTimer.Enabled = false;
+                //System.Threading.Thread.Sleep(1000);
                 progBar.Value = 100;
             }
             catch (Exception ex)
@@ -462,7 +465,18 @@ namespace CrawlerUI
                 switch (jsonObject?.Key)
                 {
                     case "click":
-                        LstValues.AddItem(jsonObject?.Value);
+                        string RealValue = string.Empty;
+                        if (jsonObject.Value != string.Empty)
+                        {
+                            RealValue = "Text: " + jsonObject.Value;
+                            RealValue += jsonObject.href != string.Empty ? " || Href: " + jsonObject.href: string.Empty;
+                        }
+                        else if (jsonObject.src != string.Empty)
+                            RealValue = "Src: " + jsonObject.src;
+                        else if (jsonObject.href != string.Empty)
+                            RealValue = "Href: " + jsonObject.href;
+
+                        LstValues.AddItem(RealValue);
                         Values.Add(jsonObject);
                         break;
                 }
@@ -567,7 +581,6 @@ namespace CrawlerUI
         #endregion
 
 
-
         #region Fields
 
         private void btnAddField_Click(object sender, EventArgs e)
@@ -637,6 +650,61 @@ namespace CrawlerUI
             catch (Exception)
             {
                 //throw;
+            }
+        }
+
+        private void btnApplyTools_Click(object sender, EventArgs e)
+        {
+            ExecuteScripts();
+        }
+
+        public async void ExecuteScripts()
+        {
+            try
+            {
+                if (PreventLinks && AddZone)
+                {
+                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
+                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
+
+                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
+                    string script = File.ReadAllText(MouseScriptPath);
+
+                    LinksDisableScr += "\n" + script;
+                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
+                }
+                else if (PreventLinks)
+                {
+                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
+                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
+                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
+                }
+                else if (AddZone)
+                {
+                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
+                    string script = File.ReadAllText(MouseScriptPath);
+                    await WView.CoreWebView2.ExecuteScriptAsync(script);
+                }
+            }
+            catch (Exception)
+            {
+                //ModLog.
+            }
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (LstValues.Count > 0 && Values.Count > 0 && LstValues.SelectedIndex >= 0)
+                {
+                    Values.RemoveAt(LstValues.SelectedIndex);
+                    LstValues.RemoveItemAt(LstValues.SelectedIndex);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

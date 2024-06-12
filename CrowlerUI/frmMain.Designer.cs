@@ -39,6 +39,7 @@
             this.btnSwAddValue = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwPrevLinks = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwScrolling = new MaterialSkin2DotNet.Controls.MaterialSwitch();
+            this.btnApplyTools = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.grpFields = new System.Windows.Forms.GroupBox();
             this.tlpFields = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddField = new MaterialSkin2DotNet.Controls.MaterialButton();
@@ -56,6 +57,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.LstValues = new MaterialSkin2DotNet.Controls.MaterialListBox();
             this.btnClearValues = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnDeleteItem = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.grpLog = new System.Windows.Forms.GroupBox();
             this.TPLLog = new System.Windows.Forms.TableLayoutPanel();
             this.btnExpotLog = new MaterialSkin2DotNet.Controls.MaterialButton();
@@ -220,10 +222,12 @@
             this.tblInToolBox.Controls.Add(this.btnSwAddValue, 0, 0);
             this.tblInToolBox.Controls.Add(this.btnSwPrevLinks, 0, 1);
             this.tblInToolBox.Controls.Add(this.btnSwScrolling, 0, 2);
+            this.tblInToolBox.Controls.Add(this.btnApplyTools, 0, 3);
             this.tblInToolBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblInToolBox.Location = new System.Drawing.Point(3, 23);
             this.tblInToolBox.Name = "tblInToolBox";
-            this.tblInToolBox.RowCount = 4;
+            this.tblInToolBox.RowCount = 5;
+            this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -280,6 +284,27 @@
             this.btnSwScrolling.TabIndex = 2;
             this.btnSwScrolling.Text = "Scrolling tool";
             this.btnSwScrolling.UseVisualStyleBackColor = true;
+            // 
+            // btnApplyTools
+            // 
+            this.btnApplyTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnApplyTools.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnApplyTools.Depth = 0;
+            this.btnApplyTools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnApplyTools.HighEmphasis = true;
+            this.btnApplyTools.Icon = null;
+            this.btnApplyTools.Location = new System.Drawing.Point(4, 126);
+            this.btnApplyTools.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnApplyTools.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnApplyTools.Name = "btnApplyTools";
+            this.btnApplyTools.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnApplyTools.Size = new System.Drawing.Size(186, 28);
+            this.btnApplyTools.TabIndex = 3;
+            this.btnApplyTools.Text = "Apply";
+            this.btnApplyTools.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnApplyTools.UseAccentColor = false;
+            this.btnApplyTools.UseVisualStyleBackColor = true;
+            this.btnApplyTools.Click += new System.EventHandler(this.btnApplyTools_Click);
             // 
             // grpFields
             // 
@@ -426,7 +451,7 @@
             // 
             this.ExtendSP.Panel2.Controls.Add(this.tableLayoutPanel3);
             this.ExtendSP.Size = new System.Drawing.Size(679, 379);
-            this.ExtendSP.SplitterDistance = 546;
+            this.ExtendSP.SplitterDistance = 539;
             this.ExtendSP.TabIndex = 0;
             // 
             // tblWebViewer
@@ -444,7 +469,7 @@
             this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
-            this.tblWebViewer.Size = new System.Drawing.Size(546, 379);
+            this.tblWebViewer.Size = new System.Drawing.Size(539, 379);
             this.tblWebViewer.TabIndex = 0;
             // 
             // WView
@@ -456,7 +481,7 @@
             this.WView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WView.Location = new System.Drawing.Point(3, 13);
             this.WView.Name = "WView";
-            this.WView.Size = new System.Drawing.Size(540, 317);
+            this.WView.Size = new System.Drawing.Size(533, 317);
             this.WView.Source = new System.Uri("https://www.amazon.com/", System.UriKind.Absolute);
             this.WView.TabIndex = 0;
             this.WView.ZoomFactor = 1D;
@@ -478,7 +503,7 @@
             this.btnLaunch.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLaunch.Size = new System.Drawing.Size(538, 34);
+            this.btnLaunch.Size = new System.Drawing.Size(531, 34);
             this.btnLaunch.TabIndex = 0;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -494,7 +519,7 @@
             this.progBar.Location = new System.Drawing.Point(3, 3);
             this.progBar.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.progBar.Name = "progBar";
-            this.progBar.Size = new System.Drawing.Size(540, 5);
+            this.progBar.Size = new System.Drawing.Size(533, 5);
             this.progBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progBar.TabIndex = 1;
             // 
@@ -510,7 +535,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(129, 379);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(136, 379);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // grbValues
@@ -519,30 +544,33 @@
             this.grbValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grbValues.Location = new System.Drawing.Point(3, 3);
             this.grbValues.Name = "grbValues";
-            this.grbValues.Size = new System.Drawing.Size(123, 373);
+            this.grbValues.Size = new System.Drawing.Size(130, 373);
             this.grbValues.TabIndex = 2;
             this.grbValues.TabStop = false;
             this.grbValues.Text = "Values";
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Controls.Add(this.LstValues, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.btnClearValues, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnDeleteItem, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 23);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(117, 347);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(124, 347);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // LstValues
             // 
             this.LstValues.BackColor = System.Drawing.Color.White;
             this.LstValues.BorderColor = System.Drawing.Color.LightGray;
+            this.tableLayoutPanel4.SetColumnSpan(this.LstValues, 2);
             this.LstValues.Depth = 0;
             this.LstValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LstValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -551,7 +579,7 @@
             this.LstValues.Name = "LstValues";
             this.LstValues.SelectedIndex = -1;
             this.LstValues.SelectedItem = null;
-            this.LstValues.Size = new System.Drawing.Size(111, 301);
+            this.LstValues.Size = new System.Drawing.Size(118, 301);
             this.LstValues.TabIndex = 1;
             // 
             // btnClearValues
@@ -567,13 +595,34 @@
             this.btnClearValues.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnClearValues.Name = "btnClearValues";
             this.btnClearValues.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearValues.Size = new System.Drawing.Size(109, 28);
+            this.btnClearValues.Size = new System.Drawing.Size(54, 28);
             this.btnClearValues.TabIndex = 0;
             this.btnClearValues.Text = "Clear";
             this.btnClearValues.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnClearValues.UseAccentColor = false;
             this.btnClearValues.UseVisualStyleBackColor = true;
             this.btnClearValues.Click += new System.EventHandler(this.btnClearValues_Click);
+            // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDeleteItem.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDeleteItem.Depth = 0;
+            this.btnDeleteItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteItem.HighEmphasis = true;
+            this.btnDeleteItem.Icon = null;
+            this.btnDeleteItem.Location = new System.Drawing.Point(66, 6);
+            this.btnDeleteItem.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDeleteItem.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDeleteItem.Size = new System.Drawing.Size(54, 28);
+            this.btnDeleteItem.TabIndex = 2;
+            this.btnDeleteItem.Text = "Delete";
+            this.btnDeleteItem.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDeleteItem.UseAccentColor = false;
+            this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
             // grpLog
             // 
@@ -1052,5 +1101,7 @@
         private MaterialSkin2DotNet.Controls.MaterialListBox lstFields;
         private MaterialSkin2DotNet.Controls.MaterialButton btnEditField;
         private MaterialSkin2DotNet.Controls.MaterialButton btnClearFields;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnApplyTools;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnDeleteItem;
     }
 }
