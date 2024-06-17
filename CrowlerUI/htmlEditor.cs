@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -79,8 +80,8 @@ namespace CrawlerUI
                 {
                     rchHtmlEditor.Text = FullHtml;
                     //rchHtmlEditor.SuspendLayout();
-                    ColorHtmlTags(rchHtmlEditor);
-                    ColoringStringValues();
+                    //ColorHtmlTags(rchHtmlEditor);
+                    //ColoringStringValues();
                     //rchHtmlEditor.ResumeLayout();
                 }
             }
@@ -96,7 +97,7 @@ namespace CrawlerUI
         {
             try
             {
-                // Get the current text of the RichTextBox
+                // Get the current text of the rchHtmlEditor
                 string text = rchHtmlEditor.Text;
 
                 // Loop through each HTML tag and color it
@@ -289,6 +290,72 @@ namespace CrawlerUI
         }
 
         #endregion
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            //SuspendDrawing(rchHtmlEditor);
+
+            //int index = 0;
+            //string searchText = txtSearch.Text; // Replace with your search text
+            //rchHtmlEditor.HideSelection = false; // Keep selection highlighted when focus is lost
+
+            //while (index < rchHtmlEditor.Text.LastIndexOf(searchText))
+            //{
+            //    rchHtmlEditor.Find(searchText, index, rchHtmlEditor.TextLength, rchHtmlEditorFinds.None);
+            //    rchHtmlEditor.SelectionBackColor = Color.LightYellow;
+            //    index = rchHtmlEditor.Text.IndexOf(searchText, index) + searchText.Length;
+            //}
+
+            //ResumeDrawing(rchHtmlEditor);
+
+
+            SuspendDrawing(rchHtmlEditor);
+            rchHtmlEditor.SelectionStart = 0;
+            rchHtmlEditor.SelectionLength = 0;
+            rchHtmlEditor.Select(0, 0);
+
+            int index = 0;
+            rchHtmlEditor.HideSelection = false; // Keep selection highlighted when focus is lost
+
+            // Find and highlight the first occurrence
+            string searchText = txtSearch.Text;
+            index = rchHtmlEditor.Text.IndexOf(txtSearch.Text);
+            if (index != -1) // Check if the text was found
+            {
+                rchHtmlEditor.Select(index, searchText.Length);
+                rchHtmlEditor.ScrollToCaret(); // Scrolls to the selected text
+                rchHtmlEditor.SelectionBackColor = Color.Gray;
+                index += searchText.Length;
+            }
+
+            // Find and highlight all other occurrences
+            while (index < rchHtmlEditor.Text.LastIndexOf(searchText))
+            {
+                rchHtmlEditor.Find(searchText, index, rchHtmlEditor.TextLength, RichTextBoxFinds.None);
+                rchHtmlEditor.SelectionBackColor = Color.Gray;
+                index = rchHtmlEditor.Text.IndexOf(searchText, index) + searchText.Length;
+            }
+
+            ResumeDrawing(rchHtmlEditor);
+        }
+
+        // Import the necessary Windows API functions
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
+        private const int WM_SETREDRAW = 11;
+
+        public void SuspendDrawing(Control parent)
+        {
+            SendMessage(parent.Handle, WM_SETREDRAW, false, 0);
+        }
+
+        public void ResumeDrawing(Control parent)
+        {
+            SendMessage(parent.Handle, WM_SETREDRAW, true, 0);
+            parent.Refresh();
+        }
+
+
 
     }
 }

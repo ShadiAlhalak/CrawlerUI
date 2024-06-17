@@ -155,10 +155,13 @@ namespace CrawlerUI
             }
         }
 
-        private void btnInspect_Click(object sender, EventArgs e)
+        private async void btnInspect_Click(object sender, EventArgs e)
         {
             try
             {
+                string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
+                string Deshtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+                CurrentHtmlText = modHtmlTextProcessing.PreProcessingHtml(Deshtml);
                 htmlEditor Editor = null;
                 if (string.IsNullOrEmpty(CurrentHtmlText))
                 {

@@ -40,12 +40,17 @@
             this.btnResetZoom = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.swHEWrap = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.rchHtmlEditor = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblSearch = new MaterialSkin2DotNet.Controls.MaterialLabel();
+            this.txtSearch = new MaterialSkin2DotNet.Controls.MaterialTextBox2();
+            this.btnFind = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.HtmlSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.HtmlOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpHtmlEditor.SuspendLayout();
             this.tblPanelHtmlEditor.SuspendLayout();
             this.tblHEditorTools.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -81,11 +86,13 @@
             this.tblPanelHtmlEditor.ColumnCount = 1;
             this.tblPanelHtmlEditor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblPanelHtmlEditor.Controls.Add(this.tblHEditorTools, 0, 0);
-            this.tblPanelHtmlEditor.Controls.Add(this.rchHtmlEditor, 0, 1);
+            this.tblPanelHtmlEditor.Controls.Add(this.rchHtmlEditor, 0, 2);
+            this.tblPanelHtmlEditor.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tblPanelHtmlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblPanelHtmlEditor.Location = new System.Drawing.Point(3, 23);
             this.tblPanelHtmlEditor.Name = "tblPanelHtmlEditor";
-            this.tblPanelHtmlEditor.RowCount = 2;
+            this.tblPanelHtmlEditor.RowCount = 3;
+            this.tblPanelHtmlEditor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblPanelHtmlEditor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblPanelHtmlEditor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblPanelHtmlEditor.Size = new System.Drawing.Size(912, 430);
@@ -260,12 +267,97 @@
             this.rchHtmlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rchHtmlEditor.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rchHtmlEditor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.rchHtmlEditor.Location = new System.Drawing.Point(3, 43);
+            this.rchHtmlEditor.Location = new System.Drawing.Point(3, 83);
             this.rchHtmlEditor.Name = "rchHtmlEditor";
-            this.rchHtmlEditor.Size = new System.Drawing.Size(906, 384);
+            this.rchHtmlEditor.Size = new System.Drawing.Size(906, 344);
             this.rchHtmlEditor.TabIndex = 1;
             this.rchHtmlEditor.Text = "HTML Editor";
             this.rchHtmlEditor.WordWrap = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tableLayoutPanel2.Controls.Add(this.lblSearch, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtSearch, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnFind, 2, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 43);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(906, 34);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Depth = 0;
+            this.lblSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSearch.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblSearch.Location = new System.Drawing.Point(3, 0);
+            this.lblSearch.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(58, 34);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Search :";
+            this.lblSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.AnimateReadOnly = false;
+            this.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtSearch.Depth = 0;
+            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSearch.HideSelection = true;
+            this.txtSearch.LeadingIcon = null;
+            this.txtSearch.Location = new System.Drawing.Point(67, 3);
+            this.txtSearch.MaxLength = 32767;
+            this.txtSearch.MouseState = MaterialSkin2DotNet.MouseState.OUT;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Padding = new System.Windows.Forms.Padding(3);
+            this.txtSearch.PasswordChar = '\0';
+            this.txtSearch.PrefixSuffixText = null;
+            this.txtSearch.ReadOnly = false;
+            this.txtSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtSearch.SelectedText = "";
+            this.txtSearch.SelectionLength = 0;
+            this.txtSearch.SelectionStart = 0;
+            this.txtSearch.ShortcutsEnabled = true;
+            this.txtSearch.Size = new System.Drawing.Size(726, 36);
+            this.txtSearch.TabIndex = 1;
+            this.txtSearch.TabStop = false;
+            this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtSearch.TrailingIcon = null;
+            this.txtSearch.UseSystemPasswordChar = false;
+            this.txtSearch.UseTallSize = false;
+            // 
+            // btnFind
+            // 
+            this.btnFind.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFind.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnFind.Depth = 0;
+            this.btnFind.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFind.HighEmphasis = true;
+            this.btnFind.Icon = null;
+            this.btnFind.Location = new System.Drawing.Point(800, 6);
+            this.btnFind.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFind.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnFind.Name = "btnFind";
+            this.btnFind.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnFind.Size = new System.Drawing.Size(102, 22);
+            this.btnFind.TabIndex = 2;
+            this.btnFind.Text = "Find";
+            this.btnFind.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnFind.UseAccentColor = false;
+            this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // HtmlSaveFileDialog
             // 
@@ -292,6 +384,8 @@
             this.tblPanelHtmlEditor.ResumeLayout(false);
             this.tblHEditorTools.ResumeLayout(false);
             this.tblHEditorTools.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -312,5 +406,9 @@
         private SaveFileDialog HtmlSaveFileDialog;
         private OpenFileDialog HtmlOpenFileDialog;
         private MaterialSkin2DotNet.Controls.MaterialButton btnResetZoom;
+        private TableLayoutPanel tableLayoutPanel2;
+        private MaterialSkin2DotNet.Controls.MaterialLabel lblSearch;
+        private MaterialSkin2DotNet.Controls.MaterialTextBox2 txtSearch;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnFind;
     }
 }
