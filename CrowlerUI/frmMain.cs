@@ -707,5 +707,11 @@ namespace CrawlerUI
 
             }
         }
+
+        private void btnInitialData_Click(object sender, EventArgs e)
+        {
+            frmInitialData frmInitialdata = new frmInitialData(Values, clsFields.GetFields());
+            frmInitialdata.ShowDialog();
+        }
     }
 }

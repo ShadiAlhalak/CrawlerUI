@@ -8,10 +8,24 @@ namespace LibStructure
 {
     public static class ModEnum
     {
-       public enum FieldsTypes
+        public enum FieldsTypes
         {
-            Text= 0 ,
-            Numerical
+            Text = 0,
+            Numerical,
+            Picture,
+            Price
+        }
+        public enum Orders
+        {
+            None = 0,
+            First,
+            Secoud,
+            Third,
+            Fourth,
+            Fifth,
+            Sixth,
+            Seventh,
+            Eighth
         }
     }
 }

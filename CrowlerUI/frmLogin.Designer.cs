@@ -91,12 +91,13 @@
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(8, 309);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 5;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(914, 212);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -108,7 +109,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(203, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 55);
+            this.label1.Size = new System.Drawing.Size(157, 50);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -119,9 +120,9 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(203, 60);
+            this.label2.Location = new System.Drawing.Point(203, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 55);
+            this.label2.Size = new System.Drawing.Size(157, 50);
             this.label2.TabIndex = 1;
             this.label2.Text = "Password";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -129,23 +130,26 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox1.Location = new System.Drawing.Point(366, 3);
             this.textBox1.MaxLength = 20;
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 49);
+            this.textBox1.Size = new System.Drawing.Size(260, 44);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.Location = new System.Drawing.Point(366, 63);
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.textBox2.Location = new System.Drawing.Point(366, 58);
             this.textBox2.MaxLength = 20;
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(260, 49);
+            this.textBox2.PasswordChar = '*';
+            this.textBox2.Size = new System.Drawing.Size(260, 44);
             this.textBox2.TabIndex = 3;
             this.textBox2.UseSystemPasswordChar = true;
             // 
@@ -158,7 +162,7 @@
             this.btnLogin.Depth = 0;
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = null;
-            this.btnLogin.Location = new System.Drawing.Point(367, 121);
+            this.btnLogin.Location = new System.Drawing.Point(367, 111);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLogin.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnLogin.Name = "btnLogin";
@@ -180,7 +184,7 @@
             this.btnCancel.Depth = 0;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(367, 170);
+            this.btnCancel.Location = new System.Drawing.Point(367, 161);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancel.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
