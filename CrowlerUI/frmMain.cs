@@ -23,6 +23,7 @@ using LibHtmlSplitter;
 using System.Diagnostics;
 using LogManagment;
 using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace CrawlerUI
 {
@@ -472,7 +473,7 @@ namespace CrawlerUI
                         if (jsonObject.Value != string.Empty)
                         {
                             RealValue = "Text: " + jsonObject.Value;
-                            RealValue += jsonObject.href != string.Empty ? " || Href: " + jsonObject.href: string.Empty;
+                            RealValue += jsonObject.href != string.Empty ? " || Href: " + jsonObject.href : string.Empty;
                         }
                         else if (jsonObject.src != string.Empty)
                             RealValue = "Src: " + jsonObject.src;
@@ -538,34 +539,72 @@ namespace CrawlerUI
                 {
                     //File.WriteAllText(FullHtmlFilePath, fullhtml);
                     ////htmlSplitter.SplitHtml(fullhtml);
-                    string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
-                    string hh = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+                    //string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
+                    string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
+                    string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+                    DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
+                    //clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
 
-                    clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(fullhtml);
-                    clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
+                    //elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(fullhtml);
+                    //clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
 
-                    var groupedByParent = result.LstElements.GroupBy(s => s.ParentGuid);
+                    // var groupedByParent = result.LstElements.GroupBy(s => s.ParentGuid);
+                    // var grouped = elems.LstElements.GroupBy(x => x.ParentGuid)
+                    //.Where(g => g.Count() > 1)
+                    //.Select(g => g.ToList())
+                    //.ToList();
 
-                    foreach (var group in groupedByParent)
+
+                    //var deepestChildren = allElements.Where(e => /* your condition for deepest elements */).ToList();
+                    //var commonParent = FindLowestCommonAncestor(result.LstElements, elems.LstElements);
+                    //var allChildren = GetAllDescendants(commonParent, elems.LstElements);
+                    //Console.WriteLine($"allChildren count: {allChildren.Count()}");
+                    // Now groupedItems contains all elements within the specific container
+
+
+                    //foreach (var group in groupedByParent)
+                    //{
+                    //    Console.WriteLine($"Group: {group.Key}");
+
+                    //    foreach (var Item in group)
+                    //    {
+                    //        Debug.WriteLine($"  Value: {Item.TextContent}");
+                    //    }
+                    //}
+
+                    //Link with mohamad 
+                    using (HttpClient client = new HttpClient())
                     {
-                        Console.WriteLine($"Group: {group.Key}");
-                        foreach (var Item in group)
+                        string url = " http://127.0.0.1:8000/crawler/get_similar";
+                        getSimilar getSimilar = new getSimilar();
+                        //getSimilar.url = "https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
+                        getSimilar.html = DesHtml;
+                        //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
+                        foreach (clsHtmlElem val in Values)
                         {
-                            Debug.WriteLine($"  Value: {Item.TextContent}");
+                            getSimilar.wanted_list.Add(val.Value);
                         }
+
+                        var json = JsonConvert.SerializeObject(getSimilar);
+                        var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                        HttpResponseMessage response = await client.PostAsync(url, data);
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(responseBody);
                     }
+
+                    rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
+
+                    //3-Serialize Values list to file
+                    string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
+                    clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath, ref ErrorMessage);
+                    rchLog.AppendText(ModResoucres.cnst_ValuesFileHasBeenWritten);
+                    rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
+                    rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
+                    rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
+                    rchLog.ScrollToCaret();
                 }
-
-                rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
-
-                //3-Serialize Values list to file
-                string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
-                clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath, ref ErrorMessage);
-                rchLog.AppendText(ModResoucres.cnst_ValuesFileHasBeenWritten);
-                rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
-                rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
-                rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
-                rchLog.ScrollToCaret();
             }
             catch (Exception ex)
             {
@@ -574,6 +613,54 @@ namespace CrawlerUI
                 Message.ShowMessage();
             }
         }
+
+        List<clsElement> GetPathToRoot(clsElement child, List<clsElement> allElements)
+        {
+            var path = new List<clsElement>();
+            var current = child;
+            while (current != null)
+            {
+                path.Add(current);
+                current = allElements.FirstOrDefault(e => e.Guid == current.ParentGuid);
+            }
+            path.Reverse(); // So that the root is the first element
+            return path;
+        }
+        clsElement FindLowestCommonAncestor(List<clsElement> children, List<clsElement> allElements)
+        {
+            var paths = children.Select(child => GetPathToRoot(child, allElements)).ToList();
+            clsElement commonAncestor = null;
+
+            for (int i = 0; i < paths.Min(p => p.Count); i++)
+            {
+                var firstPathParent = paths.First()[i];
+                if (paths.All(p => p[i].Guid == firstPathParent.Guid))
+                {
+                    commonAncestor = firstPathParent;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return commonAncestor;
+        }
+        //Recursive
+        List<clsElement> GetAllDescendants(clsElement parent, List<clsElement> allElements)
+        {
+            var descendants = new List<clsElement>();
+            var children = allElements.Where(e => e.ParentGuid == parent.Guid).ToList();
+
+            foreach (var child in children)
+            {
+                descendants.Add(child);
+                descendants.AddRange(GetAllDescendants(child, children)); // Recursive call to get all descendants
+            }
+
+            return descendants;
+        }
+
 
         #endregion
 
