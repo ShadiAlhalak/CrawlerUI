@@ -355,7 +355,5 @@ namespace CrawlerUI
             parent.Refresh();
         }
 
-
-
     }
 }

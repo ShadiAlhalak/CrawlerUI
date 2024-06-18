@@ -38,10 +38,11 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colParent = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colGroup = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colField = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colPage = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrder = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.FieldId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpConfigrations = new System.Windows.Forms.GroupBox();
             this.tlbTools = new System.Windows.Forms.TableLayoutPanel();
             this.materialLabel1 = new MaterialSkin2DotNet.Controls.MaterialLabel();
@@ -126,10 +127,11 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.colParent,
+            this.colGroup,
             this.colField,
             this.colPage,
-            this.colOrder});
+            this.colOrder,
+            this.FieldId});
             this.dgvinitData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvinitData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvinitData.Location = new System.Drawing.Point(3, 3);
@@ -181,11 +183,11 @@
             this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // colParent
+            // colGroup
             // 
-            this.colParent.HeaderText = "Parent";
-            this.colParent.MinimumWidth = 6;
-            this.colParent.Name = "colParent";
+            this.colGroup.HeaderText = "Group";
+            this.colGroup.MinimumWidth = 6;
+            this.colGroup.Name = "colGroup";
             // 
             // colField
             // 
@@ -201,11 +203,19 @@
             // 
             // colOrder
             // 
-            this.colOrder.HeaderText = "Order Item";
+            this.colOrder.HeaderText = "Order";
             this.colOrder.MinimumWidth = 6;
             this.colOrder.Name = "colOrder";
             this.colOrder.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // FieldId
+            // 
+            this.FieldId.HeaderText = "FieldId";
+            this.FieldId.MinimumWidth = 6;
+            this.FieldId.Name = "FieldId";
+            this.FieldId.ReadOnly = true;
+            this.FieldId.Visible = false;
             // 
             // grpConfigrations
             // 
@@ -344,6 +354,7 @@
             this.btnSave.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSave.UseAccentColor = false;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // colTag
             // 
@@ -403,14 +414,14 @@
             this.colFild.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colFild.Width = 125;
             // 
-            // frmPostData
+            // frmInitialData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1373, 690);
             this.Controls.Add(this.tlbMain);
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
-            this.Name = "frmPostData";
+            this.Name = "frmInitialData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Initial Data";
             this.tlbMain.ResumeLayout(false);
@@ -452,9 +463,10 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewComboBoxColumn colParent;
+        private DataGridViewComboBoxColumn colGroup;
         private DataGridViewComboBoxColumn colField;
         private DataGridViewCheckBoxColumn colPage;
         private DataGridViewComboBoxColumn colOrder;
+        private DataGridViewTextBoxColumn FieldId;
     }
 }

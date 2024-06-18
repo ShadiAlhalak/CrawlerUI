@@ -22,6 +22,11 @@ namespace LibGeneralUtilities
         public static string GetAllElemScriptPath()
         {
             return ModConstant.cnst_GetAllElem_ScriptFileName + ModConstant.cnst_js_Extention;
+        }      
+
+        public static string GetHighlightHoverElementSciptPath()
+        {
+            return ModConstant.cnst_HighlightHoverElement_ScriptFileName + ModConstant.cnst_js_Extention;
         }
 
         public static string GetAppDataPath()

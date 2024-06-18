@@ -18,6 +18,12 @@ namespace LibStructure
         public string tagName = string.Empty;
         public string href = string.Empty;
         public string src = string.Empty;
+        public string FildId = string.Empty;
+        public string FieldName = string.Empty;
+        public int group = -1;
+        public int order = -1;
+        public bool IsPage = false;
+
         public string ObjectToString()
         {
             string HtmlElem = string.Empty;

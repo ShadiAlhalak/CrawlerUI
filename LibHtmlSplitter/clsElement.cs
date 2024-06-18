@@ -18,7 +18,8 @@ namespace LibHtmlSplitter
         public int Start { get; set; }
         public int End { get; set; }
         public int Length { get { return End - Start + 1; } }
-
+        public int Group { get; set; } = -1;
+        public int Order { get; set; } = -1;
         //AI
         public bool HasData { get; set; } = false;
         public string FieldName { get; set; } = string.Empty;

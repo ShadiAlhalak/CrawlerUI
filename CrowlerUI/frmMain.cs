@@ -36,6 +36,7 @@ namespace CrawlerUI
         public string CurrentHtmlText { get; set; } = string.Empty;
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
+        public bool MouseHover { get; set; } = false;
         public bool IsSideBarOpen { get; set; } = false;
         public bool DarkMode { get; set; } = true;
         public MaterialSkinManager materialSkinManager { get; set; }
@@ -507,10 +508,10 @@ namespace CrawlerUI
                 //2-Full html file
                 string fullhtml;
                 ////* Try somthing
-                using (HttpClient client = new HttpClient())// actually only one object should be created by Application
-                {
-                    fullhtml = await client.GetStringAsync(txtURL.Text);
-                }
+                //using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                //{
+                //    fullhtml = await client.GetStringAsync(txtURL.Text);
+                //}
 
                 //string fullhtml;
                 //// obtain some arbitrary html....
@@ -539,11 +540,43 @@ namespace CrawlerUI
                 {
                     //File.WriteAllText(FullHtmlFilePath, fullhtml);
                     ////htmlSplitter.SplitHtml(fullhtml);
-                    //string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
-                    string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
+                    //string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
+                    string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
                     string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
                     DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
-                    //clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
+                    clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
+                    clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
+
+                    //var RequestedValuesGroup = Values.GroupBy(s => s.group);
+                    //try
+                    //{
+                    //    foreach (clsElement Item in result.LstElements)
+                    //    {
+                    //        var currValue = Values.FirstOrDefault(x => x.ClassName == Item.ClassName && x.tagName?.ToLower() == Item.Tag?.ToLower() && x?.Id == Item?.Id);
+                    //        Item.Group = currValue.group;
+                    //        Item.Order = currValue.order;
+                    //        Item.FieldName = currValue?.FieldName;
+                    //    }
+                    //}
+                    //catch (Exception)
+                    //{
+
+                    //}
+
+                    //foreach (var group in RequestedValuesGroup)
+                    //{
+                    //    Console.WriteLine($"Group: {group.Key}");
+                    //    foreach (var Item in group)
+                    //    {
+                    //        elems.LstElements.FirstOrDefault(x=>x.ClassName == Item.ClassName && x.Tag == Item.tagName && x.Id == Item.Id && x.TextContent == Item.Value).Start
+                    //        //Debug.WriteLine($"  Value: {Item.TextContent}");
+                    //    }
+                    //}
+
+                    //foreach (clsElement item in elems.LstElements)
+                    //{
+                    //    item.
+                    //}
 
                     //elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(fullhtml);
                     //clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
@@ -573,26 +606,26 @@ namespace CrawlerUI
                     //}
 
                     //Link with mohamad 
-                    using (HttpClient client = new HttpClient())
-                    {
-                        string url = " http://127.0.0.1:8000/crawler/get_similar";
-                        getSimilar getSimilar = new getSimilar();
-                        //getSimilar.url = "https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
-                        getSimilar.html = DesHtml;
-                        //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
-                        foreach (clsHtmlElem val in Values)
-                        {
-                            getSimilar.wanted_list.Add(val.Value);
-                        }
+                    //using (HttpClient client = new HttpClient())
+                    //{
+                    //    string url = " http://127.0.0.1:8000/crawler/get_similar";
+                    //    getSimilar getSimilar = new getSimilar();
+                    //    //getSimilar.url = "https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
+                    //    getSimilar.html = DesHtml;
+                    //    //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
+                    //    foreach (clsHtmlElem val in Values)
+                    //    {
+                    //        getSimilar.wanted_list.Add(val.Value);
+                    //    }
 
-                        var json = JsonConvert.SerializeObject(getSimilar);
-                        var data = new StringContent(json, Encoding.UTF8, "application/json");
+                    //    var json = JsonConvert.SerializeObject(getSimilar);
+                    //    var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-                        HttpResponseMessage response = await client.PostAsync(url, data);
-                        response.EnsureSuccessStatusCode();
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(responseBody);
-                    }
+                    //    HttpResponseMessage response = await client.PostAsync(url, data);
+                    //    response.EnsureSuccessStatusCode();
+                    //    string responseBody = await response.Content.ReadAsStringAsync();
+                    //    Console.WriteLine(responseBody);
+                    //}
 
                     rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 
@@ -775,6 +808,12 @@ namespace CrawlerUI
                     string script = File.ReadAllText(MouseScriptPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
+                else if (MouseHover)
+                {
+                    string MouseScriptPath = ModPathes.GetHighlightHoverElementSciptPath();
+                    string script = File.ReadAllText(MouseScriptPath);
+                    await WView.CoreWebView2.ExecuteScriptAsync(script);
+                }
             }
             catch (Exception)
             {
@@ -802,6 +841,24 @@ namespace CrawlerUI
         {
             frmInitialData frmInitialdata = new frmInitialData(Values, clsFields.GetFields());
             frmInitialdata.ShowDialog();
+            if (frmInitialdata.RequestedElements.Count > 0)
+            {
+                Values = frmInitialdata.RequestedElements;
+            }
+        }
+
+        private void btnHover_CheckedChanged(object sender, EventArgs e)
+        {
+            MaterialSwitch materialSwitch = (MaterialSwitch)sender;
+            if (materialSwitch.Checked)
+            {
+                MouseHover = true;
+            }
+            else
+            {
+                MouseHover = false;
+            }
+
         }
     }
 }

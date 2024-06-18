@@ -8,7 +8,9 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LibGeneralUtilities;
 using LibStructure;
+using LogManagment;
 using MaterialSkin2DotNet;
 namespace CrawlerUI
 {
@@ -16,7 +18,8 @@ namespace CrawlerUI
     {
         public List<clsHtmlElem> elements { get; set; } = new List<clsHtmlElem>();
         public clsFields fields { get; set; } = new clsFields();
-        public frmInitialData(List<clsHtmlElem> elements,clsFields Filds)
+        public List<clsHtmlElem> RequestedElements = new List<clsHtmlElem>();
+        public frmInitialData(List<clsHtmlElem> elements, clsFields Filds)
         {
             InitializeComponent();
             this.elements = elements;
@@ -52,12 +55,14 @@ namespace CrawlerUI
                     dgvinitData.Rows[rowIndex].Cells[9] = OrderCell;
 
                     DataGridViewComboBoxCell FieldsCell = new DataGridViewComboBoxCell();
+                    DataGridViewComboBoxCell FieldsIds = new DataGridViewComboBoxCell();
                     foreach (clsField fld in fields.LstFields)
                     {
                         FieldsCell.Items.Add(fld.Name);
+                        FieldsIds.Items.Add(fld.Id);
                     }
                     dgvinitData.Rows[rowIndex].Cells[7] = FieldsCell;
-
+                    dgvinitData.Rows[rowIndex].Cells[10] = FieldsIds;
                 }
             }
             catch (Exception)
@@ -74,6 +79,50 @@ namespace CrawlerUI
         }
         #endregion
 
-
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RequestedElements.Clear();
+                foreach (DataGridViewRow row in dgvinitData.Rows)
+                {
+                    clsHtmlElem elem = new clsHtmlElem();
+                    elem.tagName = row.Cells[0].Value.ToString();
+                    elem.ClassName = row.Cells[1].Value.ToString();
+                    elem.Id = row.Cells[2].Value.ToString();
+                    elem.Value = row.Cells[3].Value.ToString();
+                    elem.href = row.Cells[4].Value.ToString();
+                    elem.src = row.Cells[5].Value.ToString();
+                    //elem.FildId = row.Cells[10].Value.ToString();
+                    if (row.Cells[7].Value != null)
+                    {
+                        elem.FieldName = row.Cells[7].Value.ToString();
+                    }
+                    if (row.Cells[8].Value != null)
+                    {
+                        elem.IsPage = bool.Parse(row.Cells[8].Value?.ToString());
+                    }
+                    if (row.Cells[6].Value != null)
+                    {
+                        Enum.TryParse(row.Cells[6].Value.ToString(), out ModEnum.Orders Group);
+                        elem.group = (int)Group;
+                    }
+                    if (row.Cells[9].Value != null)
+                    {
+                        Enum.TryParse(row.Cells[9].Value.ToString(), out ModEnum.Orders order);
+                        elem.order = (int)order;
+                    }
+                    RequestedElements.Add(elem);
+                }
+                string ErrorMessage = string.Empty;
+                string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
+                string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
+                clsHtmlElem.SerializeHtmlElementsToFile(RequestedElements, ResultFilePath, ref ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                //ModLog.
+            }
+        }
     }
 }

@@ -40,6 +40,7 @@
             this.btnSwPrevLinks = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwScrolling = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnApplyTools = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.btnHover = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.grpFields = new System.Windows.Forms.GroupBox();
             this.tlpFields = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddField = new MaterialSkin2DotNet.Controls.MaterialButton();
@@ -136,7 +137,7 @@
             this.tblMain.RowCount = 2;
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMain.Size = new System.Drawing.Size(950, 564);
+            this.tblMain.Size = new System.Drawing.Size(950, 666);
             this.tblMain.TabIndex = 5;
             // 
             // MainSp
@@ -153,8 +154,8 @@
             // MainSp.Panel2
             // 
             this.MainSp.Panel2.Controls.Add(this.grpLog);
-            this.MainSp.Size = new System.Drawing.Size(889, 507);
-            this.MainSp.SplitterDistance = 379;
+            this.MainSp.Size = new System.Drawing.Size(889, 609);
+            this.MainSp.SplitterDistance = 455;
             this.MainSp.TabIndex = 1;
             // 
             // ToolsSP
@@ -171,7 +172,7 @@
             // ToolsSP.Panel2
             // 
             this.ToolsSP.Panel2.Controls.Add(this.ExtendSP);
-            this.ToolsSP.Size = new System.Drawing.Size(889, 379);
+            this.ToolsSP.Size = new System.Drawing.Size(889, 455);
             this.ToolsSP.SplitterDistance = 206;
             this.ToolsSP.TabIndex = 0;
             // 
@@ -186,7 +187,7 @@
             this.tblToolbox.RowCount = 1;
             this.tblToolbox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblToolbox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblToolbox.Size = new System.Drawing.Size(206, 379);
+            this.tblToolbox.Size = new System.Drawing.Size(206, 455);
             this.tblToolbox.TabIndex = 0;
             // 
             // splitContainer1
@@ -203,8 +204,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grpFields);
-            this.splitContainer1.Size = new System.Drawing.Size(200, 373);
-            this.splitContainer1.SplitterDistance = 184;
+            this.splitContainer1.Size = new System.Drawing.Size(200, 449);
+            this.splitContainer1.SplitterDistance = 221;
             this.splitContainer1.TabIndex = 1;
             // 
             // grpTools
@@ -213,7 +214,7 @@
             this.grpTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpTools.Location = new System.Drawing.Point(0, 0);
             this.grpTools.Name = "grpTools";
-            this.grpTools.Size = new System.Drawing.Size(200, 184);
+            this.grpTools.Size = new System.Drawing.Size(200, 221);
             this.grpTools.TabIndex = 0;
             this.grpTools.TabStop = false;
             this.grpTools.Text = "Toolbox";
@@ -225,17 +226,19 @@
             this.tblInToolBox.Controls.Add(this.btnSwAddValue, 0, 0);
             this.tblInToolBox.Controls.Add(this.btnSwPrevLinks, 0, 1);
             this.tblInToolBox.Controls.Add(this.btnSwScrolling, 0, 2);
-            this.tblInToolBox.Controls.Add(this.btnApplyTools, 0, 3);
+            this.tblInToolBox.Controls.Add(this.btnApplyTools, 0, 4);
+            this.tblInToolBox.Controls.Add(this.btnHover, 0, 3);
             this.tblInToolBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblInToolBox.Location = new System.Drawing.Point(3, 23);
             this.tblInToolBox.Name = "tblInToolBox";
-            this.tblInToolBox.RowCount = 5;
+            this.tblInToolBox.RowCount = 6;
+            this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblInToolBox.Size = new System.Drawing.Size(194, 158);
+            this.tblInToolBox.Size = new System.Drawing.Size(194, 195);
             this.tblInToolBox.TabIndex = 0;
             // 
             // btnSwAddValue
@@ -296,7 +299,7 @@
             this.btnApplyTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnApplyTools.HighEmphasis = true;
             this.btnApplyTools.Icon = null;
-            this.btnApplyTools.Location = new System.Drawing.Point(4, 126);
+            this.btnApplyTools.Location = new System.Drawing.Point(4, 166);
             this.btnApplyTools.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnApplyTools.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnApplyTools.Name = "btnApplyTools";
@@ -309,13 +312,30 @@
             this.btnApplyTools.UseVisualStyleBackColor = true;
             this.btnApplyTools.Click += new System.EventHandler(this.btnApplyTools_Click);
             // 
+            // btnHover
+            // 
+            this.btnHover.AutoSize = true;
+            this.btnHover.Depth = 0;
+            this.btnHover.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHover.Location = new System.Drawing.Point(0, 120);
+            this.btnHover.Margin = new System.Windows.Forms.Padding(0);
+            this.btnHover.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.btnHover.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnHover.Name = "btnHover";
+            this.btnHover.Ripple = true;
+            this.btnHover.Size = new System.Drawing.Size(194, 40);
+            this.btnHover.TabIndex = 4;
+            this.btnHover.Text = "Hover tool";
+            this.btnHover.UseVisualStyleBackColor = true;
+            this.btnHover.CheckedChanged += new System.EventHandler(this.btnHover_CheckedChanged);
+            // 
             // grpFields
             // 
             this.grpFields.Controls.Add(this.tlpFields);
             this.grpFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpFields.Location = new System.Drawing.Point(0, 0);
             this.grpFields.Name = "grpFields";
-            this.grpFields.Size = new System.Drawing.Size(200, 185);
+            this.grpFields.Size = new System.Drawing.Size(200, 224);
             this.grpFields.TabIndex = 0;
             this.grpFields.TabStop = false;
             this.grpFields.Text = "Fields";
@@ -337,7 +357,7 @@
             this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFields.Size = new System.Drawing.Size(194, 159);
+            this.tlpFields.Size = new System.Drawing.Size(194, 198);
             this.tlpFields.TabIndex = 0;
             // 
             // btnAddField
@@ -395,7 +415,7 @@
             this.lstFields.Name = "lstFields";
             this.lstFields.SelectedIndex = -1;
             this.lstFields.SelectedItem = null;
-            this.lstFields.Size = new System.Drawing.Size(188, 73);
+            this.lstFields.Size = new System.Drawing.Size(188, 112);
             this.lstFields.TabIndex = 2;
             // 
             // btnEditField
@@ -453,7 +473,7 @@
             // ExtendSP.Panel2
             // 
             this.ExtendSP.Panel2.Controls.Add(this.tableLayoutPanel3);
-            this.ExtendSP.Size = new System.Drawing.Size(679, 379);
+            this.ExtendSP.Size = new System.Drawing.Size(679, 455);
             this.ExtendSP.SplitterDistance = 539;
             this.ExtendSP.TabIndex = 0;
             // 
@@ -472,7 +492,7 @@
             this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblWebViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
-            this.tblWebViewer.Size = new System.Drawing.Size(539, 379);
+            this.tblWebViewer.Size = new System.Drawing.Size(539, 455);
             this.tblWebViewer.TabIndex = 0;
             // 
             // WView
@@ -484,7 +504,7 @@
             this.WView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WView.Location = new System.Drawing.Point(3, 13);
             this.WView.Name = "WView";
-            this.WView.Size = new System.Drawing.Size(533, 317);
+            this.WView.Size = new System.Drawing.Size(533, 393);
             this.WView.Source = new System.Uri("https://www.amazon.com/", System.UriKind.Absolute);
             this.WView.TabIndex = 0;
             this.WView.ZoomFactor = 1D;
@@ -513,7 +533,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnLaunch, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnInitialData, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 336);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 412);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -575,7 +595,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(136, 379);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(136, 455);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // grbValues
@@ -584,7 +604,7 @@
             this.grbValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grbValues.Location = new System.Drawing.Point(3, 3);
             this.grbValues.Name = "grbValues";
-            this.grbValues.Size = new System.Drawing.Size(130, 373);
+            this.grbValues.Size = new System.Drawing.Size(130, 449);
             this.grbValues.TabIndex = 2;
             this.grbValues.TabStop = false;
             this.grbValues.Text = "Values";
@@ -603,7 +623,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(124, 347);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(124, 423);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // LstValues
@@ -619,7 +639,7 @@
             this.LstValues.Name = "LstValues";
             this.LstValues.SelectedIndex = -1;
             this.LstValues.SelectedItem = null;
-            this.LstValues.Size = new System.Drawing.Size(118, 301);
+            this.LstValues.Size = new System.Drawing.Size(118, 377);
             this.LstValues.TabIndex = 1;
             // 
             // btnClearValues
@@ -670,7 +690,7 @@
             this.grpLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpLog.Location = new System.Drawing.Point(0, 0);
             this.grpLog.Name = "grpLog";
-            this.grpLog.Size = new System.Drawing.Size(889, 124);
+            this.grpLog.Size = new System.Drawing.Size(889, 150);
             this.grpLog.TabIndex = 0;
             this.grpLog.TabStop = false;
             this.grpLog.Text = "Log";
@@ -690,7 +710,7 @@
             this.TPLLog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.TPLLog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.TPLLog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TPLLog.Size = new System.Drawing.Size(883, 98);
+            this.TPLLog.Size = new System.Drawing.Size(883, 124);
             this.TPLLog.TabIndex = 0;
             // 
             // btnExpotLog
@@ -744,7 +764,7 @@
             this.rchLog.Location = new System.Drawing.Point(3, 3);
             this.rchLog.Name = "rchLog";
             this.TPLLog.SetRowSpan(this.rchLog, 3);
-            this.rchLog.Size = new System.Drawing.Size(737, 92);
+            this.rchLog.Size = new System.Drawing.Size(737, 118);
             this.rchLog.TabIndex = 3;
             this.rchLog.Text = "";
             // 
@@ -945,7 +965,7 @@
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tblSideBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblSideBar.Size = new System.Drawing.Size(49, 558);
+            this.tblSideBar.Size = new System.Drawing.Size(49, 660);
             this.tblSideBar.TabIndex = 3;
             // 
             // pivAbout
@@ -1038,7 +1058,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(956, 631);
+            this.ClientSize = new System.Drawing.Size(956, 733);
             this.Controls.Add(this.tblMain);
             this.Name = "frmMain";
             this.Text = "Smart Crawler";
@@ -1146,5 +1166,6 @@
         private MaterialSkin2DotNet.Controls.MaterialButton btnDeleteItem;
         private TableLayoutPanel tableLayoutPanel1;
         private MaterialSkin2DotNet.Controls.MaterialButton btnInitialData;
+        private MaterialSkin2DotNet.Controls.MaterialSwitch btnHover;
     }
 }
