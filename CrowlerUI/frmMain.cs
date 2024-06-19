@@ -301,24 +301,43 @@ namespace CrawlerUI
                 if (materialSwitch.Checked)
                 {
                     PreventLinks = true;
-                    //Message = new MaterialMessage(ModResoucres.MsgPreventLinksEnabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
-                    //Message.ShowMessage();
                 }
                 else
                 {
                     PreventLinks = false;
-                    //Message = new MaterialMessage(ModResoucres.MsgPreventLinksDisabled + ".\n" + ModResoucres.MsgWaitUntilReloadPage, ModResoucres.MsgType_Info);
-                    //Message.ShowMessage();
                 }
-                //progTimer.Enabled = true;
-                //progBar.Value = 0;
-                //WView.Reload();
             }
             catch (Exception ex)
             {
                 Message.Message = ex.Message;
                 Message.MessageType = ModResoucres.MsgType_Error;
                 Message.ShowMessage();
+            }
+        }
+
+        private void btnHover_CheckedChanged(object sender, EventArgs e)
+        {
+            MaterialSwitch materialSwitch = (MaterialSwitch)sender;
+            if (materialSwitch.Checked)
+            {
+                MouseHover = true;
+            }
+            else
+            {
+                MouseHover = false;
+            }
+        }
+
+        private void btnSwScrolling_CheckedChanged(object sender, EventArgs e)
+        {
+            MaterialSwitch materialSwitch = (MaterialSwitch)sender;
+            if (materialSwitch.Checked)
+            {
+                EnableScrolling = true;
+            }
+            else
+            {
+                EnableScrolling = false;
             }
         }
 
@@ -393,6 +412,63 @@ namespace CrawlerUI
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void progTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (progBar.Value < 90)
+                {
+                    progBar.Value += progBar.Step;
+                }
+            }
+            catch (Exception)
+            {
+                //throw;
+            }
+        }
+
+        private void btnApplyTools_Click(object sender, EventArgs e)
+        {
+            ExecuteScripts();
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (LstValues.Count > 0 && Values.Count > 0 && LstValues.SelectedIndex >= 0)
+                {
+                    Values.RemoveAt(LstValues.SelectedIndex);
+                    LstValues.RemoveItemAt(LstValues.SelectedIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private void btnInitialData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmInitialData frmInitialdata = new frmInitialData(Values, clsFields.GetFields());
+                frmInitialdata.ShowDialog();
+                if (frmInitialdata.RequestedElements.Count > 0)
+                {
+                    Values = frmInitialdata.RequestedElements;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
         }
 
         #region Core
@@ -648,6 +724,13 @@ namespace CrawlerUI
             }
         }
 
+
+        #endregion
+
+        #endregion
+
+        #region Methods
+        //Trying methods
         List<clsElement> GetPathToRoot(clsElement child, List<clsElement> allElements)
         {
             var path = new List<clsElement>();
@@ -660,6 +743,7 @@ namespace CrawlerUI
             path.Reverse(); // So that the root is the first element
             return path;
         }
+
         clsElement FindLowestCommonAncestor(List<clsElement> children, List<clsElement> allElements)
         {
             var paths = children.Select(child => GetPathToRoot(child, allElements)).ToList();
@@ -695,92 +779,7 @@ namespace CrawlerUI
             return descendants;
         }
 
-
-        #endregion
-
-        #endregion
-
-        #region Methods
-
-        #endregion
-
-
-        #region Fields
-
-        private void btnAddField_Click(object sender, EventArgs e)
-        {
-            frmAddField AddFieldForm = new frmAddField();
-            if (AddFieldForm.ShowDialog() == DialogResult.OK)
-            {
-                FillFields();
-            }
-        }
-
-        private void btnDeleteField_Click(object sender, EventArgs e)
-        {
-            if (lstFields.SelectedItem.Tag != null)
-            {
-                clsField deletedField = (clsField)lstFields.SelectedItem.Tag;
-                clsFields Fields = clsFields.GetFields();
-                Fields.LstFields.Remove(Fields.LstFields.FirstOrDefault(item => item.Id == deletedField.Id));
-                Fields.SetFields();
-                lstFields.RemoveItemAt(lstFields.SelectedIndex);
-            }
-        }
-
-        private void btnClearFields_Click(object sender, EventArgs e)
-        {
-            clsFields Fields = new clsFields();
-            Fields.SetFields();
-            lstFields.Clear();
-        }
-
-        private void btnEditField_Click(object sender, EventArgs e)
-        {
-            if (lstFields?.SelectedItem?.Tag != null)
-            {
-                clsField EditedField = (clsField)lstFields.SelectedItem.Tag;
-                frmAddField AddFieldForm = new frmAddField(EditedField.Id);
-                if (AddFieldForm.ShowDialog() == DialogResult.OK)
-                {
-                    FillFields();
-                }
-            }
-
-        }
-
-        private void FillFields()
-        {
-            lstFields.Items.Clear();
-            foreach (clsField field in clsFields.GetFields().LstFields)
-            {
-                //lstFields.AddItem(item.Name);   
-                MaterialListBoxItem item = new MaterialListBoxItem(field.Name, field.Description, field);
-                lstFields.AddItem(item);
-            }
-        }
-
-        #endregion
-
-        private void progTimer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (progBar.Value < 90)
-                {
-                    progBar.Value += progBar.Step;
-                }
-            }
-            catch (Exception)
-            {
-                //throw;
-            }
-        }
-
-        private void btnApplyTools_Click(object sender, EventArgs e)
-        {
-            ExecuteScripts();
-        }
+        //End Trying
 
         public async void ExecuteScripts()
         {
@@ -814,62 +813,116 @@ namespace CrawlerUI
                     await WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //ModLog.
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
-        private void btnDeleteItem_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Fields
+
+        private void btnAddField_Click(object sender, EventArgs e)
         {
             try
             {
-                if (LstValues.Count > 0 && Values.Count > 0 && LstValues.SelectedIndex >= 0)
+                frmAddField AddFieldForm = new frmAddField();
+                if (AddFieldForm.ShowDialog() == DialogResult.OK)
                 {
-                    Values.RemoveAt(LstValues.SelectedIndex);
-                    LstValues.RemoveItemAt(LstValues.SelectedIndex);
+                    FillFields();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
-        private void btnInitialData_Click(object sender, EventArgs e)
+        private void btnDeleteField_Click(object sender, EventArgs e)
         {
-            frmInitialData frmInitialdata = new frmInitialData(Values, clsFields.GetFields());
-            frmInitialdata.ShowDialog();
-            if (frmInitialdata.RequestedElements.Count > 0)
+            try
             {
-                Values = frmInitialdata.RequestedElements;
+                if (lstFields.SelectedItem.Tag != null)
+                {
+                    clsField deletedField = (clsField)lstFields.SelectedItem.Tag;
+                    clsFields Fields = clsFields.GetFields();
+                    Fields.LstFields.Remove(Fields.LstFields.FirstOrDefault(item => item.Id == deletedField.Id));
+                    Fields.SetFields();
+                    lstFields.RemoveItemAt(lstFields.SelectedIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
-        private void btnHover_CheckedChanged(object sender, EventArgs e)
+        private void btnClearFields_Click(object sender, EventArgs e)
         {
-            MaterialSwitch materialSwitch = (MaterialSwitch)sender;
-            if (materialSwitch.Checked)
+            try
             {
-                MouseHover = true;
+                clsFields Fields = new clsFields();
+                Fields.SetFields();
+                lstFields.Clear();
             }
-            else
+            catch (Exception ex)
             {
-                MouseHover = false;
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
-        private void btnSwScrolling_CheckedChanged(object sender, EventArgs e)
+        private void btnEditField_Click(object sender, EventArgs e)
         {
-            MaterialSwitch materialSwitch = (MaterialSwitch)sender;
-            if (materialSwitch.Checked)
+            try
             {
-                EnableScrolling = true;
+                if (lstFields?.SelectedItem?.Tag != null)
+                {
+                    clsField EditedField = (clsField)lstFields.SelectedItem.Tag;
+                    frmAddField AddFieldForm = new frmAddField(EditedField.Id);
+                    if (AddFieldForm.ShowDialog() == DialogResult.OK)
+                    {
+                        FillFields();
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                EnableScrolling = false;
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
+
+        private void FillFields()
+        {
+            try
+            {
+                lstFields.Items.Clear();
+                foreach (clsField field in clsFields.GetFields().LstFields)
+                {
+                    //lstFields.AddItem(item.Name);   
+                    MaterialListBoxItem item = new MaterialListBoxItem(field.Name, field.Description, field);
+                    lstFields.AddItem(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        #endregion
+
     }
 }
