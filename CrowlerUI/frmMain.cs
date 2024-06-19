@@ -162,32 +162,35 @@ namespace CrawlerUI
         {
             try
             {
-                string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
+                string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
                 string Deshtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
-                CurrentHtmlText = modHtmlTextProcessing.PreProcessingHtml(Deshtml);
-                htmlEditor Editor = null;
-                if (string.IsNullOrEmpty(CurrentHtmlText))
+                CurrentHtmlText = Deshtml; // modHtmlTextProcessing.PreProcessingHtml(Deshtml);
+                Task.Run(() =>
                 {
-                    FileInfo Fileinf = new FileInfo(ModPathes.GetHtmlTextTempFile());
-                    if (Fileinf.Exists)
+                    htmlEditor Editor = null;
+                    if (string.IsNullOrEmpty(CurrentHtmlText))
                     {
-                        Editor = new htmlEditor(Fileinf);
+                        FileInfo Fileinf = new FileInfo(ModPathes.GetHtmlTextTempFile());
+                        if (Fileinf.Exists)
+                        {
+                            Editor = new htmlEditor(Fileinf);
+                        }
                     }
-                }
-                else
-                {
-                    Editor = new htmlEditor(CurrentHtmlText);
-                }
-                if (Editor is null)
-                {
-                    Message.Message = ModResoucres.cnst_InspectThisUrlIsNotPossibleNowTryReloadPage;
-                    Message.MessageType = ModResoucres.MsgType_Error;
-                    Message.ShowMessage();
-                }
-                else
-                {
-                    Editor.ShowDialog();
-                }
+                    else
+                    {
+                        Editor = new htmlEditor(CurrentHtmlText);
+                    }
+                    if (Editor is null)
+                    {
+                        Message.Message = ModResoucres.cnst_InspectThisUrlIsNotPossibleNowTryReloadPage;
+                        Message.MessageType = ModResoucres.MsgType_Error;
+                        Message.ShowMessage();
+                    }
+                    else
+                    {
+                        Editor.ShowDialog();
+                    }
+                });
             }
             catch (Exception ex)
             {

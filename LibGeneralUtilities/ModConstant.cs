@@ -192,5 +192,10 @@ namespace LibGeneralUtilities
         };
 
         #endregion
+
+        #region API Endpoints
+        public const string cnstAPILogin = "Login";
+        public const string cnstAPIGetSimilar = "get_similar";
+        #endregion
     }
 }

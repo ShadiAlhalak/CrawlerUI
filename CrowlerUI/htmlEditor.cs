@@ -35,10 +35,6 @@ namespace CrawlerUI
             {
                 InitializeComponent();
                 FullHtml = html;
-                if (string.IsNullOrEmpty(html))
-                {
-                    FullHtml = File.ReadAllText("C:\\Users\\shadi\\AppData\\Roaming\\Smart Crawler\\Output\\2023-12-01 15-41-24\\Training Files\\amazonae.html", Encoding.UTF8);
-                }
             }
             catch (Exception ex)
             {
@@ -78,7 +74,10 @@ namespace CrawlerUI
                 FullHtml = modHtmlTextProcessing.PreProcessingHtml(FullHtml);
                 if (!string.IsNullOrEmpty(FullHtml))
                 {
-                    rchHtmlEditor.Text = FullHtml;
+                    SuspendDrawing(rchHtmlEditor);
+                    rchHtmlEditor.Text = string.Empty;
+                    rchHtmlEditor.AppendText(FullHtml);
+                    ResumeDrawing(rchHtmlEditor);
                     //rchHtmlEditor.SuspendLayout();
                     //ColorHtmlTags(rchHtmlEditor);
                     //ColoringStringValues();
