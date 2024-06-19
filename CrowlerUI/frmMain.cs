@@ -37,6 +37,7 @@ namespace CrawlerUI
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
         public bool MouseHover { get; set; } = false;
+        public bool EnableScrolling { get; set; } = false;
         public bool IsSideBarOpen { get; set; } = false;
         public bool DarkMode { get; set; } = true;
         public MaterialSkinManager materialSkinManager { get; set; }
@@ -785,23 +786,31 @@ namespace CrawlerUI
         {
             try
             {
-
                 if (PreventLinks)
                 {
                     string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
                     string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
                 }
+
                 if (AddZone)
                 {
                     string MouseScriptPath = ModPathes.GetMouseScriptPath();
                     string script = File.ReadAllText(MouseScriptPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
+
                 if (MouseHover)
                 {
-                    string MouseScriptPath = ModPathes.GetHighlightHoverElementSciptPath();
-                    string script = File.ReadAllText(MouseScriptPath);
+                    string MouseHoverPath = ModPathes.GetHighlightHoverElementSciptPath();
+                    string script = File.ReadAllText(MouseHoverPath);
+                    await WView.CoreWebView2.ExecuteScriptAsync(script);
+                }
+
+                if (EnableScrolling)
+                {
+                    string ScrollScriptPath = ModPathes.GetScrollSciptPath();
+                    string script = File.ReadAllText(ScrollScriptPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
             }
@@ -848,7 +857,19 @@ namespace CrawlerUI
             {
                 MouseHover = false;
             }
+        }
 
+        private void btnSwScrolling_CheckedChanged(object sender, EventArgs e)
+        {
+            MaterialSwitch materialSwitch = (MaterialSwitch)sender;
+            if (materialSwitch.Checked)
+            {
+                EnableScrolling = true;
+            }
+            else
+            {
+                EnableScrolling = false;
+            }
         }
     }
 }

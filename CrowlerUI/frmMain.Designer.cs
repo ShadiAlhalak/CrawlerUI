@@ -290,6 +290,7 @@
             this.btnSwScrolling.TabIndex = 2;
             this.btnSwScrolling.Text = "Scrolling tool";
             this.btnSwScrolling.UseVisualStyleBackColor = true;
+            this.btnSwScrolling.CheckedChanged += new System.EventHandler(this.btnSwScrolling_CheckedChanged);
             // 
             // btnApplyTools
             // 

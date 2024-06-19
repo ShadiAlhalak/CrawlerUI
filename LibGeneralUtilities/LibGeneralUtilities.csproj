@@ -16,16 +16,4 @@
     <ProjectReference Include="..\LibStructure\LibStructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Scripts\GetAllElem.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Scripts\LinksDisable.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Scripts\Mouse.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

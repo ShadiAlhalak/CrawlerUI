@@ -8,25 +8,43 @@ namespace LibGeneralUtilities
 {
     public static class ModPathes
     {
+        public static string GetScriptFolderPath()
+        {
+            try
+            {
+                string ScriptFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ModConstant.cnst_ScriptsFolderName);
+                if (!Directory.Exists(ScriptFolder)) Directory.CreateDirectory(ScriptFolder);
+                return ScriptFolder;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
 
         public static string GetMouseScriptPath()
         {
-            return ModConstant.cnst_Mouse_ScriptFileName + ModConstant.cnst_js_Extention;
+            return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_Mouse_ScriptFileName + ModConstant.cnst_js_Extention);
         }
 
         public static string GetLinksDisableScriptPath()
         {
-            return ModConstant.cnst_LinksDisable_ScriptFileName + ModConstant.cnst_js_Extention;
+            return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_LinksDisable_ScriptFileName + ModConstant.cnst_js_Extention);
         }
 
         public static string GetAllElemScriptPath()
         {
-            return ModConstant.cnst_GetAllElem_ScriptFileName + ModConstant.cnst_js_Extention;
-        }      
+            return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_GetAllElem_ScriptFileName + ModConstant.cnst_js_Extention);
+        }
 
         public static string GetHighlightHoverElementSciptPath()
         {
-            return ModConstant.cnst_HighlightHoverElement_ScriptFileName + ModConstant.cnst_js_Extention;
+            return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_HighlightHoverElement_ScriptFileName + ModConstant.cnst_js_Extention);
+        }
+
+        public static string GetScrollSciptPath()
+        {
+            return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_Scroll_ScriptFileName + ModConstant.cnst_js_Extention);
         }
 
         public static string GetAppDataPath()
@@ -199,6 +217,6 @@ namespace LibGeneralUtilities
         {
             return Path.Combine(GetSettingsFolderPath(), ModConstant.cnst_FieldsFileName + ModConstant.cnst_xml_Extention);
         }
-   
+
     }
 }
