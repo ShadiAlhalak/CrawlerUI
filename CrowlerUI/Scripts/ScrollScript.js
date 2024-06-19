@@ -8,9 +8,9 @@
 function humanScrollToBottom() {
     let interval = setInterval(() => {
         window.scrollBy(0, 50); // Scroll by 50 pixels every 100ms
-        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-            clearInterval(interval); // Stop scrolling when the bottom is reached
-        }
+        //if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+        //    clearInterval(interval); // Stop scrolling when the bottom is reached
+        //}
     }, 100);
 }
 

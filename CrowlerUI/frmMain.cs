@@ -33,7 +33,7 @@ namespace CrawlerUI
         #region Variables
         public List<clsHtmlElem> Values { get; set; } = new List<clsHtmlElem>();
         public MaterialMessage Message { get; set; } = new MaterialMessage();
-        public string CurrentHtmlText { get; set; } = string.Empty;
+        public string? CurrentHtmlText { get; set; } = string.Empty;
         public bool AddZone { get; set; } = false;
         public bool PreventLinks { get; set; } = false;
         public bool MouseHover { get; set; } = false;
@@ -163,34 +163,34 @@ namespace CrawlerUI
             try
             {
                 string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
-                string Deshtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+                string? Deshtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
                 CurrentHtmlText = Deshtml; // modHtmlTextProcessing.PreProcessingHtml(Deshtml);
-                Task.Run(() =>
-                {
-                    htmlEditor Editor = null;
-                    if (string.IsNullOrEmpty(CurrentHtmlText))
-                    {
-                        FileInfo Fileinf = new FileInfo(ModPathes.GetHtmlTextTempFile());
-                        if (Fileinf.Exists)
-                        {
-                            Editor = new htmlEditor(Fileinf);
-                        }
-                    }
-                    else
-                    {
-                        Editor = new htmlEditor(CurrentHtmlText);
-                    }
-                    if (Editor is null)
-                    {
-                        Message.Message = ModResoucres.cnst_InspectThisUrlIsNotPossibleNowTryReloadPage;
-                        Message.MessageType = ModResoucres.MsgType_Error;
-                        Message.ShowMessage();
-                    }
-                    else
-                    {
-                        Editor.ShowDialog();
-                    }
-                });
+                await Task.Run(() =>
+                 {
+                     htmlEditor Editor = null;
+                     if (string.IsNullOrEmpty(CurrentHtmlText))
+                     {
+                         FileInfo Fileinf = new FileInfo(ModPathes.GetHtmlTextTempFile());
+                         if (Fileinf.Exists)
+                         {
+                             Editor = new htmlEditor(Fileinf);
+                         }
+                     }
+                     else
+                     {
+                         Editor = new htmlEditor(CurrentHtmlText);
+                     }
+                     if (Editor is null)
+                     {
+                         Message.Message = ModResoucres.cnst_InspectThisUrlIsNotPossibleNowTryReloadPage;
+                         Message.MessageType = ModResoucres.MsgType_Error;
+                         Message.ShowMessage();
+                     }
+                     else
+                     {
+                         Editor.ShowDialog();
+                     }
+                 });
             }
             catch (Exception ex)
             {
