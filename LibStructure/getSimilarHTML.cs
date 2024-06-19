@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibStructure
 {
-    public class getSimilar
+    public class getSimilarHTML
     {
         //public string url { get; set; } = string.Empty;
         public string html { get; set; } = string.Empty;
