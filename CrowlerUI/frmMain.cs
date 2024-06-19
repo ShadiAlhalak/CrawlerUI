@@ -736,7 +736,7 @@ namespace CrawlerUI
 
         private void btnEditField_Click(object sender, EventArgs e)
         {
-            if (lstFields.SelectedItem.Tag != null)
+            if (lstFields?.SelectedItem?.Tag != null)
             {
                 clsField EditedField = (clsField)lstFields.SelectedItem.Tag;
                 frmAddField AddFieldForm = new frmAddField(EditedField.Id);
@@ -785,30 +785,20 @@ namespace CrawlerUI
         {
             try
             {
-                if (PreventLinks && AddZone)
-                {
-                    string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
-                    string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
 
-                    string MouseScriptPath = ModPathes.GetMouseScriptPath();
-                    string script = File.ReadAllText(MouseScriptPath);
-
-                    LinksDisableScr += "\n" + script;
-                    await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
-                }
-                else if (PreventLinks)
+                if (PreventLinks)
                 {
                     string LinksDisScrPath = ModPathes.GetLinksDisableScriptPath();
                     string LinksDisableScr = File.ReadAllText(LinksDisScrPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(LinksDisableScr);
                 }
-                else if (AddZone)
+                if (AddZone)
                 {
                     string MouseScriptPath = ModPathes.GetMouseScriptPath();
                     string script = File.ReadAllText(MouseScriptPath);
                     await WView.CoreWebView2.ExecuteScriptAsync(script);
                 }
-                else if (MouseHover)
+                if (MouseHover)
                 {
                     string MouseScriptPath = ModPathes.GetHighlightHoverElementSciptPath();
                     string script = File.ReadAllText(MouseScriptPath);
