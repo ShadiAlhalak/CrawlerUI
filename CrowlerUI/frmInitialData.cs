@@ -117,7 +117,10 @@ namespace CrawlerUI
                 string ErrorMessage = string.Empty;
                 string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
                 string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
-                clsHtmlElem.SerializeHtmlElementsToFile(RequestedElements, ResultFilePath, ref ErrorMessage);
+                //clsHtmlElem.SerializeHtmlElementsToFile(RequestedElements, ResultFilePath, ref ErrorMessage);
+                clsHtmlElems _elems = new clsHtmlElems();
+                _elems.Elements = RequestedElements;
+                clsHtmlElems.SerializeHtmlElementsToFile(_elems, ResultFilePath, ref ErrorMessage);
             }
             catch (Exception ex)
             {

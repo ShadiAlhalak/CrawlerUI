@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Xml;
+using Newtonsoft;
+using Newtonsoft.Json;
 
 namespace LibStructure
 {
@@ -42,11 +44,11 @@ namespace LibStructure
             bool Done = true;
             try
             {
-                var serializer = new XmlSerializer(typeof(List<clsHtmlElem>));
-                using (var writer = XmlWriter.Create(FilePath))
-                {
-                    serializer.Serialize(writer, HtmlElements);
-                }
+                //string serializer =  Newtonsoft.Json.JsonConvert.DeserializeObject<List<clsHtmlElem>>(HtmlElements);
+                //using (var writer = XmlWriter.Create(FilePath))
+                //{
+                //    serializer.Serialize(writer, HtmlElements);
+                //}
             }
             catch (Exception ex)
             {
@@ -59,19 +61,19 @@ namespace LibStructure
         public static List<clsHtmlElem> LoadHtmlElementsFromFile(string FilePath, ref string ErrorMessage)
         {
             List<clsHtmlElem> lstElements = new List<clsHtmlElem>();
-            try
-            {
-                string SettingsFilePath = FilePath;
-                var serializer = new XmlSerializer(typeof(List<clsHtmlElem>));
-                using (var reader = XmlReader.Create(SettingsFilePath))
-                {
-                    lstElements = serializer.Deserialize(reader) as List<clsHtmlElem>;
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
+            //try
+            //{
+            //    string SettingsFilePath = FilePath;
+            //    var serializer = new XmlSerializer(typeof(List<clsHtmlElem>));
+            //    using (var reader = XmlReader.Create(SettingsFilePath))
+            //    {
+            //        lstElements = serializer.Deserialize(reader) as List<clsHtmlElem>;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ErrorMessage = ex.Message;
+            //}
             return lstElements;
         }
     }

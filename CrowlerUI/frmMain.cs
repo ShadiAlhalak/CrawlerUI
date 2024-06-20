@@ -686,26 +686,26 @@ namespace CrawlerUI
                     //}
 
                     //Link with mohamad 
-                    //using (HttpClient client = new HttpClient())
-                    //{
-                    //    string url = " http://127.0.0.1:8000/crawler/get_similar";
-                    //    getSimilar getSimilar = new getSimilar();
-                    //    //getSimilar.url = "https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
-                    //    getSimilar.html = DesHtml;
-                    //    //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
-                    //    foreach (clsHtmlElem val in Values)
-                    //    {
-                    //        getSimilar.wanted_list.Add(val.Value);
-                    //    }
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string url = " http://127.0.0.1:8000/crawler/get_similar";
+                        getSimilarURL getSimilar = new getSimilarURL();
+                        getSimilar.url = txtURL.Text;//"https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
+                        //getSimilar.html = DesHtml;
+                        //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
+                        foreach (clsHtmlElem val in Values)
+                        {
+                            getSimilar.wanted_list.Add(val.Value);
+                        }
 
-                    //    var json = JsonConvert.SerializeObject(getSimilar);
-                    //    var data = new StringContent(json, Encoding.UTF8, "application/json");
+                        var json = JsonConvert.SerializeObject(getSimilar);
+                        var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    //    HttpResponseMessage response = await client.PostAsync(url, data);
-                    //    response.EnsureSuccessStatusCode();
-                    //    string responseBody = await response.Content.ReadAsStringAsync();
-                    //    Console.WriteLine(responseBody);
-                    //}
+                        HttpResponseMessage response = await client.PostAsync(url, data);
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(responseBody);
+                    }
 
                     rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 
