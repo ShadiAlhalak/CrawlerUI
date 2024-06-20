@@ -43,6 +43,7 @@
             this.colPage = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrder = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.FieldId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GroupParent = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.grpConfigrations = new System.Windows.Forms.GroupBox();
             this.tlbTools = new System.Windows.Forms.TableLayoutPanel();
             this.materialLabel1 = new MaterialSkin2DotNet.Controls.MaterialLabel();
@@ -131,7 +132,8 @@
             this.colField,
             this.colPage,
             this.colOrder,
-            this.FieldId});
+            this.FieldId,
+            this.GroupParent});
             this.dgvinitData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvinitData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvinitData.Location = new System.Drawing.Point(3, 3);
@@ -216,6 +218,12 @@
             this.FieldId.Name = "FieldId";
             this.FieldId.ReadOnly = true;
             this.FieldId.Visible = false;
+            // 
+            // GroupParent
+            // 
+            this.GroupParent.HeaderText = "Group Parent";
+            this.GroupParent.MinimumWidth = 6;
+            this.GroupParent.Name = "GroupParent";
             // 
             // grpConfigrations
             // 
@@ -468,5 +476,6 @@
         private DataGridViewCheckBoxColumn colPage;
         private DataGridViewComboBoxColumn colOrder;
         private DataGridViewTextBoxColumn FieldId;
+        private DataGridViewComboBoxColumn GroupParent;
     }
 }

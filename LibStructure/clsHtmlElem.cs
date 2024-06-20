@@ -13,6 +13,7 @@ namespace LibStructure
 {
     public class clsHtmlElem
     {
+        //[JsonIgnore]
         public string Key = string.Empty;
         public string Id = string.Empty;
         public string ClassName = string.Empty;
@@ -23,6 +24,7 @@ namespace LibStructure
         public string FildId = string.Empty;
         public string FieldName = string.Empty;
         public int group = -1;
+        public int groupParent = -1;
         public int order = -1;
         public bool IsPage = false;
 

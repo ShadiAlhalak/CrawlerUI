@@ -46,9 +46,13 @@ namespace CrawlerUI
                     dgvinitData.Rows[rowIndex].Cells[5].Value = elem.src;
 
                     // Add enum cells
-                    DataGridViewComboBoxCell ParentCell = new DataGridViewComboBoxCell();
-                    ParentCell.DataSource = Enum.GetNames(typeof(ModEnum.Orders));
-                    dgvinitData.Rows[rowIndex].Cells[6] = ParentCell;
+                    DataGridViewComboBoxCell GroupCell = new DataGridViewComboBoxCell();
+                    GroupCell.DataSource = Enum.GetNames(typeof(ModEnum.Orders));
+                    dgvinitData.Rows[rowIndex].Cells[6] = GroupCell;
+
+                    DataGridViewComboBoxCell ParentGroup = new DataGridViewComboBoxCell();
+                    ParentGroup.DataSource = Enum.GetNames(typeof(ModEnum.Orders));
+                    dgvinitData.Rows[rowIndex].Cells[11] = ParentGroup;
 
                     DataGridViewComboBoxCell OrderCell = new DataGridViewComboBoxCell();
                     OrderCell.DataSource = Enum.GetNames(typeof(ModEnum.Orders));
@@ -112,11 +116,16 @@ namespace CrawlerUI
                         Enum.TryParse(row.Cells[9].Value.ToString(), out ModEnum.Orders order);
                         elem.order = (int)order;
                     }
+                    if (row.Cells[11].Value != null)
+                    {
+                        Enum.TryParse(row.Cells[11].Value.ToString(), out ModEnum.Orders order);
+                        elem.groupParent = (int)order;
+                    }
                     RequestedElements.Add(elem);
                 }
                 string ErrorMessage = string.Empty;
                 string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
-                string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
+                string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_json_Extention);
                 //clsHtmlElem.SerializeHtmlElementsToFile(RequestedElements, ResultFilePath, ref ErrorMessage);
                 clsHtmlElems _elems = new clsHtmlElems();
                 _elems.Elements = RequestedElements;
