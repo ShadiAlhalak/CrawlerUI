@@ -593,98 +593,17 @@ namespace CrawlerUI
                 //    fullhtml = await client.GetStringAsync(txtURL.Text);
                 //}
 
-                //string fullhtml;
-                //// obtain some arbitrary html....
-                //using (var client = new WebClient())
-                //{
-                //    fullhtml = client.DownloadString(txtURL.Text);
-                //}
-                //// use the html agility pack: http://www.codeplex.com/htmlagilitypack
-                //HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                //doc.LoadHtml(html);
-                //StringBuilder sb = new StringBuilder();
-                //foreach (HtmlTextNode node in doc.DocumentNode.SelectNodes("//text()"))
-                //{
-                //    sb.AppendLine(node.Text);
-                //}
-                //string final = sb.ToString();
-
-                //*
-                //string GetAllElemPath = ModPathes.GetAllElemScriptPath();
-                //string GetAllElemScr = File.ReadAllText(GetAllElemPath);
                 //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.textContent");
-                //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML;");
                 string SiteName = ModValidation.GetSiteName(txtURL.Text);
                 string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName.Substring(0, 8) + ModConstant.cnst_html_Extention);
                 if (!string.IsNullOrEmpty(SiteName))
                 {
-                    //File.WriteAllText(FullHtmlFilePath, fullhtml);
-                    ////htmlSplitter.SplitHtml(fullhtml);
+
                     //string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
                     string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
                     string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
                     DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
                     CoreApplicaion(DesHtml);
-                    //clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
-                    //clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
-
-                    //var RequestedValuesGroup = Values.GroupBy(s => s.group);
-                    //try
-                    //{
-                    //    foreach (clsElement Item in result.LstElements)
-                    //    {
-                    //        var currValue = Values.FirstOrDefault(x => x.ClassName == Item.ClassName && x.tagName?.ToLower() == Item.Tag?.ToLower() && x?.Id == Item?.Id);
-                    //        Item.Group = currValue.group;
-                    //        Item.Order = currValue.order;
-                    //        Item.FieldName = currValue?.FieldName;
-                    //    }
-                    //}
-                    //catch (Exception)
-                    //{
-
-                    //}
-
-                    //foreach (var group in RequestedValuesGroup)
-                    //{
-                    //    Console.WriteLine($"Group: {group.Key}");
-                    //    foreach (var Item in group)
-                    //    {
-                    //        elems.LstElements.FirstOrDefault(x=>x.ClassName == Item.ClassName && x.Tag == Item.tagName && x.Id == Item.Id && x.TextContent == Item.Value).Start
-                    //        //Debug.WriteLine($"  Value: {Item.TextContent}");
-                    //    }
-                    //}
-
-                    //foreach (clsElement item in elems.LstElements)
-                    //{
-                    //    item.
-                    //}
-
-                    //elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(fullhtml);
-                    //clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
-
-                    // var groupedByParent = result.LstElements.GroupBy(s => s.ParentGuid);
-                    // var grouped = elems.LstElements.GroupBy(x => x.ParentGuid)
-                    //.Where(g => g.Count() > 1)
-                    //.Select(g => g.ToList())
-                    //.ToList();
-
-
-                    //var deepestChildren = allElements.Where(e => /* your condition for deepest elements */).ToList();
-                    //var commonParent = FindLowestCommonAncestor(result.LstElements, elems.LstElements);
-                    //var allChildren = GetAllDescendants(commonParent, elems.LstElements);
-                    //Console.WriteLine($"allChildren count: {allChildren.Count()}");
-                    // Now groupedItems contains all elements within the specific container
-
-
-                    //foreach (var group in groupedByParent)
-                    //{
-                    //    Console.WriteLine($"Group: {group.Key}");
-
-                    //    foreach (var Item in group)
-                    //    {
-                    //        Debug.WriteLine($"  Value: {Item.TextContent}");
-                    //    }
-                    //}
 
                     //Link with mohamad 
                     //using (HttpClient client = new HttpClient())
@@ -711,7 +630,7 @@ namespace CrawlerUI
                     rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 
                     //3-Serialize Values list to file
-                    string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_xml_Extention);
+                    string ResultFilePath = Path.Combine(TrainingFolder, ModConstant.cnst_ValuesFileName + ModConstant.cnst_json_Extention);
                     clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath, ref ErrorMessage);
                     rchLog.AppendText(ModResoucres.cnst_ValuesFileHasBeenWritten);
                     rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
@@ -782,7 +701,7 @@ namespace CrawlerUI
 
             return descendants;
         }
-
+        //End Trying
         clsElements CoreApplicaion(string DesHtml)
         {
             clsElements Results = new clsElements();
@@ -806,7 +725,7 @@ namespace CrawlerUI
                 Pairs pairs = new Pairs();
                 counter = 0;
                 List<clsField> UserFields = clsFields.GetFields().LstFields;
-                foreach (clsElement elem in result.LstElements?.Where(x => x.GroupParent != -1))
+                foreach (clsElement elem in result?.LstElements?.Where(x => x.GroupParent != -1))
                 {
                     var groupedObjects = result.LstElements
                     .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")
@@ -848,29 +767,17 @@ namespace CrawlerUI
                     .Select(group => new
                     {
                         GroupID = group.Key,
-                        Users = group.OrderBy(u => u.order).ToList()
+                        Field = group.OrderBy(u => u.order).ToList()
                     });
-
-
-                var fieldsGroup = pairs.lstPairs.GroupBy(item => item.group).ToList();
-                foreach (var group in groupedAndSortedUsers)
-                {
-                    Console.WriteLine($"Group {group.GroupID}:");
-                    foreach (var item in group.Users)
-                    {
-                        Console.WriteLine($"Group {item.Key}:");
-                    }
-                }
 
                 using (var writer = new StreamWriter("output.csv"))
                 {
                     foreach (var group in groupedAndSortedUsers)
                     {
-                        var csvLine = string.Join(",", group.Users.Select(user => user.Value));
+                        var csvLine = string.Join(",", group.Field.Select(user => user.Value));
                         writer.WriteLine(csvLine);
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -880,7 +787,6 @@ namespace CrawlerUI
             }
             return Results;
         }
-        //End Trying
 
         public async void ExecuteScripts()
         {
