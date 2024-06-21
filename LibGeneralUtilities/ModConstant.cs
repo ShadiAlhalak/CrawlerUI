@@ -190,12 +190,14 @@ namespace LibGeneralUtilities
         "wbr",
         "xmp"
         };
+        public const string HtmlSpan = "span";
 
         #endregion
 
         #region API Endpoints
         public const string cnstAPILogin = "Login";
         public const string cnstAPIGetSimilar = "get_similar";
+        public const string cnstAPICreateDS = "create_ds";
         #endregion
     }
 }

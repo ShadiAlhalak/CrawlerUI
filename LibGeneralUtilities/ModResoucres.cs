@@ -20,6 +20,8 @@ namespace LibGeneralUtilities
         public const string cnst_FieldsFileISNotExist = "Field file is not exist.";
         public const string cnst_AllSettingsAreRequired = "All settings are required.";
         public const string cnst_InspectThisUrlIsNotPossibleNowTryReloadPage = "Inspect this URl is not possible try reload page";
+        public const string MsgDataSetNameAndDescreptionAreRequired = "Dataset name and descreption are required.";
+        public const string MsgCannotLaunchBeforeAddFieldsAndValues = "Make sure you have added fields and values and initial data before launch.";
         #endregion
 
         #region Log

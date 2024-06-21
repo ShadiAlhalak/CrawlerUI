@@ -24,6 +24,7 @@ using System.Diagnostics;
 using LogManagment;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace CrawlerUI
 {
@@ -579,53 +580,60 @@ namespace CrawlerUI
             string ErrorMessage = string.Empty;
             try
             {
-                rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
-                rchLog.ScrollToCaret();
-                rchLog.AppendText(ModResoucres.cnst_StartProcessing);
-                //1-Get Training output folder path
-                string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
-
-                //2-Full html file
-                string fullhtml;
-                ////* Try somthing
-                //using (HttpClient client = new HttpClient())// actually only one object should be created by Application
+                //1-Check if user add values and fields 
+                if (Values.Count == 0 || clsFields.GetFields().LstFields.Count == 0)
+                {
+                    Message.Message = ModResoucres.MsgCannotLaunchBeforeAddFieldsAndValues;
+                    Message.MessageType = ModResoucres.MsgType_Error;
+                    Message.ShowMessage();
+                    return;
+                }
+                //2-Initial data set info
+                frmNewDS newds = new frmNewDS();
+                if (newds.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }
+                //3-Initial ds with API
+                //Link with mohamad 
+                //using (HttpClient client = new HttpClient())
                 //{
-                //    fullhtml = await client.GetStringAsync(txtURL.Text);
+                //    string? url =$"{clsSettings.loadSettings(ref ErrorMessage)?.AIServiceUrl}/{ModConstant.cnstAPICreateDS}";
+                //    clsCreateDS Info = new clsCreateDS();
+                //    Info.Title = newds.txtName.Text;
+                //    Info.Description = newds.txtDescription.Text;
+                //    Info.Fields = clsFields.GetFields()?.LstFields;
+
+
+                //    var json = JsonConvert.SerializeObject(Info);
+                //    var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                //    HttpResponseMessage response = await client.PostAsync(url, data);
+                //    response.EnsureSuccessStatusCode();
+                //    string responseBody = await response.Content.ReadAsStringAsync();
+                //    Console.WriteLine(responseBody);
                 //}
 
-                //var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.textContent");
-                string SiteName = ModValidation.GetSiteName(txtURL.Text);
-                string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName.Substring(0, 8) + ModConstant.cnst_html_Extention);
-                if (!string.IsNullOrEmpty(SiteName))
-                {
+                rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
+                rchLog.ScrollToCaret();
 
+                rchLog.SelectionColor = System.Drawing.Color.Blue;
+                rchLog.AppendText(ModResoucres.cnst_StartProcessing);
+                rchLog.SelectionColor = rchLog.ForeColor;
+
+
+                //1-Get Training output folder path
+                string TrainingFolder = ModPathes.GetSessionTrainingFolder(ref ErrorMessage);
+                ////var fullhtml = await WView.CoreWebView2.ExecuteScriptAsync("document.documentElement.textContent");
+                //string SiteName = ModValidation.GetSiteName(txtURL.Text);
+                //string FullHtmlFilePath = Path.Combine(TrainingFolder, SiteName.Substring(0, 8) + ModConstant.cnst_html_Extention);
+                if (!string.IsNullOrEmpty(newds.txtName.Text))
+                {
                     //string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
                     string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
                     string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
                     DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
                     CoreApplicaion(DesHtml);
-
-                    //Link with mohamad 
-                    //using (HttpClient client = new HttpClient())
-                    //{
-                    //    string url = " http://127.0.0.1:8000/crawler/get_similar";
-                    //    getSimilarURL getSimilar = new getSimilarURL();
-                    //    getSimilar.url = txtURL.Text;//"https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
-                    //    //getSimilar.html = DesHtml;
-                    //    //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
-                    //    foreach (clsHtmlElem val in Values)
-                    //    {
-                    //        getSimilar.wanted_list.Add(val.Value);
-                    //    }
-
-                    //    var json = JsonConvert.SerializeObject(getSimilar);
-                    //    var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    //    HttpResponseMessage response = await client.PostAsync(url, data);
-                    //    response.EnsureSuccessStatusCode();
-                    //    string responseBody = await response.Content.ReadAsStringAsync();
-                    //    Console.WriteLine(responseBody);
-                    //}
 
                     rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 
@@ -634,7 +642,9 @@ namespace CrawlerUI
                     clsHtmlElem.SerializeHtmlElementsToFile(Values, ResultFilePath, ref ErrorMessage);
                     rchLog.AppendText(ModResoucres.cnst_ValuesFileHasBeenWritten);
                     rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
+                    rchLog.SelectionColor = System.Drawing.Color.Green;
                     rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
+                    rchLog.SelectionColor = rchLog.ForeColor;
                     rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
                     rchLog.ScrollToCaret();
                 }
@@ -646,7 +656,6 @@ namespace CrawlerUI
                 Message.ShowMessage();
             }
         }
-
 
         #endregion
 
@@ -728,7 +737,7 @@ namespace CrawlerUI
                 foreach (clsElement elem in result?.LstElements?.Where(x => x.GroupParent != -1))
                 {
                     var groupedObjects = result.LstElements
-                    .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")
+                    .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")//
                     .ToDictionary(group => group.Key, group => group.ToList());
                     foreach (var item in groupedObjects[true])
                     {
@@ -741,20 +750,24 @@ namespace CrawlerUI
                             pair.Key = Rule.FieldName;
                             pair.order = Rule?.order;
                             clsField currentField = UserFields?.FirstOrDefault(x => x.Name == Rule.FieldName);
-                            switch (currentField.Type)
+                            if (currentField != null)
                             {
-                                case ModEnum.FieldsTypes.Text:
-                                    pair.Value = item?.TextContent;
-                                    break;
-                                case ModEnum.FieldsTypes.Numerical:
-                                    pair.Value = LibHtmlSplitter.ModMain.KeepOnlyNumbers(item?.TextContent)?.ToString();
-                                    break;
-                                case ModEnum.FieldsTypes.Picture:
-                                    string? src = LibHtmlSplitter.ModMain.GetSrcValuesFromHtml(item.Element)?.First();
-                                    pair.Value = src;
-                                    break;
-                                default:
-                                    break;
+
+                                switch (currentField.Type)
+                                {
+                                    case ModEnum.FieldsTypes.Text:
+                                        pair.Value = item?.TextContent;
+                                        break;
+                                    case ModEnum.FieldsTypes.Numerical:
+                                        pair.Value = LibHtmlSplitter.ModMain.KeepOnlyNumbers(item?.TextContent)?.ToString();
+                                        break;
+                                    case ModEnum.FieldsTypes.Picture:
+                                        string? src = LibHtmlSplitter.ModMain.GetSrcValuesFromHtml(item.Element)?.First();
+                                        pair.Value = src;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                             pairs.lstPairs.Add(pair);
                         }
@@ -783,7 +796,7 @@ namespace CrawlerUI
             {
                 Message.Message = ex.Message;
                 Message.MessageType = ModResoucres.MsgType_Error;
-                Message.ShowMessage();
+                //Message.ShowMessage();
             }
             return Results;
         }

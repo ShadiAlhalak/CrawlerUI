@@ -888,10 +888,11 @@
             this.txtURL.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtURL.LeadingIcon = null;
             this.txtURL.Location = new System.Drawing.Point(343, 3);
-            this.txtURL.MaxLength = 50;
+            this.txtURL.MaxLength = 200;
             this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
             this.txtURL.Multiline = false;
             this.txtURL.Name = "txtURL";
+            this.txtURL.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txtURL.Size = new System.Drawing.Size(483, 36);
             this.txtURL.TabIndex = 4;
             this.txtURL.Text = "";

@@ -1330,7 +1330,7 @@ namespace LibHtmlSplitter
                                         //element.TextContent = html.Substring(textStart, text2end.LastIndexOf("<")).Trim(); // Extract the text content
                                         element.TextContent = System.Net.WebUtility.HtmlDecode(text2end); // Decode HTML entities
                                     }
-                                    else
+                                    if (TextContentLength == 0 || element.TextContent.ToLower().Contains(ModConstant.HtmlSpan))
                                     {
                                         //int start = element.Element.IndexOf('>') + 1;
                                         //int end = element.Element.LastIndexOf('<');
