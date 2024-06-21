@@ -71,9 +71,9 @@
             this.btnBack = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnBrawserHome = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnGo = new MaterialSkin2DotNet.Controls.MaterialButton();
-            this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox();
             this.btnReload = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnInspect = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox2();
             this.tblSideBar = new System.Windows.Forms.TableLayoutPanel();
             this.pivAbout = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
@@ -783,9 +783,9 @@
             this.tbpUrlControl.Controls.Add(this.btnBack, 3, 0);
             this.tbpUrlControl.Controls.Add(this.btnBrawserHome, 1, 0);
             this.tbpUrlControl.Controls.Add(this.btnGo, 6, 0);
-            this.tbpUrlControl.Controls.Add(this.txtURL, 5, 0);
             this.tbpUrlControl.Controls.Add(this.btnReload, 2, 0);
             this.tbpUrlControl.Controls.Add(this.btnInspect, 0, 0);
+            this.tbpUrlControl.Controls.Add(this.txtURL, 5, 0);
             this.tbpUrlControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpUrlControl.Location = new System.Drawing.Point(58, 3);
             this.tbpUrlControl.Name = "tbpUrlControl";
@@ -879,28 +879,6 @@
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
-            // txtURL
-            // 
-            this.txtURL.AnimateReadOnly = false;
-            this.txtURL.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtURL.Depth = 0;
-            this.txtURL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtURL.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtURL.LeadingIcon = null;
-            this.txtURL.Location = new System.Drawing.Point(343, 3);
-            this.txtURL.MaxLength = 200;
-            this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
-            this.txtURL.Multiline = false;
-            this.txtURL.Name = "txtURL";
-            this.txtURL.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtURL.Size = new System.Drawing.Size(483, 36);
-            this.txtURL.TabIndex = 4;
-            this.txtURL.Text = "";
-            this.txtURL.TrailingIcon = null;
-            this.txtURL.UseAccent = false;
-            this.txtURL.UseTallSize = false;
-            this.txtURL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtURL_KeyDown);
-            // 
             // btnReload
             // 
             this.btnReload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -941,6 +919,38 @@
             this.btnInspect.UseAccentColor = false;
             this.btnInspect.UseVisualStyleBackColor = true;
             this.btnInspect.Click += new System.EventHandler(this.btnInspect_Click);
+            // 
+            // txtURL
+            // 
+            this.txtURL.AnimateReadOnly = false;
+            this.txtURL.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtURL.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
+            this.txtURL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtURL.Depth = 0;
+            this.txtURL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtURL.HideSelection = true;
+            this.txtURL.LeadingIcon = null;
+            this.txtURL.Location = new System.Drawing.Point(343, 3);
+            this.txtURL.MaxLength = 32767;
+            this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
+            this.txtURL.Name = "txtURL";
+            this.txtURL.PasswordChar = '\0';
+            this.txtURL.PrefixSuffixText = null;
+            this.txtURL.ReadOnly = false;
+            this.txtURL.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtURL.SelectedText = "";
+            this.txtURL.SelectionLength = 0;
+            this.txtURL.SelectionStart = 0;
+            this.txtURL.ShortcutsEnabled = true;
+            this.txtURL.Size = new System.Drawing.Size(483, 36);
+            this.txtURL.TabIndex = 7;
+            this.txtURL.TabStop = false;
+            this.txtURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtURL.TrailingIcon = null;
+            this.txtURL.UseSystemPasswordChar = false;
+            this.txtURL.UseTallSize = false;
             // 
             // tblSideBar
             // 
@@ -1130,7 +1140,6 @@
         private MaterialSkin2DotNet.Controls.MaterialButton btnBack;
         private MaterialSkin2DotNet.Controls.MaterialButton btnBrawserHome;
         private MaterialSkin2DotNet.Controls.MaterialButton btnGo;
-        private MaterialSkin2DotNet.Controls.MaterialTextBox txtURL;
         private RichTextBox rchLog;
         private TableLayoutPanel tblInToolBox;
         private MaterialSkin2DotNet.Controls.MaterialSwitch btnSwAddValue;
@@ -1169,5 +1178,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private MaterialSkin2DotNet.Controls.MaterialButton btnInitialData;
         private MaterialSkin2DotNet.Controls.MaterialSwitch btnHover;
+        private MaterialSkin2DotNet.Controls.MaterialTextBox2 txtURL;
     }
 }
