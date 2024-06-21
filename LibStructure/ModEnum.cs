@@ -13,7 +13,6 @@ namespace LibStructure
             Text = 0,
             Numerical,
             Picture,
-            Price
         }
         public enum Orders
         {

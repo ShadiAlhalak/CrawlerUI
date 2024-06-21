@@ -624,8 +624,9 @@ namespace CrawlerUI
                     string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
                     string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
                     DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
-                    clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
-                    clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
+                    CoreApplicaion(DesHtml);
+                    //clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
+                    //clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
 
                     //var RequestedValuesGroup = Values.GroupBy(s => s.group);
                     //try
@@ -686,26 +687,26 @@ namespace CrawlerUI
                     //}
 
                     //Link with mohamad 
-                    using (HttpClient client = new HttpClient())
-                    {
-                        string url = " http://127.0.0.1:8000/crawler/get_similar";
-                        getSimilarURL getSimilar = new getSimilarURL();
-                        getSimilar.url = txtURL.Text;//"https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
-                        //getSimilar.html = DesHtml;
-                        //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
-                        foreach (clsHtmlElem val in Values)
-                        {
-                            getSimilar.wanted_list.Add(val.Value);
-                        }
+                    //using (HttpClient client = new HttpClient())
+                    //{
+                    //    string url = " http://127.0.0.1:8000/crawler/get_similar";
+                    //    getSimilarURL getSimilar = new getSimilarURL();
+                    //    getSimilar.url = txtURL.Text;//"https://www.amazon.ae/s?k=s23+ultra&crid=SSNWUPPRNOLA&sprefix=s23+ultr%2Caps%2C548&ref=nb_sb_noss_2";
+                    //    //getSimilar.html = DesHtml;
+                    //    //getSimilar.wanted_list.Add("Samsung Galaxy S23 Ultra 5G Dual SIM Green 12GB RAM 256GB - Middle East Version");
+                    //    foreach (clsHtmlElem val in Values)
+                    //    {
+                    //        getSimilar.wanted_list.Add(val.Value);
+                    //    }
 
-                        var json = JsonConvert.SerializeObject(getSimilar);
-                        var data = new StringContent(json, Encoding.UTF8, "application/json");
+                    //    var json = JsonConvert.SerializeObject(getSimilar);
+                    //    var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-                        HttpResponseMessage response = await client.PostAsync(url, data);
-                        response.EnsureSuccessStatusCode();
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(responseBody);
-                    }
+                    //    HttpResponseMessage response = await client.PostAsync(url, data);
+                    //    response.EnsureSuccessStatusCode();
+                    //    string responseBody = await response.Content.ReadAsStringAsync();
+                    //    Console.WriteLine(responseBody);
+                    //}
 
                     rchLog.AppendText(ModResoucres.cnst_FullHtmlFileHasBeenWritten);
 
@@ -782,6 +783,107 @@ namespace CrawlerUI
             return descendants;
         }
 
+        clsElements CoreApplicaion(string DesHtml)
+        {
+            clsElements Results = new clsElements();
+            try
+            {
+                clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
+                clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
+                List<clsHtmlElem> Parents = Values.Where(o => o.groupParent != -1).ToList();
+                int counter = 0;
+                foreach (clsHtmlElem Parent in Parents)
+                {
+                    foreach (clsElement item in result.LstElements)
+                    {
+                        if (item.ClassName.ToLower() == Parent.ClassName.ToLower() && item.Tag.ToLower() == Parent.tagName.ToLower())
+                        {
+                            item.GroupParent = counter;
+                            counter++;
+                        }
+                    }
+                }
+                //Dictionary<string, object> userInputDictionary = new Dictionary<string, object>();
+                Pairs pairs = new Pairs();
+                counter = 0;
+                List<clsField> UserFields = clsFields.GetFields().LstFields;
+                foreach (clsElement elem in result.LstElements?.Where(x => x.GroupParent != -1))
+                {
+                    var groupedObjects = result.LstElements
+        .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")
+        .ToDictionary(group => group.Key, group => group.ToList());
+                    foreach (var item in groupedObjects[true])
+                    {
+                        //userInputDictionary["Field1"] = "Value1";
+                        //userInputDictionary["Field2"] = 42;
+                        clsPair pair = new clsPair();
+                        pair.group = counter;
+                        clsHtmlElem? Rule = Values?.FirstOrDefault(x => x.ClassName == item.ClassName);
+                        if (Rule != null)
+                        {
+                            pair.Key = Rule.FieldName;
+                            pair.order = Rule?.order;
+                            clsField currentField = UserFields?.FirstOrDefault(x => x.Name == Rule.FieldName);
+                            switch (currentField.Type)
+                            {
+                                case ModEnum.FieldsTypes.Text:
+                                    pair.Value = item?.TextContent;
+                                    break;
+                                case ModEnum.FieldsTypes.Numerical:
+                                    pair.Value = LibHtmlSplitter.ModMain.KeepOnlyNumbers(item?.TextContent)?.ToString();
+                                    break;
+                                case ModEnum.FieldsTypes.Picture:
+                                    string? src = LibHtmlSplitter.ModMain.GetSrcValuesFromHtml(item.Element)?.First();
+                                    pair.Value = src;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            pairs.lstPairs.Add(pair);
+                        }
+                    }
+                    counter++;
+                }
+
+                var groupedAndSortedUsers = pairs.lstPairs
+                    .GroupBy(u => u.group)
+                    .Select(group => new
+                    {
+                        GroupID = group.Key,
+                        Users = group.OrderBy(u => u.order).ToList()
+                    });
+
+
+                var fieldsGroup = pairs.lstPairs.GroupBy(item => item.group).ToList();
+                foreach (var group in groupedAndSortedUsers)
+                {
+                    Console.WriteLine($"Group {group.GroupID}:");
+                    foreach (var item in group.Users)
+                    {
+                        Console.WriteLine($"Group {item.Key}:");
+
+                        //Console.WriteLine($"  {item.}, {item.Property2}, ..."); // Replace with actual properties
+                    }
+                }
+
+                using (var writer = new StreamWriter("output.csv"))
+                {
+                    foreach (var group in groupedAndSortedUsers)
+                    {
+                        var csvLine = string.Join(",", group.Users.Select(user => user.Value));
+                        writer.WriteLine(csvLine);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+            return Results;
+        }
         //End Trying
 
         public async void ExecuteScripts()

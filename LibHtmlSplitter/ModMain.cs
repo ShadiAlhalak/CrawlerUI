@@ -34,6 +34,51 @@ namespace LibHtmlSplitter
             return Result;
         }
 
+        public static List<string> GetSrcValuesFromHtml(string htmlContent)
+        {
+            var srcValues = new List<string>();
+            try
+            {
+                if (string.IsNullOrEmpty(htmlContent))
+                {
+                    return srcValues;
+                }
+                int index = 0;
+                while (true)
+                {
+                    // Find the next occurrence of 'src="'
+                    int srcIndex = htmlContent.IndexOf("src=\"", index, StringComparison.OrdinalIgnoreCase);
+                    if (srcIndex == -1)
+                        break; // No more 'src' attributes found
+
+                    // Find the closing double quote after the 'src' value
+                    int quoteIndex = htmlContent.IndexOf("\"", srcIndex + 5);
+                    if (quoteIndex == -1)
+                        break; // Malformed HTML
+
+                    // Extract the 'src' value
+                    string srcValue = htmlContent.Substring(srcIndex + 5, quoteIndex - (srcIndex + 5));
+                    srcValues.Add(srcValue);
+
+                    // Move the index to the next position
+                    index = quoteIndex + 1;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return srcValues;
+        }
+
+        public static string KeepOnlyNumbers(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            return Regex.Replace(input, "[^0-9]", "");
+        }
+
         public static void htmlSplit(string FullHtml)
         {
             string newFullHtml = LibGeneralUtilities.modHtmlTextProcessing.PreProcessingHtml(FullHtml);
