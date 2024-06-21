@@ -788,7 +788,7 @@ namespace CrawlerUI
             clsElements Results = new clsElements();
             try
             {
-                clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml);
+                clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml, debugvalue: "");
                 clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
                 List<clsHtmlElem> Parents = Values.Where(o => o.groupParent != -1).ToList();
                 int counter = 0;
@@ -803,19 +803,17 @@ namespace CrawlerUI
                         }
                     }
                 }
-                //Dictionary<string, object> userInputDictionary = new Dictionary<string, object>();
                 Pairs pairs = new Pairs();
                 counter = 0;
                 List<clsField> UserFields = clsFields.GetFields().LstFields;
                 foreach (clsElement elem in result.LstElements?.Where(x => x.GroupParent != -1))
                 {
                     var groupedObjects = result.LstElements
-        .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")
-        .ToDictionary(group => group.Key, group => group.ToList());
+                    .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")
+                    .ToDictionary(group => group.Key, group => group.ToList());
                     foreach (var item in groupedObjects[true])
                     {
-                        //userInputDictionary["Field1"] = "Value1";
-                        //userInputDictionary["Field2"] = 42;
+
                         clsPair pair = new clsPair();
                         pair.group = counter;
                         clsHtmlElem? Rule = Values?.FirstOrDefault(x => x.ClassName == item.ClassName);
@@ -861,8 +859,6 @@ namespace CrawlerUI
                     foreach (var item in group.Users)
                     {
                         Console.WriteLine($"Group {item.Key}:");
-
-                        //Console.WriteLine($"  {item.}, {item.Property2}, ..."); // Replace with actual properties
                     }
                 }
 
