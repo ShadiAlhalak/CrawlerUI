@@ -43,18 +43,50 @@ namespace LibHtmlSplitter
             using (StreamWriter writer = new StreamWriter(csvPath))
             {
                 // Write header row with property names
-                string header = string.Join(",", typeof(clsElement).GetProperties().Select(p => p.Name));
+                string header = string.Join(",", typeof(clsAIElem).GetProperties().Select(p => p.Name));
                 writer.WriteLine(header);
 
-                // Write object data, properly handling potential commas within values
                 foreach (clsElement element in this.LstElements)
                 {
-                    string line = string.Join(",", typeof(clsElement).GetProperties()
+                    element.Element = element.Element.Replace("\n", "###").Replace("\r\n", "###");
+                    element.TextContent = element.TextContent.Replace("\n", "###").Replace("\r\n", "###");
+                }
+
+                List<clsAIElem> AIElems = new List<clsAIElem>();
+                foreach (clsElement item in this.LstElements)
+                {
+                    clsAIElem aIElem = new clsAIElem();
+                    aIElem.Guid = item.Guid;
+                    aIElem.ParentGuid = item.ParentGuid;
+                    aIElem.Tag = item.Tag;
+                    aIElem.Id = item.Id;
+                    aIElem.ClassName = item.ClassName;
+                    aIElem.Start = item.Start;
+                    aIElem.End = item.End;
+                    aIElem.TextContent = item.TextContent;
+                    aIElem.FieldName = item.FieldName;
+                    AIElems.Add(aIElem);
+                }
+                //// Write object data, properly handling potential commas within values
+                //foreach (clsElement element in this.LstElements)
+                //{
+                //    string line = string.Join(",", typeof(clsElement).GetProperties()
+                //                                        .Select(p => p.GetValue(element).ToString().Contains(",")
+                //                                                  ? string.Format("\"{0}\"", p.GetValue(element))  // Enclose in quotes if comma exists
+                //                                                  : p.GetValue(element).ToString()));
+                //    writer.WriteLine(line);
+                //}
+
+                // Write object data, properly handling potential commas within values
+                foreach (clsAIElem element in AIElems)
+                {
+                    string line = string.Join(",", typeof(clsAIElem).GetProperties()
                                                         .Select(p => p.GetValue(element).ToString().Contains(",")
                                                                   ? string.Format("\"{0}\"", p.GetValue(element))  // Enclose in quotes if comma exists
                                                                   : p.GetValue(element).ToString()));
                     writer.WriteLine(line);
                 }
+
             }
         }
     }

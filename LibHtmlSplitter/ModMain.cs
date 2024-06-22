@@ -12,6 +12,7 @@ using LibStructure;
 using System.Diagnostics;
 using System.Collections;
 using System.Net.Http;
+using System.Data;
 
 namespace LibHtmlSplitter
 {
@@ -23,7 +24,7 @@ namespace LibHtmlSplitter
             try
             {
                 Result.LstElements = AllElements.LstElements.Where(elem => Rules.Any(rule =>
-                    !string.IsNullOrEmpty(elem.ClassName) && !string.IsNullOrEmpty(rule.ClassName) && rule.ClassName == elem.ClassName
+                    !string.IsNullOrEmpty(elem.ClassName) && !string.IsNullOrEmpty(rule.ClassName) && rule.ClassName.ToLower() == elem.ClassName.ToLower()
                     )).ToList();
                 //var filteredListA = listA.Where(a => listB.Any(b => b.Id == a.Id)).ToList();
             }
@@ -35,6 +36,32 @@ namespace LibHtmlSplitter
             return Result;
         }
 
+        public static clsElements InitialForAI(clsElements AllElements, List<clsHtmlElem> Rules)
+        {
+            clsElements Result = new clsElements();
+            try
+            {
+                foreach (clsElement elem in AllElements.LstElements)
+                {
+                    foreach (clsHtmlElem rule in Rules)
+                    {
+                        if (!string.IsNullOrEmpty(elem.ClassName) && !string.IsNullOrEmpty(rule.ClassName) && rule.ClassName.ToLower() == elem.ClassName.ToLower() && rule.tagName.ToLower() == elem.Tag.ToLower())
+                        {
+                            elem.FieldName = rule.FieldName;
+                            //elem.GroupParent = rule.groupParent;
+                            //elem.Order = rule.order;
+                            elem.HasData = true;
+                        }
+                    }
+                }
+                AllElements.SaveAsCSV("Training2.csv");
+            }
+            catch (Exception)
+            {
+
+            }
+            return Result;
+        }
         public static List<string> GetSrcValuesFromHtml(string htmlContent)
         {
             var srcValues = new List<string>();

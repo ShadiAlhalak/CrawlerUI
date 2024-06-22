@@ -15,8 +15,8 @@ namespace LibHtmlSplitter
         public string ClassName { get; set; } = string.Empty;
         public string Element { get; set; } = string.Empty;
         public string TextContent { get; set; } = string.Empty;
-        public int Start { get; set; }
-        public int End { get; set; }
+        public int Start { get; set; } = -1;
+        public int End { get; set; } = -1;
         public int Length { get { return End - Start + 1; } }
         public int Group { get; set; } = -1;
         public int GroupParent { get; set; } = -1;

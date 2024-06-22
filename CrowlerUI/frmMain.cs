@@ -717,6 +717,8 @@ namespace CrawlerUI
             try
             {
                 clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml, debugvalue: "");
+                //ModMain.InitialForAI(elems,Values);
+
                 clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
                 List<clsHtmlElem> Parents = Values.Where(o => o.groupParent != -1).ToList();
                 int counter = 0;
