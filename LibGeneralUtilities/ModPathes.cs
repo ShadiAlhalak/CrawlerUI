@@ -176,6 +176,23 @@ namespace LibGeneralUtilities
             }
             return SessionFolder;
         }
+        public static string GetSessionOutPutFolder(string AdditionalName, ref string ErrorMessage)
+        {
+            string SessionFolder = string.Empty;
+            try
+            {
+                SessionFolder = Path.Combine(GetGeneralOutputFolder(ref ErrorMessage), $"{AdditionalName}-{ModGeneral.GetTimeDateNow()}");
+                if (!Directory.Exists(SessionFolder))
+                {
+                    Directory.CreateDirectory(SessionFolder);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+            return SessionFolder;
+        }
 
         public static string GetSessionTrainingFolder(ref string ErrorMessage)
         {

@@ -23,6 +23,8 @@ namespace LibGeneralUtilities
         public const string cnst_Mouse_ScriptFileName = "Mouse";
         public const string cnst_OutputFolder = "Output";
         public const string cnst_FieldsFileName = "Fields";
+        public const string cnst_Rules = "Rules";
+
         #endregion
 
         #region Extetions
@@ -31,6 +33,7 @@ namespace LibGeneralUtilities
         public const string cnst_html_Extention = ".html";
         public const string cnst_js_Extention = ".js";
         public const string cnst_json_Extention = ".json";
+        public const string cnst_csv_Extention = ".csv";
         #endregion
 
         #region URLs 

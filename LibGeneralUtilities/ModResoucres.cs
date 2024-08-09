@@ -22,15 +22,21 @@ namespace LibGeneralUtilities
         public const string cnst_InspectThisUrlIsNotPossibleNowTryReloadPage = "Inspect this URl is not possible try reload page";
         public const string MsgDataSetNameAndDescreptionAreRequired = "Dataset name and descreption are required.";
         public const string MsgCannotLaunchBeforeAddFieldsAndValues = "Make sure you have added fields and values and initial data before launch.";
+        public const string MsgTimeIsOut = "Time is out";
+        public const string MsgPleaseCheckIntenetConnection = "please check intenet connection.";
         #endregion
 
         #region Log
         public const string cnst_LogSeparatour = "------------\n";
         public const string cnst_StartProcessing = "Start processing...\n";
         public const string cnst_FullHtmlFileHasBeenWritten = "Full html file has been written\n";
+        public const string cnst_ResultFileHasBeenWritten = "Result file has been written\n";
         public const string cnst_ValuesFileHasBeenWritten = "Values file has been written\n";
         public const string cnst_LookAtTheOutputFolder = "Lookup at output folder\n";
         public const string cnst_ProcessingFinish = "Processing finish.\n";
+        public const string cnst_ProcessingFaild = "Processing Faild.\n";
+        public const string cnst_Error = "Error:";
+
         #endregion
 
         #region MessageTypes
