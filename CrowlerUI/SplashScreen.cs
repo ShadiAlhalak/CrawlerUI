@@ -35,5 +35,6 @@ namespace CrawlerUI
                 this.Hide();
             }
         }
+
     }
 }

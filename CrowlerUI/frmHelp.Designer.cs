@@ -68,13 +68,13 @@
             this.lblTitle.AutoSize = true;
             this.tblAbout.SetColumnSpan(this.lblTitle, 2);
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("Old English Text MT", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.Font = new System.Drawing.Font("Algerian", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTitle.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTitle.Location = new System.Drawing.Point(3, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(788, 133);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Smart Crawler";
+            this.lblTitle.Text = "Eleven";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -82,7 +82,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(3, 233);
             this.label1.Name = "label1";
@@ -95,13 +95,13 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label5.Location = new System.Drawing.Point(140, 233);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(651, 50);
             this.label5.TabIndex = 7;
-            this.label5.Text = "SmartCrawler@SAM.com";
+            this.label5.Text = "SmartCrawler@Eleven.com";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -109,7 +109,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label2.Location = new System.Drawing.Point(3, 183);
             this.label2.Name = "label2";
@@ -122,13 +122,13 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(140, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(651, 50);
             this.label3.TabIndex = 9;
-            this.label3.Text = "www.SAM.com";
+            this.label3.Text = "www.Eleven.com";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblDescriptionDetails
@@ -136,7 +136,7 @@
             this.lblDescriptionDetails.AutoSize = true;
             this.tblAbout.SetColumnSpan(this.lblDescriptionDetails, 2);
             this.lblDescriptionDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescriptionDetails.Font = new System.Drawing.Font("Berlin Sans FB", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDescriptionDetails.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDescriptionDetails.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDescriptionDetails.Location = new System.Drawing.Point(3, 133);
             this.lblDescriptionDetails.Name = "lblDescriptionDetails";

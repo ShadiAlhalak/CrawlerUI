@@ -37,28 +37,28 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.SlateGray;
-            this.lblTitle.Font = new System.Drawing.Font("Old English Text MT", 79.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Font = new System.Drawing.Font("Algerian", 79.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(20, 161);
+            this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(903, 158);
+            this.lblTitle.Size = new System.Drawing.Size(930, 530);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Smart Crawler";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTitle.Text = "Eleven";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.SlateGray;
-            this.label1.Font = new System.Drawing.Font("Old English Text MT", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Algerian", 16.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(20, 307);
+            this.label1.Location = new System.Drawing.Point(215, 325);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(885, 51);
+            this.label1.Size = new System.Drawing.Size(477, 32);
             this.label1.TabIndex = 2;
-            this.label1.Text = "AI tool that used to collect data from most websites";
+            this.label1.Text = "AI-Driven Web Data Extractor";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // spTimer
