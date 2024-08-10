@@ -12,5 +12,6 @@ namespace LibStructure
         public string? Key { get; set; } = string.Empty;
         public string? Value { get; set; } = string.Empty;
         public int? order { get; set; } = -1;
+        public string Page { get; set; } = string.Empty;
     }
 }

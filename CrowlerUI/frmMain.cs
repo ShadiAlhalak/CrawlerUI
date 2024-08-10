@@ -25,6 +25,9 @@ using LogManagment;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Security.Policy;
+using System.Collections.Specialized;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CrawlerUI
 {
@@ -577,6 +580,7 @@ namespace CrawlerUI
         {
             try
             {
+                //LoopThroughUrlsAsync();
                 LaunchProcess();
             }
             catch (Exception ex)
@@ -642,7 +646,7 @@ namespace CrawlerUI
         }
         //End Trying
 
-        void GoToUrl(string url = "")
+        async void GoToUrl(string url = "")
         {
             try
             {
@@ -654,7 +658,23 @@ namespace CrawlerUI
                 progTimer.Enabled = true;
                 string ValidUrl = ModValidation.ValidateURL(txtURL.Text);
                 txtURL.Text = ValidUrl;
-                WView.Source = new Uri(ValidUrl);
+                //WView.Source = new Uri(ValidUrl);
+
+
+
+                var tcs = new TaskCompletionSource<bool>();
+                EventHandler<CoreWebView2NavigationCompletedEventArgs> handler = null;
+                handler = (s, e) =>
+                {
+                    WView.CoreWebView2.NavigationCompleted -= handler;
+                    tcs.SetResult(true);
+                };
+                WView.CoreWebView2.NavigationCompleted += handler;
+
+                WView.CoreWebView2.Navigate(url);
+                await tcs.Task;
+
+
             }
             catch (Exception)
             {
@@ -713,17 +733,39 @@ namespace CrawlerUI
                 if (!string.IsNullOrEmpty(newds.txtName.Text))
                 {
                     ResultFodler = ModPathes.GetSessionOutPutFolder(newds.txtName.Text, ref ErrorMessage);
-                    //string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
-                    string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
-                    string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
-                    DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
+                    //1-Get Pages
+                    List<Pairs> FullResult = new List<Pairs>();
+                    var Pages = Values.Where(item => item.IsPage == true).Select(x => x.href);
+                    foreach (var page in Pages)
+                    {
+                        //2-Load page
+                        //pageLoaded = false;
+                        if (string.IsNullOrEmpty(page)) continue;
+
+                        var tcs = new TaskCompletionSource<bool>();
+                        EventHandler<CoreWebView2NavigationCompletedEventArgs> handler = null;
+                        handler = (s, e) =>
+                        {
+                            WView.CoreWebView2.NavigationCompleted -= handler;
+                            tcs.SetResult(true);
+                        };
+                        WView.CoreWebView2.NavigationCompleted += handler;
+
+                        WView.CoreWebView2.Navigate(page);
+                        await tcs.Task;
+
+                        //string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
+                        string htmlwebv2 = await WView.ExecuteScriptAsync("document.body.outerHTML");
+                        string DesHtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+                        DesHtml = modHtmlTextProcessing.PreProcessingHtml(DesHtml);
+                        List<Pairs> PageResult = await CoreApplicaion(DesHtml, page);
+                        FullResult.AddRange(PageResult);
+                        //// Perform your actions on the loaded page
+                    }
                     string csvResultFile = Path.Combine(ResultFodler, ModConstant.cnst_OutputFolder + ModConstant.cnst_csv_Extention);
-                    //Task.Run(CoreApplicaion(DesHtml, csvResultFile, ref ErrorMessage));
-                    clsParameters param = new clsParameters();
-                    var thread = new Thread(CoreApplicaion);
-                    thread.Start(param);
-                
-                if (!string.IsNullOrEmpty(ErrorMessage))
+                    WriteFullResult(FullResult, csvResultFile);
+
+                    if (!string.IsNullOrEmpty(ErrorMessage))
                     {
                         rchLog.SelectionColor = System.Drawing.Color.Red;
                         rchLog.AppendText(ModResoucres.cnst_ProcessingFaild);
@@ -753,6 +795,42 @@ namespace CrawlerUI
                 Message.Message = ex.Message;
                 Message.MessageType = ModResoucres.MsgType_Error;
                 Message.ShowMessage();
+            }
+        }
+        public void WriteFullResult(List<Pairs> Lines, string ResultCsvPath)
+        {
+            try
+            {
+                //Create result file as csv now 
+                if (!File.Exists(ResultCsvPath))
+                {
+                    using (var writer = new StreamWriter(ResultCsvPath))
+                    {
+                        foreach (Pairs Line in Lines)
+                        {
+                            var csvLine = string.Join(";", Line.lstPairs.Select(Val => Val.Value)); ;
+                            writer.WriteLine(csvLine);
+                        }
+                    }
+                }
+                else
+                {
+                    List<string> NewLines = new List<string>();
+                    foreach (Pairs Line in Lines)
+                    {
+                        var csvLine = string.Join(";", Line.lstPairs.Select(Val => Val.Value));
+                        NewLines.Add(csvLine);
+                    }
+                    File.AppendAllLines(ResultCsvPath, NewLines);
+                }
+                string jsonResutlPath = Path.ChangeExtension(ResultCsvPath, ModConstant.cnst_json_Extention);
+                string serializer = Newtonsoft.Json.JsonConvert.SerializeObject(Lines, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(jsonResutlPath, serializer);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 
@@ -900,151 +978,137 @@ namespace CrawlerUI
         //    }
         //    return Results;
         //}
-        
-        void CoreApplicaion(object param)
+
+        async Task<List<Pairs>> CoreApplicaion(string DesHtml, string Page)
         {
-            //param = (clsParameters)param;
+            List<Pairs> Lines = new List<Pairs>();
+            string ErrorMessage = string.Empty;
             clsElements Results = new clsElements();
             try
             {
-                //1-Get Pages
-                var Pages = Values.Where(item => item.IsPage == true).Select(x => x.href);
-                foreach (var page in Pages)
+                //Start processing
+                //4-Split html code to list of elments 
+                clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml, debugvalue: "");
+                //ModMain.InitialForAI(elems,Values);
+
+                //5-Find requested elments 
+                clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
+
+                //6-Find parents if exits
+                List<clsHtmlElem> Parents = Values.Where(o => o.groupParent != -1).ToList();
+                int counter = 0;
+                foreach (clsHtmlElem Parent in Parents)
                 {
-                    //2-Load page
-                    pageLoaded = false;
-                    if (string.IsNullOrEmpty(page)) continue;
-                    txtURL.Text = page;
-                    this.Invoke(GoToUrl);
-                    int timeout = 30;
-                    int timer = 0;
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
-                    while (!pageLoaded)
+                    foreach (clsElement item in result.LstElements)
                     {
-                        //if (timer < timeout)
-                        //{
-                        //    System.Threading.Thread.Sleep(1000);
-                        //    timer++;
-                        //}
-                        //else
-                        //{
-                        //    ErrorMessage = ModResoucres.MsgTimeIsOut + ModResoucres.MsgPleaseCheckIntenetConnection;
-                        //    return Results;
-                        //}
-                        if (stopwatch.ElapsedMilliseconds >= timeout * 1000)
+                        if (item.ClassName.ToLower() == Parent.ClassName.ToLower() && item.Tag.ToLower() == Parent.tagName.ToLower())
                         {
-                            //ErrorMessage = ModResoucres.MsgTimeIsOut + ModResoucres.MsgPleaseCheckIntenetConnection;
-                            return;
+                            item.GroupParent = counter;
+                            counter++;
                         }
                     }
-
-                    //Start processing
-                    //4-Split html code to list of elments 
-                    clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(((clsParameters)param).HtmlCode , debugvalue: "");
-                    //ModMain.InitialForAI(elems,Values);
-
-                    //5-Find requested elments 
-                    clsElements result = LibHtmlSplitter.ModMain.CrawlCore(elems, Values);
-
-                    //6-Find parents if exits
-                    List<clsHtmlElem> Parents = Values.Where(o => o.groupParent != -1).ToList();
-                    int counter = 0;
-                    foreach (clsHtmlElem Parent in Parents)
+                }
+                Pairs pairs = new Pairs();
+                counter = 0;
+                List<clsField> UserFields = clsFields.GetFields().LstFields;
+                foreach (clsElement elem in result?.LstElements?.Where(x => x.GroupParent != -1))
+                {
+                    var groupedObjects = result.LstElements
+                    .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")//
+                    .ToDictionary(group => group.Key, group => group.ToList());
+                    foreach (var item in groupedObjects[true])
                     {
-                        foreach (clsElement item in result.LstElements)
-                        {
-                            if (item.ClassName.ToLower() == Parent.ClassName.ToLower() && item.Tag.ToLower() == Parent.tagName.ToLower())
-                            {
-                                item.GroupParent = counter;
-                                counter++;
-                            }
-                        }
-                    }
-                    Pairs pairs = new Pairs();
-                    counter = 0;
-                    List<clsField> UserFields = clsFields.GetFields().LstFields;
-                    foreach (clsElement elem in result?.LstElements?.Where(x => x.GroupParent != -1))
-                    {
-                        var groupedObjects = result.LstElements
-                        .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")//
-                        .ToDictionary(group => group.Key, group => group.ToList());
-                        foreach (var item in groupedObjects[true])
-                        {
 
-                            clsPair pair = new clsPair();
-                            pair.group = counter;
-                            clsHtmlElem? Rule = Values?.FirstOrDefault(x => x.ClassName == item.ClassName);
-                            if (Rule != null)
+                        clsPair pair = new clsPair();
+                        pair.group = counter;
+                        clsHtmlElem? Rule = Values?.FirstOrDefault(x => x.ClassName == item.ClassName);
+                        if (Rule != null)
+                        {
+                            pair.Key = Rule.FieldName;
+                            pair.order = Rule?.order;
+                            clsField currentField = UserFields?.FirstOrDefault(x => x.Name == Rule.FieldName);
+                            if (currentField != null)
                             {
-                                pair.Key = Rule.FieldName;
-                                pair.order = Rule?.order;
-                                clsField currentField = UserFields?.FirstOrDefault(x => x.Name == Rule.FieldName);
-                                if (currentField != null)
+
+                                switch (currentField.Type)
                                 {
-
-                                    switch (currentField.Type)
-                                    {
-                                        case ModEnum.FieldsTypes.Text:
-                                            pair.Value = item?.TextContent;
-                                            break;
-                                        case ModEnum.FieldsTypes.Numerical:
-                                            pair.Value = LibHtmlSplitter.ModMain.KeepOnlyNumbers(item?.TextContent)?.ToString();
-                                            break;
-                                        case ModEnum.FieldsTypes.Picture:
-                                            string? src = LibHtmlSplitter.ModMain.GetSrcValuesFromHtml(item.Element)?.First();
-                                            pair.Value = src;
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                                    case ModEnum.FieldsTypes.Text:
+                                        pair.Value = item?.TextContent;
+                                        break;
+                                    case ModEnum.FieldsTypes.Numerical:
+                                        pair.Value = LibHtmlSplitter.ModMain.KeepOnlyNumbers(item?.TextContent)?.ToString();
+                                        break;
+                                    case ModEnum.FieldsTypes.Picture:
+                                        string? src = LibHtmlSplitter.ModMain.GetSrcValuesFromHtml(item.Element)?.First();
+                                        pair.Value = src;
+                                        break;
+                                    default:
+                                        break;
                                 }
-                                pairs.lstPairs.Add(pair);
                             }
+                            pairs.lstPairs.Add(pair);
                         }
-                        counter++;
                     }
+                    counter++;
+                }
 
-                    var groupedAndSortedUsers = pairs.lstPairs
-                        .GroupBy(u => u.group)
-                        .Select(group => new
-                        {
-                            GroupID = group.Key,
-                            Field = group.OrderBy(u => u.order).ToList()
-                        });
+                var groupedAndSortedUsers = pairs.lstPairs
+                    .GroupBy(u => u.group)
+                    .Select(group => new
+                    {
+                        GroupID = group.Key,
+                        Field = group.OrderBy(u => u.order).ToList()
+                    });
 
-                    //Create result file as csv now 
-                    if (!File.Exists(((clsParameters)param).ResultFilePath))
+                //Create result file as csv now 
+                //    if (!File.Exists(ResultCsvPath))
+                //    {
+                //        using (var writer = new StreamWriter(ResultCsvPath))
+                //        {
+                //            foreach (var group in groupedAndSortedUsers)
+                //            {
+                //                var csvLine = string.Join(",", group.Field.Select(user => user.Value));
+                //                writer.WriteLine(csvLine);
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        List<string> NewLines = new List<string>();
+                //        foreach (var group in groupedAndSortedUsers)
+                //        {
+
+                //            var csvLine = string.Join(",", group.Field.Select(user => user.Value));
+                //            NewLines.Add(csvLine);
+                //        }
+                //        File.AppendAllLines(ResultCsvPath, NewLines);
+                //    }
+
+                //Initial result
+                foreach (var group in groupedAndSortedUsers)
+                {
+                    Pairs Line = new Pairs();
+                    foreach (var item in group.Field)
                     {
-                        using (var writer = new StreamWriter(((clsParameters)param).ResultFilePath))
-                        {
-                            foreach (var group in groupedAndSortedUsers)
-                            {
-                                var csvLine = string.Join(",", group.Field.Select(user => user.Value));
-                                writer.WriteLine(csvLine);
-                            }
-                        }
+                        clsPair pair = new clsPair();
+                        pair.Key = item.Key;
+                        pair.Value = item.Value;
+                        pair.order = item.order;
+                        pair.group = item.group;
+                        pair.Page = Page;
+                        Line.lstPairs.Add(pair);
                     }
-                    else
-                    {
-                        List<string> NewLines = new List<string>();
-                        foreach (var group in groupedAndSortedUsers)
-                        {
-                            var csvLine = string.Join(",", group.Field.Select(user => user.Value));
-                            NewLines.Add(csvLine);
-                        }
-                        File.AppendAllLines(((clsParameters)param).ResultFilePath, NewLines);
-                    }
+                    Lines.Add(Line);
                 }
             }
             catch (Exception ex)
             {
-                //ErrorMessage = ex.Message;
+                ErrorMessage = ex.Message;
                 //Message.Message = ex.Message;
                 //Message.MessageType = ModResoucres.MsgType_Error;
                 //Message.ShowMessage();
             }
-            return;
+            return Lines;
         }
 
         public async void ExecuteScripts()
@@ -1087,6 +1151,59 @@ namespace CrawlerUI
             }
         }
 
+
+        private async Task LoopThroughUrlsAsync()
+        {
+            //1-Get Pages
+            var Pages = Values.Where(item => item.IsPage == true).Select(x => x.href);
+            foreach (var page in Pages)
+            {
+                //2-Load page
+                //pageLoaded = false;
+                if (string.IsNullOrEmpty(page)) continue;
+
+                var tcs = new TaskCompletionSource<bool>();
+                EventHandler<CoreWebView2NavigationCompletedEventArgs> handler = null;
+                handler = (s, e) =>
+                {
+                    WView.CoreWebView2.NavigationCompleted -= handler;
+                    tcs.SetResult(true);
+                };
+                WView.CoreWebView2.NavigationCompleted += handler;
+
+                WView.CoreWebView2.Navigate(page);
+                await tcs.Task;
+
+                // Perform your actions on the loaded page
+                //await CoreApplicaion();
+            }
+
+            //string[] urls = { "https://www.google.com", "https://www.facebook.com", "https://www.amazon.ae" };
+            //foreach (var url in urls)
+            //{
+            //    var tcs = new TaskCompletionSource<bool>();
+            //    EventHandler<CoreWebView2NavigationCompletedEventArgs> handler = null;
+            //    handler = (s, e) =>
+            //    {
+            //        WView.CoreWebView2.NavigationCompleted -= handler;
+            //        tcs.SetResult(true);
+            //    };
+            //    WView.CoreWebView2.NavigationCompleted += handler;
+
+            //    WView.CoreWebView2.Navigate(url);
+            //    await tcs.Task;
+
+            //    // Perform your actions on the loaded page
+            //    await PerformActionsOnPageAsync();
+            //}
+        }
+
+        private async Task PerformActionsOnPageAsync()
+        {
+            // Example: Execute JavaScript on the loaded page
+            string script = "document.body.style.backgroundColor = 'lightblue';";
+            await WView.CoreWebView2.ExecuteScriptAsync(script);
+        }
         #endregion
 
         #region Fields
