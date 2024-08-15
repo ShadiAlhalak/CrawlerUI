@@ -1357,45 +1357,49 @@ namespace LibHtmlSplitter
                                         //element.TextContent = html.Substring(textStart, text2end.LastIndexOf("<")).Trim(); // Extract the text content
                                         element.TextContent = System.Net.WebUtility.HtmlDecode(text2end); // Decode HTML entities
                                     }
-                                    if (TextContentLength == 0 || element.TextContent.ToLower().Contains(ModConstant.HtmlSpan))
+                                    if (TextContentLength <= 0 || element.TextContent.ToLower().Contains(ModConstant.HtmlSpan))
                                     {
                                         //int start = element.Element.IndexOf('>') + 1;
                                         //int end = element.Element.LastIndexOf('<');
                                         //string innerText = element.Element.Substring(start, end - start).Trim();
                                         try
                                         {
-                                            var textContents = new List<string>();
-                                            int currentPos = 0;
-
-                                            while (true)
-                                            {
-                                                int startTag = element.Element.IndexOf('<', currentPos);
-                                                if (startTag == -1)
-                                                    break; // لم يتم العثور على علامات
-
-                                                int endTag = element.Element.IndexOf('>', startTag);
-                                                if (endTag == -1)
-                                                    break; // HTML غير صحيح
-
-                                                string tag = element.Element.Substring(startTag, endTag - startTag + 1);
-                                                if (!tag.StartsWith("</")) // تجاوز العلامات الإغلاقية
-                                                {
-                                                    int startText = endTag + 1;
-                                                    int endText = element.Element.IndexOf('<', startText);
-                                                    if (endText == -1)
-                                                        endText = element.Element.Length; // نهاية النص
-
-                                                    string innerText = element.Element.Substring(startText, endText - startText).Trim();
-                                                    if (!string.IsNullOrEmpty(innerText))
-                                                        textContents.Add(innerText);
-                                                }
-
-                                                currentPos = endTag + 1;
-                                            }
-
-                                            Console.WriteLine(textContents);
-                                            string tempText = string.Join(" ", textContents);
+                                            string tempText =modHtmlTextProcessing.ExtractTextIgnoredTags(element.Element);
                                             element.TextContent = System.Net.WebUtility.HtmlDecode(tempText); // Decode HTML entities
+
+                                       
+                                            //var textContents = new List<string>();
+                                            //int currentPos = 0;
+
+                                            //while (true)
+                                            //{
+                                            //    int startTag = element.Element.IndexOf('<', currentPos);
+                                            //    if (startTag == -1)
+                                            //        break; // لم يتم العثور على علامات
+
+                                            //    int endTag = element.Element.IndexOf('>', startTag);
+                                            //    if (endTag == -1)
+                                            //        break; // HTML غير صحيح
+
+                                            //    string tag = element.Element.Substring(startTag, endTag - startTag + 1);
+                                            //    if (!tag.StartsWith("</")) // تجاوز العلامات الإغلاقية
+                                            //    {
+                                            //        int startText = endTag + 1;
+                                            //        int endText = element.Element.IndexOf('<', startText);
+                                            //        if (endText == -1)
+                                            //            endText = element.Element.Length; // نهاية النص
+
+                                            //        string innerText = element.Element.Substring(startText, endText - startText).Trim();
+                                            //        if (!string.IsNullOrEmpty(innerText))
+                                            //            textContents.Add(innerText);
+                                            //    }
+
+                                            //    currentPos = endTag + 1;
+                                            //}
+
+                                            //Console.WriteLine(textContents);
+                                            //string tempText = string.Join(" ", textContents);
+                                            //element.TextContent = System.Net.WebUtility.HtmlDecode(tempText); // Decode HTML entities
                                         }
                                         catch (Exception)
                                         {

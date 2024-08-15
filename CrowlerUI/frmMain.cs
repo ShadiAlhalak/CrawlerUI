@@ -1,33 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MaterialSkin2DotNet;
-using LibGeneralUtilities;
+﻿using LibGeneralUtilities;
+using LibHtmlSplitter;
 using LibStructure;
+using MaterialSkin2DotNet;
+using MaterialSkin2DotNet.Controls;
 using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using MaterialSkin2DotNet.Controls;
-using Microsoft.VisualBasic;
-using System.Dynamic;
-using HtmlAgilityPack;
-using System.Net;
-using System.IO;
-using LibHtmlSplitter;
-using System.Diagnostics;
-using LogManagment;
-using Newtonsoft.Json.Linq;
-using System.Xml.Linq;
-using Microsoft.VisualBasic.ApplicationServices;
-using System.Security.Policy;
-using System.Collections.Specialized;
-using System.Reflection.Metadata.Ecma335;
+using System.Data;
+using System.Text;
 
 namespace CrawlerUI
 {
@@ -652,33 +631,34 @@ namespace CrawlerUI
             {
                 if (!string.IsNullOrEmpty(url))
                 {
-
+                    txtURL.Text = url;
                 }
+
                 progBar.Value = 0;
                 progTimer.Enabled = true;
                 string ValidUrl = ModValidation.ValidateURL(txtURL.Text);
                 txtURL.Text = ValidUrl;
-                //WView.Source = new Uri(ValidUrl);
+                WView.Source = new Uri(ValidUrl);
 
 
 
-                var tcs = new TaskCompletionSource<bool>();
-                EventHandler<CoreWebView2NavigationCompletedEventArgs> handler = null;
-                handler = (s, e) =>
-                {
-                    WView.CoreWebView2.NavigationCompleted -= handler;
-                    tcs.SetResult(true);
-                };
-                WView.CoreWebView2.NavigationCompleted += handler;
+                //var tcs = new TaskCompletionSource<bool>();
+                //EventHandler<CoreWebView2NavigationCompletedEventArgs> handler = null;
+                //handler = (s, e) =>
+                //{
+                //    WView.CoreWebView2.NavigationCompleted -= handler;
+                //    tcs.SetResult(true);
+                //};
+                //WView.CoreWebView2.NavigationCompleted += handler;
 
-                WView.CoreWebView2.Navigate(url);
-                await tcs.Task;
-
-
+                //WView.CoreWebView2.Navigate(url);
+                //await tcs.Task;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Message.Message = ex.Message;
+                Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
             }
         }
 
@@ -783,7 +763,7 @@ namespace CrawlerUI
                         rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
                         rchLog.AppendText(ResultFodler);
                         rchLog.SelectionColor = System.Drawing.Color.Green;
-                        rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
+                        rchLog.AppendText("\n" + ModResoucres.cnst_ProcessingFinish);
                         rchLog.SelectionColor = rchLog.ForeColor;
                         rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
                         rchLog.ScrollToCaret();
@@ -804,7 +784,7 @@ namespace CrawlerUI
                 //Create result file as csv now 
                 if (!File.Exists(ResultCsvPath))
                 {
-                    using (var writer = new StreamWriter(ResultCsvPath))
+                    using (var writer = new StreamWriter(ResultCsvPath, false, Encoding.UTF8))
                     {
                         foreach (Pairs Line in Lines)
                         {
@@ -821,7 +801,7 @@ namespace CrawlerUI
                         var csvLine = string.Join(";", Line.lstPairs.Select(Val => Val.Value));
                         NewLines.Add(csvLine);
                     }
-                    File.AppendAllLines(ResultCsvPath, NewLines);
+                    File.AppendAllLines(ResultCsvPath, NewLines, Encoding.UTF8);
                 }
                 string jsonResutlPath = Path.ChangeExtension(ResultCsvPath, ModConstant.cnst_json_Extention);
                 string serializer = Newtonsoft.Json.JsonConvert.SerializeObject(Lines, Newtonsoft.Json.Formatting.Indented);
@@ -989,6 +969,8 @@ namespace CrawlerUI
                 //Start processing
                 //4-Split html code to list of elments 
                 clsElements elems = LibHtmlSplitter.ModMain.SplitHtmlToElements(DesHtml, debugvalue: "");
+                string savepath = "C:\\Users\\shadi\\Desktop\\مجلد جديد\\Final Try\\data\\gsm.csv";
+                elems.SaveAsCSV(savepath);
                 //ModMain.InitialForAI(elems,Values);
 
                 //5-Find requested elments 
@@ -1014,7 +996,7 @@ namespace CrawlerUI
                 foreach (clsElement elem in result?.LstElements?.Where(x => x.GroupParent != -1))
                 {
                     var groupedObjects = result.LstElements
-                    .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.Tag.ToLower() != "div")//
+                    .GroupBy(obj => obj.Start >= elem.Start && obj.End <= elem.End && obj.GroupParent == -1)//obj.Tag.ToLower() != "div"
                     .ToDictionary(group => group.Key, group => group.ToList());
                     foreach (var item in groupedObjects[true])
                     {

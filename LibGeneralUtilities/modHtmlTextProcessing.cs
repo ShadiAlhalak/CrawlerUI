@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace LibGeneralUtilities
 {
@@ -216,5 +216,37 @@ namespace LibGeneralUtilities
             return StringSection;
         }
 
+        //    var html = "<div><b>Bold</b> <span>Span</span> <p>Paragraph</p> <sup>Super</sup> <sub>Sub</sub></div>";
+        //    var html = "<div><B>Bold</B> <SPAN>Span</SPAN> <p>Paragraph</p> <SUP>Super</SUP> <sub>Sub</sub> <EM>Emphasized</EM> <strong>Strong</strong></div>";
+        public static string ExtractTextIgnoredTags(string html)
+        {
+            //// List of tags to ignore
+            //var tagsToIgnore = new List<string> { "b", "span", "sup", "sub", "em", "strong", "i", "u", "mark", "small", "del", "ins", "code", "kbd", "var", "s" };
+
+            //// Remove the tags to ignore
+            //foreach (var tag in tagsToIgnore)
+            //{
+            //    html = Regex.Replace(html, $@"<\s*{tag}[^>]*>(.*?)<\s*/\s*{tag}>", "", RegexOptions.IgnoreCase);
+            //}
+
+            //// Remove all remaining tags
+            //html = Regex.Replace(html, "<.*?>", string.Empty);
+
+            //return html;
+
+            // List of tags to ignore
+            var tagsToIgnore = new List<string> { "b", "span", "sup", "sub", "em", "strong", "i", "u", "mark", "small", "del", "ins", "code", "kbd", "var", "s" };
+
+            // Remove the tags to ignore
+            foreach (var tag in tagsToIgnore)
+            {
+                html = Regex.Replace(html, $@"<\s*{tag}[^>]*>(.*?)<\s*/\s*{tag}>", "$1", RegexOptions.IgnoreCase);
+            }
+
+            // Remove all remaining tags
+            html = Regex.Replace(html, "<.*?>", string.Empty);
+
+            return html;
+        }
     }
 }
