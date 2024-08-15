@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Data;
 using System.Security.Permissions;
 using System.Text;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CrawlerUI
@@ -74,7 +75,8 @@ namespace CrawlerUI
                 if (settings != null && !string.IsNullOrEmpty(settings.HomePageUrl))
                 {
                     txtURL.Text = settings.HomePageUrl;
-                    WView.Source = new Uri(settings.HomePageUrl);
+                    //WView.Source = new Uri(settings.HomePageUrl);
+                    WView.CoreWebView2.Navigate(settings.HomePageUrl);
                 }
             }
             catch (Exception ex)
@@ -149,6 +151,7 @@ namespace CrawlerUI
             {
                 string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");
                 string? Deshtml = System.Text.Json.JsonSerializer.Deserialize<string>(htmlwebv2);
+                Deshtml = modHtmlTextProcessing.PreProcessingHtml(Deshtml);
                 CurrentHtmlText = Deshtml; // modHtmlTextProcessing.PreProcessingHtml(Deshtml);
                 await Task.Run(() =>
                  {
@@ -192,13 +195,16 @@ namespace CrawlerUI
             string ErrorMessage = string.Empty;
             try
             {
-                progBar.Value = 0;
-                progTimer.Enabled = true;
                 clsSettings settings = clsSettings.loadSettings(ref ErrorMessage);
                 if (settings != null && !string.IsNullOrEmpty(settings.HomePageUrl))
                 {
-                    txtURL.Text = settings.HomePageUrl;
-                    WView.Source = new Uri(settings.HomePageUrl);
+                    if (settings.HomePageUrl.ToLower() != WView.Source.AbsoluteUri.ToLower())
+                    {
+                        progBar.Value = 0;
+                        progTimer.Enabled = true;
+                        txtURL.Text = settings.HomePageUrl;
+                        WView.Source = new Uri(settings.HomePageUrl);
+                    }
                 }
             }
             catch (Exception ex)
@@ -726,6 +732,7 @@ namespace CrawlerUI
 
                 rchLog.SelectionColor = System.Drawing.Color.Blue;
                 rchLog.AppendText(ModResoucres.cnst_StartProcessing);
+                rchLog.ScrollToCaret();
                 rchLog.SelectionColor = rchLog.ForeColor;
 
                 //
@@ -733,6 +740,9 @@ namespace CrawlerUI
                 if (!string.IsNullOrEmpty(newds.txtName.Text))
                 {
                     //Discuss current page
+                    rchLog.SelectionColor = System.Drawing.Color.Blue;
+                    rchLog.AppendText(ModResoucres.cnst_ProcessingCurrentPage);
+                    rchLog.ScrollToCaret();
                     ResultFodler = ModPathes.GetSessionOutPutFolder(newds.txtName.Text, ref ErrorMessage);
                     List<Pairs> FullResult = new List<Pairs>();
                     //string htmlwebv2 = await WView.ExecuteScriptAsync("document.documentElement.outerHTML");

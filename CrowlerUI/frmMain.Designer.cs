@@ -526,8 +526,9 @@
             this.WView.Location = new System.Drawing.Point(3, 13);
             this.WView.Name = "WView";
             this.WView.Size = new System.Drawing.Size(533, 393);
-            this.WView.Source = new System.Uri("https://www.amazon.com/", System.UriKind.Absolute);
+            this.WView.Source = new System.Uri("about:blank", System.UriKind.Absolute);
             this.WView.TabIndex = 0;
+            this.WView.Tag = "";
             this.WView.ZoomFactor = 1D;
             this.WView.CoreWebView2InitializationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs>(this.WView_CoreWebView2InitializationCompleted_1);
             this.WView.NavigationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs>(this.WView_NavigationCompleted_1);
