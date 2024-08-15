@@ -6,6 +6,7 @@ using MaterialSkin2DotNet.Controls;
 using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using System.Data;
+using System.Security.Permissions;
 using System.Text;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -27,6 +28,8 @@ namespace CrawlerUI
         public bool DarkMode { get; set; } = true;
         public bool pageLoaded { get; set; } = false;
         public MaterialSkinManager materialSkinManager { get; set; }
+        public bool LoopOnpages { get; set; } = false;
+        public bool SelectParents { get; set; } = false;
         #endregion
 
         #region Constractor
@@ -459,6 +462,8 @@ namespace CrawlerUI
                 if (frmInitialdata.RequestedElements.Count > 0)
                 {
                     Values = frmInitialdata.RequestedElements;
+                    //LoopOnpages = frmInitialdata.ckbLoopOnPages.Checked;
+                    //SelectParents = frmInitialdata.ckbSelectParents.Checked;
                 }
             }
             catch (Exception ex)

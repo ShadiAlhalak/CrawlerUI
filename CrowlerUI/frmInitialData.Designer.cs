@@ -47,11 +47,10 @@
             this.grpConfigrations = new System.Windows.Forms.GroupBox();
             this.tlbTools = new System.Windows.Forms.TableLayoutPanel();
             this.materialLabel1 = new MaterialSkin2DotNet.Controls.MaterialLabel();
-            this.materialCheckbox1 = new MaterialSkin2DotNet.Controls.MaterialCheckbox();
             this.numUD = new System.Windows.Forms.NumericUpDown();
-            this.materialCheckbox2 = new MaterialSkin2DotNet.Controls.MaterialCheckbox();
-            this.btnApply = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnSave = new MaterialSkin2DotNet.Controls.MaterialButton();
+            this.ckbSelectParents = new MaterialSkin2DotNet.Controls.MaterialCheckbox();
+            this.ckbLoopOnPages = new MaterialSkin2DotNet.Controls.MaterialCheckbox();
             this.colTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,7 +81,7 @@
             this.tlbMain.Name = "tlbMain";
             this.tlbMain.RowCount = 4;
             this.tlbMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tlbMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlbMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.tlbMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlbMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tlbMain.Size = new System.Drawing.Size(1367, 623);
@@ -92,9 +91,9 @@
             // 
             this.grpData.Controls.Add(this.tlbData);
             this.grpData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpData.Location = new System.Drawing.Point(8, 108);
+            this.grpData.Location = new System.Drawing.Point(8, 75);
             this.grpData.Name = "grpData";
-            this.grpData.Size = new System.Drawing.Size(1351, 507);
+            this.grpData.Size = new System.Drawing.Size(1351, 540);
             this.grpData.TabIndex = 1;
             this.grpData.TabStop = false;
             this.grpData.Text = "Data";
@@ -111,7 +110,7 @@
             this.tlbData.RowCount = 1;
             this.tlbData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlbData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlbData.Size = new System.Drawing.Size(1345, 481);
+            this.tlbData.Size = new System.Drawing.Size(1345, 514);
             this.tlbData.TabIndex = 0;
             // 
             // dgvinitData
@@ -145,7 +144,7 @@
             this.dgvinitData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvinitData.ShowCellErrors = false;
             this.dgvinitData.ShowRowErrors = false;
-            this.dgvinitData.Size = new System.Drawing.Size(1339, 475);
+            this.dgvinitData.Size = new System.Drawing.Size(1339, 508);
             this.dgvinitData.TabIndex = 0;
             this.dgvinitData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvinitData_CellContentClick);
             // 
@@ -231,7 +230,7 @@
             this.grpConfigrations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpConfigrations.Location = new System.Drawing.Point(8, 8);
             this.grpConfigrations.Name = "grpConfigrations";
-            this.grpConfigrations.Size = new System.Drawing.Size(1351, 94);
+            this.grpConfigrations.Size = new System.Drawing.Size(1351, 61);
             this.grpConfigrations.TabIndex = 2;
             this.grpConfigrations.TabStop = false;
             this.grpConfigrations.Text = "Configrations";
@@ -248,18 +247,17 @@
             this.tlbTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlbTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tlbTools.Controls.Add(this.materialLabel1, 0, 0);
-            this.tlbTools.Controls.Add(this.materialCheckbox1, 0, 1);
             this.tlbTools.Controls.Add(this.numUD, 1, 0);
-            this.tlbTools.Controls.Add(this.materialCheckbox2, 1, 1);
-            this.tlbTools.Controls.Add(this.btnApply, 2, 0);
-            this.tlbTools.Controls.Add(this.btnSave, 2, 1);
+            this.tlbTools.Controls.Add(this.btnSave, 7, 0);
+            this.tlbTools.Controls.Add(this.ckbSelectParents, 2, 0);
+            this.tlbTools.Controls.Add(this.ckbLoopOnPages, 3, 0);
             this.tlbTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlbTools.Location = new System.Drawing.Point(3, 23);
             this.tlbTools.Name = "tlbTools";
-            this.tlbTools.RowCount = 2;
-            this.tlbTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlbTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlbTools.Size = new System.Drawing.Size(1345, 68);
+            this.tlbTools.RowCount = 1;
+            this.tlbTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlbTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlbTools.Size = new System.Drawing.Size(1345, 35);
             this.tlbTools.TabIndex = 0;
             // 
             // materialLabel1
@@ -271,27 +269,10 @@
             this.materialLabel1.Location = new System.Drawing.Point(3, 0);
             this.materialLabel1.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(162, 34);
+            this.materialLabel1.Size = new System.Drawing.Size(162, 35);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "Selected items count :";
             this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // materialCheckbox1
-            // 
-            this.materialCheckbox1.AutoSize = true;
-            this.materialCheckbox1.Depth = 0;
-            this.materialCheckbox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialCheckbox1.Location = new System.Drawing.Point(0, 34);
-            this.materialCheckbox1.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckbox1.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckbox1.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.materialCheckbox1.Name = "materialCheckbox1";
-            this.materialCheckbox1.ReadOnly = false;
-            this.materialCheckbox1.Ripple = true;
-            this.materialCheckbox1.Size = new System.Drawing.Size(168, 34);
-            this.materialCheckbox1.TabIndex = 1;
-            this.materialCheckbox1.Text = "Select Parents";
-            this.materialCheckbox1.UseVisualStyleBackColor = true;
             // 
             // numUD
             // 
@@ -306,43 +287,6 @@
             0,
             0});
             // 
-            // materialCheckbox2
-            // 
-            this.materialCheckbox2.AutoSize = true;
-            this.materialCheckbox2.Depth = 0;
-            this.materialCheckbox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialCheckbox2.Location = new System.Drawing.Point(168, 34);
-            this.materialCheckbox2.Margin = new System.Windows.Forms.Padding(0);
-            this.materialCheckbox2.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialCheckbox2.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.materialCheckbox2.Name = "materialCheckbox2";
-            this.materialCheckbox2.ReadOnly = false;
-            this.materialCheckbox2.Ripple = true;
-            this.materialCheckbox2.Size = new System.Drawing.Size(168, 34);
-            this.materialCheckbox2.TabIndex = 3;
-            this.materialCheckbox2.Text = "LoopOnPages";
-            this.materialCheckbox2.UseVisualStyleBackColor = true;
-            // 
-            // btnApply
-            // 
-            this.btnApply.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnApply.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnApply.Depth = 0;
-            this.btnApply.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnApply.HighEmphasis = true;
-            this.btnApply.Icon = null;
-            this.btnApply.Location = new System.Drawing.Point(337, 1);
-            this.btnApply.Margin = new System.Windows.Forms.Padding(1);
-            this.btnApply.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnApply.Name = "btnApply";
-            this.btnApply.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnApply.Size = new System.Drawing.Size(166, 32);
-            this.btnApply.TabIndex = 4;
-            this.btnApply.Text = "Apply ";
-            this.btnApply.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnApply.UseAccentColor = false;
-            this.btnApply.UseVisualStyleBackColor = true;
-            // 
             // btnSave
             // 
             this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -351,18 +295,58 @@
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.HighEmphasis = true;
             this.btnSave.Icon = null;
-            this.btnSave.Location = new System.Drawing.Point(337, 35);
+            this.btnSave.Location = new System.Drawing.Point(1177, 1);
             this.btnSave.Margin = new System.Windows.Forms.Padding(1);
             this.btnSave.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnSave.Name = "btnSave";
             this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSave.Size = new System.Drawing.Size(166, 32);
+            this.btnSave.Size = new System.Drawing.Size(167, 33);
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Save";
             this.btnSave.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSave.UseAccentColor = false;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // ckbSelectParents
+            // 
+            this.ckbSelectParents.AutoSize = true;
+            this.ckbSelectParents.Checked = true;
+            this.ckbSelectParents.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbSelectParents.Depth = 0;
+            this.ckbSelectParents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ckbSelectParents.Location = new System.Drawing.Point(336, 0);
+            this.ckbSelectParents.Margin = new System.Windows.Forms.Padding(0);
+            this.ckbSelectParents.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.ckbSelectParents.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.ckbSelectParents.Name = "ckbSelectParents";
+            this.ckbSelectParents.ReadOnly = false;
+            this.ckbSelectParents.Ripple = true;
+            this.ckbSelectParents.Size = new System.Drawing.Size(168, 35);
+            this.ckbSelectParents.TabIndex = 1;
+            this.ckbSelectParents.Text = "Select Parents";
+            this.ckbSelectParents.UseVisualStyleBackColor = true;
+            this.ckbSelectParents.Visible = false;
+            // 
+            // ckbLoopOnPages
+            // 
+            this.ckbLoopOnPages.AutoSize = true;
+            this.ckbLoopOnPages.Checked = true;
+            this.ckbLoopOnPages.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbLoopOnPages.Depth = 0;
+            this.ckbLoopOnPages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ckbLoopOnPages.Location = new System.Drawing.Point(504, 0);
+            this.ckbLoopOnPages.Margin = new System.Windows.Forms.Padding(0);
+            this.ckbLoopOnPages.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.ckbLoopOnPages.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.ckbLoopOnPages.Name = "ckbLoopOnPages";
+            this.ckbLoopOnPages.ReadOnly = false;
+            this.ckbLoopOnPages.Ripple = true;
+            this.ckbLoopOnPages.Size = new System.Drawing.Size(168, 35);
+            this.ckbLoopOnPages.TabIndex = 3;
+            this.ckbLoopOnPages.Text = "LoopOnPages";
+            this.ckbLoopOnPages.UseVisualStyleBackColor = true;
+            this.ckbLoopOnPages.Visible = false;
             // 
             // colTag
             // 
@@ -453,7 +437,6 @@
         private TableLayoutPanel tlbData;
         private DataGridView dgvinitData;
         private GroupBox grpConfigrations;
-        private MaterialSkin2DotNet.Controls.MaterialCheckbox materialCheckbox1;
         private NumericUpDown numUD;
         private DataGridViewTextBoxColumn colTag;
         private DataGridViewTextBoxColumn colClassName;
@@ -462,8 +445,6 @@
         private DataGridViewTextBoxColumn colHref;
         private DataGridViewTextBoxColumn colSrc;
         private DataGridViewComboBoxColumn colFild;
-        private MaterialSkin2DotNet.Controls.MaterialCheckbox materialCheckbox2;
-        private MaterialSkin2DotNet.Controls.MaterialButton btnApply;
         private MaterialSkin2DotNet.Controls.MaterialButton btnSave;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -477,5 +458,7 @@
         private DataGridViewComboBoxColumn colOrder;
         private DataGridViewTextBoxColumn FieldId;
         private DataGridViewComboBoxColumn GroupParent;
+        public MaterialSkin2DotNet.Controls.MaterialCheckbox ckbLoopOnPages;
+        public MaterialSkin2DotNet.Controls.MaterialCheckbox ckbSelectParents;
     }
 }
