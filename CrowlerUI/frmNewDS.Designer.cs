@@ -89,7 +89,7 @@
             this.lblDiscription.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.lblDiscription.Name = "lblDiscription";
             this.lblDiscription.Size = new System.Drawing.Size(109, 40);
-            this.lblDiscription.TabIndex = 2;
+            this.lblDiscription.TabIndex = 0;
             this.lblDiscription.Text = "Description :";
             this.lblDiscription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -114,7 +114,7 @@
             this.txtDescription.SelectionStart = 0;
             this.txtDescription.ShortcutsEnabled = true;
             this.txtDescription.Size = new System.Drawing.Size(373, 161);
-            this.txtDescription.TabIndex = 4;
+            this.txtDescription.TabIndex = 2;
             this.txtDescription.TabStop = false;
             this.txtDescription.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDescription.UseSystemPasswordChar = false;
@@ -144,7 +144,7 @@
             this.txtName.SelectionStart = 0;
             this.txtName.ShortcutsEnabled = true;
             this.txtName.Size = new System.Drawing.Size(258, 36);
-            this.txtName.TabIndex = 5;
+            this.txtName.TabIndex = 1;
             this.txtName.TabStop = false;
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtName.TrailingIcon = null;
@@ -182,7 +182,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnCancel.Size = new System.Drawing.Size(74, 32);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "cancel";
             this.btnCancel.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnCancel.UseAccentColor = false;
@@ -203,7 +203,7 @@
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnLaunch.Size = new System.Drawing.Size(74, 32);
-            this.btnLaunch.TabIndex = 1;
+            this.btnLaunch.TabIndex = 3;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLaunch.UseAccentColor = false;
