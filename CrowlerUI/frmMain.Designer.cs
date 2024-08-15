@@ -39,8 +39,9 @@
             this.btnSwAddValue = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwPrevLinks = new MaterialSkin2DotNet.Controls.MaterialSwitch();
             this.btnSwScrolling = new MaterialSkin2DotNet.Controls.MaterialSwitch();
-            this.btnApplyTools = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnHover = new MaterialSkin2DotNet.Controls.MaterialSwitch();
+            this.btnswPreventPopup = new MaterialSkin2DotNet.Controls.MaterialSwitch();
+            this.btnApplyTools = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.grpFields = new System.Windows.Forms.GroupBox();
             this.tlpFields = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddField = new MaterialSkin2DotNet.Controls.MaterialButton();
@@ -205,7 +206,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grpFields);
             this.splitContainer1.Size = new System.Drawing.Size(200, 449);
-            this.splitContainer1.SplitterDistance = 221;
+            this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.TabIndex = 1;
             // 
             // grpTools
@@ -214,7 +215,7 @@
             this.grpTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpTools.Location = new System.Drawing.Point(0, 0);
             this.grpTools.Name = "grpTools";
-            this.grpTools.Size = new System.Drawing.Size(200, 221);
+            this.grpTools.Size = new System.Drawing.Size(200, 267);
             this.grpTools.TabIndex = 0;
             this.grpTools.TabStop = false;
             this.grpTools.Text = "Toolbox";
@@ -226,19 +227,21 @@
             this.tblInToolBox.Controls.Add(this.btnSwAddValue, 0, 0);
             this.tblInToolBox.Controls.Add(this.btnSwPrevLinks, 0, 1);
             this.tblInToolBox.Controls.Add(this.btnSwScrolling, 0, 2);
-            this.tblInToolBox.Controls.Add(this.btnApplyTools, 0, 4);
             this.tblInToolBox.Controls.Add(this.btnHover, 0, 3);
+            this.tblInToolBox.Controls.Add(this.btnswPreventPopup, 0, 4);
+            this.tblInToolBox.Controls.Add(this.btnApplyTools, 0, 5);
             this.tblInToolBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblInToolBox.Location = new System.Drawing.Point(3, 23);
             this.tblInToolBox.Name = "tblInToolBox";
-            this.tblInToolBox.RowCount = 6;
+            this.tblInToolBox.RowCount = 7;
+            this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblInToolBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblInToolBox.Size = new System.Drawing.Size(194, 195);
+            this.tblInToolBox.Size = new System.Drawing.Size(194, 241);
             this.tblInToolBox.TabIndex = 0;
             // 
             // btnSwAddValue
@@ -292,27 +295,6 @@
             this.btnSwScrolling.UseVisualStyleBackColor = true;
             this.btnSwScrolling.CheckedChanged += new System.EventHandler(this.btnSwScrolling_CheckedChanged);
             // 
-            // btnApplyTools
-            // 
-            this.btnApplyTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnApplyTools.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnApplyTools.Depth = 0;
-            this.btnApplyTools.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnApplyTools.HighEmphasis = true;
-            this.btnApplyTools.Icon = null;
-            this.btnApplyTools.Location = new System.Drawing.Point(4, 166);
-            this.btnApplyTools.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnApplyTools.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
-            this.btnApplyTools.Name = "btnApplyTools";
-            this.btnApplyTools.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnApplyTools.Size = new System.Drawing.Size(186, 28);
-            this.btnApplyTools.TabIndex = 3;
-            this.btnApplyTools.Text = "Apply";
-            this.btnApplyTools.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnApplyTools.UseAccentColor = false;
-            this.btnApplyTools.UseVisualStyleBackColor = true;
-            this.btnApplyTools.Click += new System.EventHandler(this.btnApplyTools_Click);
-            // 
             // btnHover
             // 
             this.btnHover.AutoSize = true;
@@ -330,13 +312,51 @@
             this.btnHover.UseVisualStyleBackColor = true;
             this.btnHover.CheckedChanged += new System.EventHandler(this.btnHover_CheckedChanged);
             // 
+            // btnswPreventPopup
+            // 
+            this.btnswPreventPopup.AutoSize = true;
+            this.btnswPreventPopup.Depth = 0;
+            this.btnswPreventPopup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnswPreventPopup.Location = new System.Drawing.Point(0, 160);
+            this.btnswPreventPopup.Margin = new System.Windows.Forms.Padding(0);
+            this.btnswPreventPopup.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.btnswPreventPopup.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnswPreventPopup.Name = "btnswPreventPopup";
+            this.btnswPreventPopup.Ripple = true;
+            this.btnswPreventPopup.Size = new System.Drawing.Size(194, 40);
+            this.btnswPreventPopup.TabIndex = 5;
+            this.btnswPreventPopup.Text = "Prevent popup";
+            this.btnswPreventPopup.UseVisualStyleBackColor = true;
+            this.btnswPreventPopup.CheckedChanged += new System.EventHandler(this.btnswPreventPopup_CheckedChanged);
+            // 
+            // btnApplyTools
+            // 
+            this.btnApplyTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnApplyTools.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnApplyTools.Depth = 0;
+            this.btnApplyTools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnApplyTools.HighEmphasis = true;
+            this.btnApplyTools.Icon = null;
+            this.btnApplyTools.Location = new System.Drawing.Point(4, 206);
+            this.btnApplyTools.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnApplyTools.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnApplyTools.Name = "btnApplyTools";
+            this.btnApplyTools.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnApplyTools.Size = new System.Drawing.Size(186, 28);
+            this.btnApplyTools.TabIndex = 3;
+            this.btnApplyTools.Text = "Apply";
+            this.btnApplyTools.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnApplyTools.UseAccentColor = false;
+            this.btnApplyTools.UseVisualStyleBackColor = true;
+            this.btnApplyTools.Click += new System.EventHandler(this.btnApplyTools_Click);
+            // 
             // grpFields
             // 
             this.grpFields.Controls.Add(this.tlpFields);
             this.grpFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpFields.Location = new System.Drawing.Point(0, 0);
             this.grpFields.Name = "grpFields";
-            this.grpFields.Size = new System.Drawing.Size(200, 224);
+            this.grpFields.Size = new System.Drawing.Size(200, 178);
             this.grpFields.TabIndex = 0;
             this.grpFields.TabStop = false;
             this.grpFields.Text = "Fields";
@@ -358,7 +378,7 @@
             this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpFields.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFields.Size = new System.Drawing.Size(194, 198);
+            this.tlpFields.Size = new System.Drawing.Size(194, 152);
             this.tlpFields.TabIndex = 0;
             // 
             // btnAddField
@@ -416,7 +436,7 @@
             this.lstFields.Name = "lstFields";
             this.lstFields.SelectedIndex = -1;
             this.lstFields.SelectedItem = null;
-            this.lstFields.Size = new System.Drawing.Size(188, 112);
+            this.lstFields.Size = new System.Drawing.Size(188, 66);
             this.lstFields.TabIndex = 2;
             // 
             // btnEditField
@@ -1179,5 +1199,6 @@
         private MaterialSkin2DotNet.Controls.MaterialButton btnInitialData;
         private MaterialSkin2DotNet.Controls.MaterialSwitch btnHover;
         private MaterialSkin2DotNet.Controls.MaterialTextBox2 txtURL;
+        private MaterialSkin2DotNet.Controls.MaterialSwitch btnswPreventPopup;
     }
 }

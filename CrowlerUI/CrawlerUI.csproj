@@ -54,6 +54,9 @@
     <None Update="Scripts\Mouse.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Scripts\PreventPopup.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Scripts\ScrollScript.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

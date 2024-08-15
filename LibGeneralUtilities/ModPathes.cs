@@ -47,6 +47,11 @@ namespace LibGeneralUtilities
             return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_Scroll_ScriptFileName + ModConstant.cnst_js_Extention);
         }
 
+        public static string GetPreventPopupPath()
+        {
+            return Path.Combine(GetScriptFolderPath(), ModConstant.cnst_PreventPopup_ScriptFileName + ModConstant.cnst_js_Extention);
+        }
+
         public static string GetAppDataPath()
         {
             string AppData = string.Empty;
