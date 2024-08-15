@@ -36,7 +36,7 @@ namespace LibGeneralUtilities
         public const string cnst_ProcessingFinish = "Processing finish.\n";
         public const string cnst_ProcessingFaild = "Processing Faild.\n";
         public const string cnst_Error = "Error:";
-
+        public const string cnst_ProcessingPage = "Processing Page : ";
         #endregion
 
         #region MessageTypes

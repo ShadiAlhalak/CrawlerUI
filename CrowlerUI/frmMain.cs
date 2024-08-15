@@ -716,8 +716,13 @@ namespace CrawlerUI
                     //1-Get Pages
                     List<Pairs> FullResult = new List<Pairs>();
                     var Pages = Values.Where(item => item.IsPage == true).Select(x => x.href);
+                    int counter = 0;
                     foreach (var page in Pages)
                     {
+                        counter += 1;
+                        rchLog.SelectionColor = System.Drawing.Color.Blue;
+                        rchLog.AppendText(ModResoucres.cnst_ProcessingPage + counter.ToString() + "\n");
+                        rchLog.ScrollToCaret();
                         //2-Load page
                         //pageLoaded = false;
                         if (string.IsNullOrEmpty(page)) continue;
@@ -749,7 +754,8 @@ namespace CrawlerUI
                     {
                         rchLog.SelectionColor = System.Drawing.Color.Red;
                         rchLog.AppendText(ModResoucres.cnst_ProcessingFaild);
-                        rchLog.AppendText($"{ModResoucres.cnst_Error} : {ErrorMessage}");
+                        rchLog.ScrollToCaret();
+                        rchLog.AppendText($"{ModResoucres.cnst_Error} : {ErrorMessage} \n");
                         rchLog.SelectionColor = rchLog.ForeColor;
                     }
                     else
@@ -760,10 +766,14 @@ namespace CrawlerUI
                         elems.Elements = Values;
                         clsHtmlElems.SerializeHtmlElementsToFile(elems, ResultFilePath, ref ErrorMessage);
                         rchLog.AppendText(ModResoucres.cnst_ResultFileHasBeenWritten);
+                        rchLog.ScrollToCaret();
                         rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
-                        rchLog.AppendText(ResultFodler);
+                        rchLog.ScrollToCaret();
+                        rchLog.AppendText(ResultFodler + "\n");
+                        rchLog.ScrollToCaret();
                         rchLog.SelectionColor = System.Drawing.Color.Green;
-                        rchLog.AppendText("\n" + ModResoucres.cnst_ProcessingFinish);
+                        rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
+                        rchLog.ScrollToCaret();
                         rchLog.SelectionColor = rchLog.ForeColor;
                         rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
                         rchLog.ScrollToCaret();
@@ -777,6 +787,7 @@ namespace CrawlerUI
                 Message.ShowMessage();
             }
         }
+
         public void WriteFullResult(List<Pairs> Lines, string ResultCsvPath)
         {
             try
@@ -786,6 +797,17 @@ namespace CrawlerUI
                 {
                     using (var writer = new StreamWriter(ResultCsvPath, false, Encoding.UTF8))
                     {
+                        //Write header 
+                        if (Lines != null && Lines.Count > 0)
+                        {
+                            if (Lines[0]?.lstPairs?.Count > 0)
+                            {
+                                var HeaderLine = string.Join(";", Lines[0]?.lstPairs.Select(Val => Val.Key)); ;
+                                writer.WriteLine(HeaderLine);
+                            }
+                        }
+
+                        //Write line values
                         foreach (Pairs Line in Lines)
                         {
                             var csvLine = string.Join(";", Line.lstPairs.Select(Val => Val.Value)); ;
@@ -810,7 +832,7 @@ namespace CrawlerUI
             catch (Exception ex)
             {
 
-                throw;
+                //throw;
             }
         }
 
