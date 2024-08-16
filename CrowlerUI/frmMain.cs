@@ -31,6 +31,7 @@ namespace CrawlerUI
         public MaterialSkinManager materialSkinManager { get; set; }
         public bool LoopOnpages { get; set; } = false;
         public bool SelectParents { get; set; } = false;
+        public clsLoginResBody LoginUser { get; set; } = new clsLoginResBody();
         #endregion
 
         #region Constractor

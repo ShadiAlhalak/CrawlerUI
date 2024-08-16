@@ -25,6 +25,7 @@ namespace LibGeneralUtilities
         public const string MsgTimeIsOut = "Time is out";
         public const string MsgPleaseCheckIntenetConnection = "please check intenet connection.";
         public const string MsgCacheClearedSuccessfully = "Cache cleared successfully!";
+        public const string MsgLoginFaild = "No active account found with the given credentials";
         #endregion
 
         #region Log
