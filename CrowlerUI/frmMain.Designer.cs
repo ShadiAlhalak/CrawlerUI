@@ -75,6 +75,7 @@
             this.btnReload = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnInspect = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.txtURL = new MaterialSkin2DotNet.Controls.MaterialTextBox2();
+            this.btnClearCachw = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tblSideBar = new System.Windows.Forms.TableLayoutPanel();
             this.pivAbout = new System.Windows.Forms.PictureBox();
             this.picHelp = new System.Windows.Forms.PictureBox();
@@ -792,7 +793,8 @@
             // 
             // tbpUrlControl
             // 
-            this.tbpUrlControl.ColumnCount = 7;
+            this.tbpUrlControl.ColumnCount = 8;
+            this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
@@ -800,13 +802,14 @@
             this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tbpUrlControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tbpUrlControl.Controls.Add(this.btnForward, 4, 0);
-            this.tbpUrlControl.Controls.Add(this.btnBack, 3, 0);
-            this.tbpUrlControl.Controls.Add(this.btnBrawserHome, 1, 0);
-            this.tbpUrlControl.Controls.Add(this.btnGo, 6, 0);
-            this.tbpUrlControl.Controls.Add(this.btnReload, 2, 0);
-            this.tbpUrlControl.Controls.Add(this.btnInspect, 0, 0);
-            this.tbpUrlControl.Controls.Add(this.txtURL, 5, 0);
+            this.tbpUrlControl.Controls.Add(this.btnForward, 5, 0);
+            this.tbpUrlControl.Controls.Add(this.btnBack, 4, 0);
+            this.tbpUrlControl.Controls.Add(this.btnBrawserHome, 2, 0);
+            this.tbpUrlControl.Controls.Add(this.btnGo, 7, 0);
+            this.tbpUrlControl.Controls.Add(this.btnReload, 3, 0);
+            this.tbpUrlControl.Controls.Add(this.btnInspect, 1, 0);
+            this.tbpUrlControl.Controls.Add(this.txtURL, 6, 0);
+            this.tbpUrlControl.Controls.Add(this.btnClearCachw, 0, 0);
             this.tbpUrlControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpUrlControl.Location = new System.Drawing.Point(58, 3);
             this.tbpUrlControl.Name = "tbpUrlControl";
@@ -823,7 +826,7 @@
             this.btnForward.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnForward.HighEmphasis = true;
             this.btnForward.Icon = null;
-            this.btnForward.Location = new System.Drawing.Point(294, 6);
+            this.btnForward.Location = new System.Drawing.Point(414, 6);
             this.btnForward.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnForward.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnForward.Name = "btnForward";
@@ -844,7 +847,7 @@
             this.btnBack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBack.HighEmphasis = true;
             this.btnBack.Icon = null;
-            this.btnBack.Location = new System.Drawing.Point(244, 6);
+            this.btnBack.Location = new System.Drawing.Point(364, 6);
             this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBack.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnBack.Name = "btnBack";
@@ -865,7 +868,7 @@
             this.btnBrawserHome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBrawserHome.HighEmphasis = true;
             this.btnBrawserHome.Icon = null;
-            this.btnBrawserHome.Location = new System.Drawing.Point(84, 6);
+            this.btnBrawserHome.Location = new System.Drawing.Point(204, 6);
             this.btnBrawserHome.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBrawserHome.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnBrawserHome.Name = "btnBrawserHome";
@@ -908,7 +911,7 @@
             this.btnReload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnReload.HighEmphasis = true;
             this.btnReload.Icon = null;
-            this.btnReload.Location = new System.Drawing.Point(164, 6);
+            this.btnReload.Location = new System.Drawing.Point(284, 6);
             this.btnReload.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnReload.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnReload.Name = "btnReload";
@@ -928,7 +931,7 @@
             this.btnInspect.Depth = 0;
             this.btnInspect.HighEmphasis = true;
             this.btnInspect.Icon = null;
-            this.btnInspect.Location = new System.Drawing.Point(4, 6);
+            this.btnInspect.Location = new System.Drawing.Point(124, 6);
             this.btnInspect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInspect.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
             this.btnInspect.Name = "btnInspect";
@@ -953,7 +956,7 @@
             this.txtURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtURL.HideSelection = true;
             this.txtURL.LeadingIcon = null;
-            this.txtURL.Location = new System.Drawing.Point(343, 3);
+            this.txtURL.Location = new System.Drawing.Point(463, 3);
             this.txtURL.MaxLength = 32767;
             this.txtURL.MouseState = MaterialSkin2DotNet.MouseState.OUT;
             this.txtURL.Name = "txtURL";
@@ -965,13 +968,35 @@
             this.txtURL.SelectionLength = 0;
             this.txtURL.SelectionStart = 0;
             this.txtURL.ShortcutsEnabled = true;
-            this.txtURL.Size = new System.Drawing.Size(483, 36);
+            this.txtURL.Size = new System.Drawing.Size(363, 36);
             this.txtURL.TabIndex = 7;
             this.txtURL.TabStop = false;
             this.txtURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtURL.TrailingIcon = null;
             this.txtURL.UseSystemPasswordChar = false;
             this.txtURL.UseTallSize = false;
+            this.txtURL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtURL_KeyDown_1);
+            // 
+            // btnClearCachw
+            // 
+            this.btnClearCachw.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearCachw.Density = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearCachw.Depth = 0;
+            this.btnClearCachw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearCachw.HighEmphasis = true;
+            this.btnClearCachw.Icon = null;
+            this.btnClearCachw.Location = new System.Drawing.Point(4, 6);
+            this.btnClearCachw.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearCachw.MouseState = MaterialSkin2DotNet.MouseState.HOVER;
+            this.btnClearCachw.Name = "btnClearCachw";
+            this.btnClearCachw.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearCachw.Size = new System.Drawing.Size(112, 33);
+            this.btnClearCachw.TabIndex = 8;
+            this.btnClearCachw.Text = "Clear Cache";
+            this.btnClearCachw.Type = MaterialSkin2DotNet.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearCachw.UseAccentColor = false;
+            this.btnClearCachw.UseVisualStyleBackColor = true;
+            this.btnClearCachw.Click += new System.EventHandler(this.btnClearCachw_Click);
             // 
             // tblSideBar
             // 
@@ -1201,5 +1226,6 @@
         private MaterialSkin2DotNet.Controls.MaterialSwitch btnHover;
         private MaterialSkin2DotNet.Controls.MaterialTextBox2 txtURL;
         private MaterialSkin2DotNet.Controls.MaterialSwitch btnswPreventPopup;
+        private MaterialSkin2DotNet.Controls.MaterialButton btnClearCachw;
     }
 }

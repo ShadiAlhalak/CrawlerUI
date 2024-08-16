@@ -137,7 +137,7 @@ namespace CrawlerUI
             }
         }
 
-        private void txtURL_KeyDown(object sender, KeyEventArgs e)
+        private void txtURL_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -184,6 +184,18 @@ namespace CrawlerUI
             {
                 Message.Message = ex.Message;
                 Message.MessageType = ModResoucres.MsgType_Error;
+                Message.ShowMessage();
+            }
+        }
+
+        private async void btnClearCachw_Click(object sender, EventArgs e)
+        {
+            if (WView.CoreWebView2 != null)
+            {
+                CoreWebView2Profile profile = WView.CoreWebView2.Profile;
+                await profile.ClearBrowsingDataAsync(CoreWebView2BrowsingDataKinds.AllProfile);
+                Message.Message = ModResoucres.MsgCacheClearedSuccessfully;
+                Message.MessageType = ModResoucres.MsgType_Info;
                 Message.ShowMessage();
             }
         }
@@ -481,7 +493,6 @@ namespace CrawlerUI
         }
 
         #region Core
-
 
         private void WView_CoreWebView2InitializationCompleted_1(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
@@ -1073,7 +1084,6 @@ namespace CrawlerUI
                 Message.ShowMessage();
             }
         }
-
 
         private async Task LoopThroughUrlsAsync()
         {

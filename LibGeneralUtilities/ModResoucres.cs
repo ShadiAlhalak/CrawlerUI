@@ -24,6 +24,7 @@ namespace LibGeneralUtilities
         public const string MsgCannotLaunchBeforeAddFieldsAndValues = "Make sure you have added fields and values and initial data before launch.";
         public const string MsgTimeIsOut = "Time is out";
         public const string MsgPleaseCheckIntenetConnection = "please check intenet connection.";
+        public const string MsgCacheClearedSuccessfully = "Cache cleared successfully!";
         #endregion
 
         #region Log
