@@ -30,7 +30,6 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -38,6 +37,7 @@
             this.btnLogin = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.btnCancel = new MaterialSkin2DotNet.Controls.MaterialButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -90,20 +90,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(914, 212);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.SlateGray;
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("Algerian", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(3, 100);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(908, 135);
-            this.lblTitle.TabIndex = 2;
-            this.lblTitle.Text = "Eleven";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -137,10 +123,10 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox1.Location = new System.Drawing.Point(366, 3);
             this.textBox1.MaxLength = 20;
-            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 44);
+            this.textBox1.Size = new System.Drawing.Size(260, 43);
             this.textBox1.TabIndex = 2;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // textBox2
             // 
@@ -149,12 +135,11 @@
             this.textBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox2.Location = new System.Drawing.Point(366, 58);
             this.textBox2.MaxLength = 20;
-            this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(260, 44);
+            this.textBox2.Size = new System.Drawing.Size(260, 43);
             this.textBox2.TabIndex = 3;
-            this.textBox2.UseSystemPasswordChar = true;
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // btnLogin
             // 
@@ -216,6 +201,20 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.28572F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(914, 295);
             this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.SlateGray;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Font = new System.Drawing.Font("Algerian", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(3, 100);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(908, 135);
+            this.lblTitle.TabIndex = 2;
+            this.lblTitle.Text = "Eleven";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label3
             // 
