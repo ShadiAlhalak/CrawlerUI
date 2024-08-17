@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,17 +35,55 @@ namespace CrawlerUI
                 user.password = txtPassword.Text;
                 string requestBody = Newtonsoft.Json.JsonConvert.SerializeObject(user);
                 var data = new StringContent(requestBody, Encoding.UTF8, "application/json");
+                clsLoginResBody res;
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.PostAsync("http://192.168.159.230:8000/auth/jwt/create/", data);
+                    HttpResponseMessage response = await client.PostAsync("https://8b91-185-183-34-180.ngrok-free.app/auth/jwt/create/", data);
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    clsLoginResBody res = Newtonsoft.Json.JsonConvert.DeserializeObject<clsLoginResBody>(responseBody);
+                    res = Newtonsoft.Json.JsonConvert.DeserializeObject<clsLoginResBody>(responseBody);
                     Console.WriteLine(responseBody);
                     Main.LoginUser = res;
-                    Main.Show();
-                    this.Hide();
+                    //Main.Show();
+                    //this.Hide();
                 }
+
+
+
+
+                using (HttpClient client = new HttpClient())
+                {
+                    try
+                    {
+                        // Send the GET request
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", res.access);
+
+                        HttpResponseMessage response = await client.GetAsync("https://8b91-185-183-34-180.ngrok-free.app/documents/document/es_data?title=shadi_es_data");
+
+                        // Check if the response indicates success
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Read the content as a byte array
+                            byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+                            // Specify the file path to save the downloaded file
+                            string filePath = Path.Combine(Environment.CurrentDirectory, "test.csv");
+
+                            // Write the bytes to a file
+                            await File.WriteAllBytesAsync(filePath, fileBytes);
+                            Console.WriteLine($"File downloaded successfully: {filePath}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Exception: {ex.Message}");
+                    }
+                }
+
             }
             catch (Exception)
             {

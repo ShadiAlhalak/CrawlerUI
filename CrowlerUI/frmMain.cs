@@ -1,11 +1,13 @@
 ﻿using LibGeneralUtilities;
 using LibHtmlSplitter;
 using LibStructure;
+using LibStructure.API_Request_Body;
 using MaterialSkin2DotNet;
 using MaterialSkin2DotNet.Controls;
 using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using System.Data;
+using System.Net.Http.Headers;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows.Forms;
@@ -714,30 +716,8 @@ namespace CrawlerUI
                     return;
                 }
                 //2-Initial data set info
-                frmNewDS newds = new frmNewDS();
-                if (newds.ShowDialog() == DialogResult.Cancel)
-                {
-                    return;
-                }
-                //3-Initial ds with API
-                //Link with mohamad 
-                //using (HttpClient client = new HttpClient())
-                //{
-                //    string? url =$"{clsSettings.loadSettings(ref ErrorMessage)?.AIServiceUrl}/{ModConstant.cnstAPICreateDS}";
-                //    clsCreateDS Info = new clsCreateDS();
-                //    Info.Title = newds.txtName.Text;
-                //    Info.Description = newds.txtDescription.Text;
-                //    Info.Fields = clsFields.GetFields()?.LstFields;
-
-
-                //    var json = JsonConvert.SerializeObject(Info);
-                //    var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-                //    HttpResponseMessage response = await client.PostAsync(url, data);
-                //    response.EnsureSuccessStatusCode();
-                //    string responseBody = await response.Content.ReadAsStringAsync();
-                //    Console.WriteLine(responseBody);
-                //}
+                frmNewDS newds = new frmNewDS(Values, LoginUser);
+                if (newds.ShowDialog() == DialogResult.Cancel) return;
 
                 rchLog.AppendText(ModResoucres.cnst_LogSeparatour);
                 rchLog.ScrollToCaret();
@@ -800,6 +780,22 @@ namespace CrawlerUI
                     string csvResultFile = Path.Combine(ResultFodler, ModConstant.cnst_OutputFolder + ModConstant.cnst_csv_Extention);
                     WriteFullResult(FullResult, csvResultFile);
 
+                    //3-Initial ds with API
+                    //Link with mohamad 
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string? url = $"{clsSettings.loadSettings(ref ErrorMessage)?.AIServiceUrl}/{ModConstant.cnstAPIAddData}";
+                        clsSaveDataES Info = new clsSaveDataES();
+                        Info.title = newds.txtName.Text;
+                        Info.results = FullResult;
+                        var json = JsonConvert.SerializeObject(Info);
+                        var data = new StringContent(json, Encoding.UTF8, "application/json");
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", LoginUser.access);
+                        HttpResponseMessage response = await client.PostAsync(url, data);
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(responseBody);
+                    }
                     if (!string.IsNullOrEmpty(ErrorMessage))
                     {
                         rchLog.SelectionColor = System.Drawing.Color.Red;
@@ -832,6 +828,12 @@ namespace CrawlerUI
             }
             catch (Exception ex)
             {
+                rchLog.SelectionColor = System.Drawing.Color.Red;
+                rchLog.AppendText(ModResoucres.cnst_ProcessingFaild);
+                rchLog.ScrollToCaret();
+                rchLog.AppendText($"{ModResoucres.cnst_Error} : {ex.Message} \n");
+                rchLog.SelectionColor = rchLog.ForeColor;
+
                 Message.Message = ex.Message;
                 Message.MessageType = ModResoucres.MsgType_Error;
                 Message.ShowMessage();
