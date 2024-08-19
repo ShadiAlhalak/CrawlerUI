@@ -27,6 +27,7 @@ namespace LibGeneralUtilities
         public const string MsgCacheClearedSuccessfully = "Cache cleared successfully!";
         public const string MsgLoginFaild = "No active account found with the given credentials";
         public const string MsgFaildCreateDataset = "Faild create dataset";
+        public const string MsgAIServiceURLISInvalid = "AI serviec url is empty or invalid.";
         #endregion
 
         #region Log
@@ -36,6 +37,7 @@ namespace LibGeneralUtilities
         public const string cnst_ResultFileHasBeenWritten = "Result file has been written\n";
         public const string cnst_ValuesFileHasBeenWritten = "Values file has been written\n";
         public const string cnst_LookAtTheOutputFolder = "Lookup at output folder\n";
+        public const string cnst_LookAtWebSite = "Lookup at website\n";
         public const string cnst_ProcessingFinish = "Processing finish.\n";
         public const string cnst_ProcessingFaild = "Processing Faild.\n";
         public const string cnst_Error = "Error:";

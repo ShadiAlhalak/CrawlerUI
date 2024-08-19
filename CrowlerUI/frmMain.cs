@@ -784,8 +784,9 @@ namespace CrawlerUI
                     //Link with mohamad 
                     using (HttpClient client = new HttpClient())
                     {
-                        string? url = $"{clsSettings.loadSettings(ref ErrorMessage)?.AIServiceUrl}/{ModConstant.cnstAPIAddData}";
+                        string? url = $"{clsSettings.loadSettings(ref ErrorMessage)?.AIServiceUrl}{ModConstant.cnstAPIAddData}";
                         clsSaveDataES Info = new clsSaveDataES();
+                        FullResult = FullResult.Where(item => item.lstPairs.Count == newds.doc.fields.Count).ToList();
                         Info.title = newds.txtName.Text;
                         Info.results = FullResult;
                         var json = JsonConvert.SerializeObject(Info);
@@ -813,10 +814,10 @@ namespace CrawlerUI
                         clsHtmlElems.SerializeHtmlElementsToFile(elems, ResultFilePath, ref ErrorMessage);
                         rchLog.AppendText(ModResoucres.cnst_ResultFileHasBeenWritten);
                         rchLog.ScrollToCaret();
-                        rchLog.AppendText(ModResoucres.cnst_LookAtTheOutputFolder);
+                        rchLog.AppendText(ModResoucres.cnst_LookAtWebSite);
                         rchLog.ScrollToCaret();
-                        rchLog.AppendText(ResultFodler + "\n");
-                        rchLog.ScrollToCaret();
+                        //rchLog.AppendText(ResultFodler + "\n");
+                        //rchLog.ScrollToCaret();
                         rchLog.SelectionColor = System.Drawing.Color.Green;
                         rchLog.AppendText(ModResoucres.cnst_ProcessingFinish);
                         rchLog.ScrollToCaret();

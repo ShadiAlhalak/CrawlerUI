@@ -199,10 +199,12 @@ namespace LibGeneralUtilities
         #endregion
 
         #region API Endpoints
-        public const string cnstAPILogin = "Login";
+        public const string cnstAPILogin = "auth/jwt/create/";
+        public const string cnstAPIAddDoc = "documents/document/add";
+
         public const string cnstAPIGetSimilar = "get_similar";
         public const string cnstAPICreateDS = "create_ds";
-        public const string cnstAPIAddData = "/documents/document/es_data";
+        public const string cnstAPIAddData = "documents/document/es_data";
         #endregion
     }
 }

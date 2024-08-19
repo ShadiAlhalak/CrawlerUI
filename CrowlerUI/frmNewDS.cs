@@ -20,6 +20,7 @@ namespace CrawlerUI
         public MaterialMessage Message { get; set; } = new MaterialMessage();
         public List<clsHtmlElem> Rules { get; set; } = new List<clsHtmlElem>();
         public clsLoginResBody LoginUser { get; set; } = new clsLoginResBody();
+        public clsAddDocument doc { get; set; } = new clsAddDocument();
         public frmNewDS(List<clsHtmlElem> rules, clsLoginResBody LoginUser)
         {
             InitializeComponent();
@@ -45,33 +46,59 @@ namespace CrawlerUI
                     Message.ShowMessage();
                     return;
                 }
-                clsAddDocument doc = new clsAddDocument();
-                doc.title = txtName.Text.ToLower();
-                doc.description = txtDescription.Text.ToLower();
-                var flds = Rules.Select(item => item.FieldName).Distinct().ToList();
-                foreach (var item in flds)
+                string ErrorMessage = string.Empty;
+                clsSettings settings = clsSettings.loadSettings(ref ErrorMessage);
+                if (settings != null && !string.IsNullOrEmpty(settings.AIServiceUrl))
                 {
-                    if (!string.IsNullOrEmpty(item?.ToString()))
+                    //clsAddDocument doc = new clsAddDocument();
+                    doc.title = txtName.Text.ToLower().Trim();
+                    doc.description = txtDescription.Text.ToLower();
+                    var flds = Rules.Select(item => item.FieldName).Distinct().ToList();
+                    foreach (var item in flds)
                     {
-                        clsAPIFields apiFields = new clsAPIFields();
-                        apiFields.FieldName = item.ToLower();
-                        apiFields.type = "text";
-                        doc.fields.Add(apiFields);
+                        if (!string.IsNullOrEmpty(item?.ToString()))
+                        {
+                            clsAPIFields apiFields = new clsAPIFields();
+                            apiFields.FieldName = item.ToLower();
+                            apiFields.type = "text";
+                            doc.fields.Add(apiFields);
+                        }
+                    }
+                    string requestBody = Newtonsoft.Json.JsonConvert.SerializeObject(doc);
+                    var data = new StringContent(requestBody, Encoding.UTF8, "application/json");
+
+                    ErrorMessage = string.Empty;
+                    clsSettings ToolSettings = clsSettings.loadSettings(ref ErrorMessage);
+                    if (!String.IsNullOrEmpty(ToolSettings.AIServiceUrl))
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", LoginUser.access);
+                            string url = $"{ToolSettings.AIServiceUrl}{ModConstant.cnstAPIAddDoc}";
+                            HttpResponseMessage response = await client.PostAsync(url, data);
+                            response.EnsureSuccessStatusCode();
+                            string responseBody = await response.Content.ReadAsStringAsync();
+                            //clsLoginResBody res = Newtonsoft.Json.JsonConvert.DeserializeObject<clsLoginResBody>(responseBody);
+                        }
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        Message.Message = ModResoucres.MsgAIServiceURLISInvalid;
+                        Message.MessageType = ModResoucres.MsgType_Error;
+                        Message.ShowMessage();
+                        DialogResult = DialogResult.Cancel;
                     }
                 }
-                string requestBody = Newtonsoft.Json.JsonConvert.SerializeObject(doc);
-                var data = new StringContent(requestBody, Encoding.UTF8, "application/json");
-                using (HttpClient client = new HttpClient())
+                else
                 {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", LoginUser.access);
-
-                    HttpResponseMessage response = await client.PostAsync("https://8b91-185-183-34-180.ngrok-free.app/documents/document/add", data);
-                    response.EnsureSuccessStatusCode();
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    //clsLoginResBody res = Newtonsoft.Json.JsonConvert.DeserializeObject<clsLoginResBody>(responseBody);
+                    Message.Message = ModResoucres.MsgAIServiceURLISInvalid;
+                    Message.MessageType = ModResoucres.MsgType_Error;
+                    Message.ShowMessage();
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
                 }
-                DialogResult = DialogResult.OK;
-                this.Close();
             }
             catch (Exception)
             {

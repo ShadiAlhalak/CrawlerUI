@@ -11,8 +11,8 @@ namespace LibStructure
     {
         [JsonIgnore]
         public int? group { get; set; } = -1;
-        public string? Key { get; set; } = string.Empty;
-        public string? Value { get; set; } = string.Empty;
+        public string Key { get; set; } = string.Empty;
+        public string Value { get; set; } = string.Empty;
         [JsonIgnore]
         public int? order { get; set; } = -1;
         [JsonIgnore]
